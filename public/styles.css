@@ -1,0 +1,48 @@
+/* Style for the table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style for the "Create new" link */
+a[href*="app_projet_new"] {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 2px solid #4CAF50;
+  border-radius: 5px;
+  color: #250fa5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a[href*="app_projet_new"]:hover {
+  background-color: #0c27c0;
+  color: white;
+}
+
+/* Style for the page nom */
+h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* Style for the "no records found" message */
+td[colspan="9"] {
+  text-align: center;
+  font-style: italic;
+}

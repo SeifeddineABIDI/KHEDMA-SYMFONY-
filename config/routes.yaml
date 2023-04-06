@@ -1,0 +1,29 @@
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+freelancer_home:
+    path: /freelancer
+    controller: App\Controller\FreelancerController::home
+    
+client_home:
+    path: /client
+    controller: App\Controller\ClientController::home
+
+app_login:
+    path: /login
+    controller: App\Controller\LoginController::login
+    methods: [GET, POST]
+
+app_tache_index:
+    path: '/projet/{projetId}/tache'
+    controller: App\Controller\TacheController::index
+
+update_tache_status:
+  path: /update_tache_status
+  controller: App\Controller\TacheController::updateTacheStatus
+  methods: [POST]
