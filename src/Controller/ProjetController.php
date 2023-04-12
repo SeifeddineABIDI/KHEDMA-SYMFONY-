@@ -19,6 +19,8 @@ class ProjetController extends AbstractController
 
         $username = $request->getSession()->get('username');
         $role=$request->getSession()->get('role');
+
+       
         
         if ($role === 'freelancer') {
             $projets = $entityManager
@@ -26,8 +28,10 @@ class ProjetController extends AbstractController
                 ->findBy(['freelancer' => $username]);
 
 
-                return $this->render('projet/freelancerprojet.html.twig', [
+                return $this->render('/hexadash/projetfreelancer.html.twig', [
                     'projets' => $projets,
+                    'currentusername' => $username,
+            'currentRole' => $role,
                 ]);
         } else {
             $projets = $entityManager
@@ -35,8 +39,10 @@ class ProjetController extends AbstractController
                 ->findBy(['client' => $username]);
 
 
-                return $this->render('projet/clientprojet.html.twig', [
+                return $this->render('/hexadash/projetclient.html.twig', [
                     'projets' => $projets,
+                    'currentusername' => $username,
+            'currentRole' => $role,
                 ]);
         }
 

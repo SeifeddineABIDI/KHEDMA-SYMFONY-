@@ -27,3 +27,11 @@ update_tache_status:
   path: /update_tache_status
   controller: App\Controller\TacheController::updateTacheStatus
   methods: [POST]
+
+  # config/routes.yaml
+hexadash_index:
+    path: /hexadash/
+    controller: App\Controller\HexaDashController::index
+
+
+

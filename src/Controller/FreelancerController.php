@@ -17,10 +17,12 @@ class FreelancerController extends AbstractController
        
         $session = $request->getSession();
         $username =$session->get('username');
+        $role =$session->get('role');
         
-        return $this->render('/freelancer/index.html.twig', [
+        return $this->render('/hexadash/index.html.twig', [
             'controller_name' => 'FreelancerController',
             'currentusername' => $username,
+            'currentRole' => $role,
         ]);
     }
 }

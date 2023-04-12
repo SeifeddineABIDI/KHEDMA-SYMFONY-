@@ -16,7 +16,7 @@ class LoginController extends AbstractController
     public function login(Request $request, EntityManagerInterface $entityManager, CurrentUser $currentUser): Response
     {
         // Render the login form
-        $content = $this->render('login/login.html.twig', [
+        $content = $this->render('hexadash/login.html', [
             'controller_name' => 'LoginController',
         ])->getContent();
         

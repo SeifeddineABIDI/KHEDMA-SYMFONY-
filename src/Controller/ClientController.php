@@ -16,10 +16,12 @@ class ClientController extends AbstractController
         
         $session = $request->getSession();
         $username =$session->get('username');
+        $role =$session->get('role');
         
-        return $this->render('/client/index.html.twig', [
+        return $this->render('/hexadash/index.html.twig', [
             'controller_name' => 'ClientController',
             'currentusername' => $username,
+            'currentRole' => $role,
         ]);
     }
 }
