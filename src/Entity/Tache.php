@@ -4,6 +4,7 @@ namespace App\Entity;
 use App\Entity\Projet;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tache
@@ -26,6 +27,11 @@ class Tache
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     
+
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
@@ -38,7 +44,7 @@ class Tache
 
     /**
      * @var string|null
-     *
+      * @Assert\NotBlank()
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;

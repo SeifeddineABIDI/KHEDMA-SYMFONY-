@@ -22,7 +22,7 @@ class TacheController extends AbstractController
             ->getRepository(Tache::class)
             ->findBy(['project' => $projetId]);
 
-        return $this->render('tache/index.html.twig', [
+        return $this->render('/tache/index.html.twig', [
             'taches' => $taches,
             'projetId' => $projetId,
         ]);
