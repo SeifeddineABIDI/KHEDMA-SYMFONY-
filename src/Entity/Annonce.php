@@ -16,7 +16,7 @@ class Annonce
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Entrer le titre')]
+    #[Assert\NotBlank(message: '*Champ Obligatoire')]
     #[Assert\Length(
         min: 5,
         max: 255,

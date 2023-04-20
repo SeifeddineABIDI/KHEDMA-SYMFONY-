@@ -9,7 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Dompdf\Dompdf;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 #[Route('/annonce')]
 class AnnonceController extends AbstractController
 {
@@ -75,12 +76,16 @@ class AnnonceController extends AbstractController
 
         return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
     }
-   
+    #[Route('/tripardate', name: 'app_annonce_tri')]
     public function tri(AnnonceRepository $annonceRepository): Response
     {
-        $annonces = $annonceRepository->findAllSortedByDate();
-        return $this->render('BackOffice/annonce/index.html.twig', [
-            'annonces' => $annonces,
+        $annonce = $annonceRepository->findAllSortedByDate();
+        return $this->render('BackOffice/annonce/tri.html.twig', [
+            'annonces' => $annonce,
         ]);
+        
     }
+   
+    
+
 }

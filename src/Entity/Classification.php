@@ -18,9 +18,9 @@ class Classification
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Entrer nom classification')]
+    #[Assert\NotBlank(message: '*Champ Obligatoire')]
     #[Assert\Length(
-        min: 3,
+        min: 2,
         max: 255,
         minMessage: 'The name must be at least {{ limit }} characters',
         maxMessage: 'The name cannot exceed {{ limit }} characters'
@@ -28,7 +28,7 @@ class Classification
     private ?string $Nom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Entrer le domaine')]
+    #[Assert\NotBlank(message: '*Champ Obligatoire')]
     #[Assert\Length(
         min: 3,
         max: 255,

@@ -64,10 +64,11 @@ class AnnonceRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-public function findAllSortedByDate() { 
-    $qb = $this->createQueryBuilder('a');
-    $qb->orderBy('a.date', 'DESC');
-
-    return $qb->getQuery()->getResult();}
+public function findAllSortedByDate(): array { 
+    return $this->createQueryBuilder('a')
+    ->orderBy('a.date', 'ASC')
+    ->getQuery()
+    ->getResult() ;
+ }
 
 }
