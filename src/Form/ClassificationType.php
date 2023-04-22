@@ -14,7 +14,7 @@ class ClassificationType extends AbstractType
         $builder
             ->add('Nom')
             ->add('domaine')
-            ->add('archive')
+            
         ;
     }
 

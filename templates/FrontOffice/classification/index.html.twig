@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classification index{% endblock %}
+
+{% block body %}
+   <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
+                        <div class="d-flex align-items-center user-member__title justify-content-center me-sm-25">
+                            <h4 class="text-capitalize fw-500 breadcrumb-title">Liste de Classification</h4>
+                            
+                        </div>
+
+                        <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
+                            <img src="/BackOffice/img/svg/search.svg" alt="search" class="svg">
+                            <input class="form-control me-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by Nom" aria-label="Search">
+                        </form>
+
+                    </div>
+
+    <table border="2" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Domaine</th>
+                <th>Archive</th>
+               {# <th>actions</th> #}
+            </tr>
+        </thead>
+        <tbody>
+        {% for classification in classifications %}
+            <tr>
+               <div class="d-flex">
+                <td>{{ classification.id }}</td>
+                </div>
+                <div class="d-flex">
+                <td>{{ classification.Nom }}</td>
+                </div>
+                <div class="d-flex">
+                <td>{{ classification.domaine }}</td>
+                </div>
+                <div class="d-flex">
+                <td>{{ classification.archive ? 'Yes' : 'No' }}</td>
+                </div>
+                <td>
+                 
+                                            <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                                            <li>
+                                                <a href="{{ path('app_classification_show', {'id': classification.id}) }}" class="show">
+                                                    <i class="uil uil-eye"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('app_classification_edit', {'id': classification.id}) }}" class="edit">
+                                                    <i class="uil uil-edit"></i>
+                                                </a>
+                                            </li>
+                                            
+                                            {# <li>
+                                                <a href="{{ path('app_user_ban', {'id': user.id}) }}" 
+                                                    value="{{ csrf_token('delete' ~ user.id) }}" class="remove">
+                                                    <i class="fa-solid fa-user-slash"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('app_user_unban', {'id': user.id}) }}" class="edit">
+                                                    <i class="fa-brands fa-creative-commons-by"></i>
+                                                </a>
+                                            </li> #}
+                                            </ul>
+                                        </td>
+                {# <td>
+                    <a href="{{ path('app_classification_show', {'id': classification.id}) }}">show</a>
+                    <a href="{{ path('app_classification_edit', {'id': classification.id}) }}">edit</a>
+                </td> #}
+           </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   {# <a href="{{ path('app_classification_new') }}">Create new</a> #}
+   <div class="action-btn">
+                        <a href="{{ path('app_classification_new') }}" class="btn btn-info btn-default btn-squared btn-transparent-info " >
+                           <i class="las la-plus fs-16"></i>Add New Classification</a>
+
+                     </div>
+{% endblock %}

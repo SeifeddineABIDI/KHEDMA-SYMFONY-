@@ -1,3 +1,8 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+export_pdf:
+    path: '/annonce/export/all'
+    controller: App\Controller\AnnonceController::exportAllPdfAction
+    requirements:
+        id: \d+

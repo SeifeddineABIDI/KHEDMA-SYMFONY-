@@ -16,7 +16,7 @@ class AnnonceType extends AbstractType
         $builder
             ->add('titre')
             ->add('date')
-            ->add('archive')
+           
             ->add('classification', EntityType::class, [
                 'class' => Classification::class,
                 'choice_label' => 'Nom',

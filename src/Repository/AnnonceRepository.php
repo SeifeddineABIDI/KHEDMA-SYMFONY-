@@ -70,5 +70,25 @@ public function findAllSortedByDate(): array {
     ->getQuery()
     ->getResult() ;
  }
+ public function searchByTitre(string $titre): array
+{
+    $query = $this->createQueryBuilder('a')
+    ->where('a.titre = :titre')
+    ->setParameter('titre', $titre);
+
+    return $query->getQuery()->getResult();
+}
+
+public function findByNom($classification)
+{
+    $query = $this->createQueryBuilder('a')
+        ->select('a')
+        ->join('a.classification', 'c')
+        ->where('c.nom LIKE :nom')
+        ->setParameter('nom', '%' . $classification . '%')
+        ->getQuery();
+
+    return $query->getResult();
+}
 
 }

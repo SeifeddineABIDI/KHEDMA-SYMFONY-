@@ -1,0 +1,17 @@
+<div class="pagination">
+    {% if current_page > 1 %}
+        <a href="{{ path('app_annonce_list_paginated', {'page': current_page - 1}) }}">Previous</a>
+    {% endif %}
+
+    {% for i in 1..pages %}
+        {% if current_page == i %}
+            <span class="current">{{ i }}</span>
+        {% else %}
+            <a href="{{ path('app_annonce_list_paginated', {'page': i}) }}">{{ i }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if current_page < pages %}
+        <a href="{{ path('app_annonce_list_paginated', {'page': current_page + 1}) }}">Next</a>
+    {% endif %}
+</div>

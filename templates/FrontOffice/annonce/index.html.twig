@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce index{% endblock %}
+
+{% block body %}
+
+<div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
+    <div class="d-flex align-items-center user-member__title justify-content-center me-sm-25">
+        <h4 class="text-capitalize fw-500 breadcrumb-title">Liste d'Annonces </h4>
+    </div>
+    
+<form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
+                                    <img src="{{ asset('FrontOffice/img/svg/search.svg') }}" alt="search" class="svg">
+                                    <input class="form-control me-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by NomClassification" aria-label="Search">
+                                </form>
+
+</div>
+
+<table border="2" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Classification</th>
+            <th>Archive</th>
+          {#  <th>Actions</th> #}
+        </tr>
+    </thead>
+    <tbody>
+       {% if annonces is empty %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% else %}
+        {% for annonce in annonces %}
+        <tr>
+            <td>{{ annonce.id }}</td>
+            <td>{{ annonce.titre }}</td>
+            <td>{{ annonce.date ? annonce.date|date('Y-m-d') : '' }}</td>
+            <td>{{ annonce.classification.nom }}</td>
+            <td>{{ annonce.archive ? 'Yes' : 'No' }}</td>
+            <td>
+                <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                    <li>
+                        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="show">
+                            <i class="uil uil-eye"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}" class="edit">
+                            <i class="uil uil-edit"></i>
+                        </a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+ 
+    {% endif %}
+    </tbody>
+</table>
+
+<a href="{{ path('app_annonce_new') }}" class="btn btn-info btn-default btn-squared btn-transparent-info ">
+    Add New Annonce
+</a>
+
+<a href="{{ path('export_all_pdf') }}" class="btn btn-info btn-default btn-squared btn-transparent-info ">
+    Télécharger PDF
+</a>
+
+{% endblock %}

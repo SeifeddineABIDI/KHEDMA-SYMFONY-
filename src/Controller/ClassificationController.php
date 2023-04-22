@@ -16,7 +16,7 @@ class ClassificationController extends AbstractController
     #[Route('/', name: 'app_classification_index', methods: ['GET'])]
     public function index(ClassificationRepository $classificationRepository): Response
     {
-        return $this->render('BackOffice/classification/index.html.twig', [
+        return $this->render('FrontOffice/classification/index.html.twig', [
             'classifications' => $classificationRepository->findAll(),
         ]);
     }
@@ -34,7 +34,7 @@ class ClassificationController extends AbstractController
             return $this->redirectToRoute('app_classification_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('BackOffice/classification/new.html.twig', [
+        return $this->renderForm('FrontOffice/classification/new.html.twig', [
             'classification' => $classification,
             'form' => $form,
         ]);
@@ -43,7 +43,7 @@ class ClassificationController extends AbstractController
     #[Route('/{id}', name: 'app_classification_show', methods: ['GET'])]
     public function show(Classification $classification): Response
     {
-        return $this->render('BackOffice/classification/show.html.twig', [
+        return $this->render('FrontOffice/classification/show.html.twig', [
             'classification' => $classification,
         ]);
     }
@@ -60,7 +60,7 @@ class ClassificationController extends AbstractController
             return $this->redirectToRoute('app_classification_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('BackOffice/classification/edit.html.twig', [
+        return $this->renderForm('FrontOffice/classification/edit.html.twig', [
             'classification' => $classification,
             'form' => $form,
         ]);
