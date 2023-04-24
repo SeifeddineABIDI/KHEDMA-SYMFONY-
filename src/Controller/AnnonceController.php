@@ -10,17 +10,24 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
-
+use Knp\Component\Pager\PaginatorInterface;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 #[Route('/annonce')]
 class AnnonceController extends AbstractController
 {
   
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
-    public function index(AnnonceRepository $annonceRepository): Response
+    public function index(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
     {
+        $annonces = $annonceRepository->findAll();
+        $annonces = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1),
+            2
+        );
+
         return $this->render('FrontOffice/annonce/index.html.twig', [
-            'annonces' => $annonceRepository->findAll(),
+            'annonces' => $annonces,
         ]);
     }
 
@@ -78,26 +85,58 @@ class AnnonceController extends AbstractController
 
         return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/tripardate', name: 'app_annonce_tri')]
-    public function tri(AnnonceRepository $annonceRepository): Response
-    {
-        $annonce = $annonceRepository->findAllSortedByDate();
-        return $this->render('FrontOffice/annonce/tri.html.twig', [
-            'annonces' => $annonce,
-        ]);
-        
-    }
+    #[Route('/tripartitre', name: 'app_annonce_tri')]
+    public function listOrdonne(AnnonceRepository $repo) : Response
+    { $annonces = $repo->orderByTitre();
    
-    #[Route('/rechercher', name: 'app_annonce_search', methods: ['GET'])]
-    public function search(Request $request)
+      
+        return $this->render("FrontOffice/annonce/tri.html.twig",
+        ["annonces"=>$annonces]);
+    }
+        
+   
+#[Route('/search', name: 'app_annonce_search', methods: ['GET', 'POST'])]
+public function search(Request $request, AnnonceRepository $annonceRepository): Response
 {
-    $nom = $request->query->get('nom');
-    $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findBy(['nom' => $nom]);
+    $form = $this->createFormBuilder()
+        ->add('titre', TextType::class, ['required' => false])
+        ->add('date', DateType::class, ['required' => false])
+        ->add('classification', EntityType::class, [
+            'required' => false,
+            'class' => Classification::class,
+            'choice_label' => 'nom',
+        ])
+        ->add('search', SubmitType::class, ['label' => 'Rechercher'])
+        ->getForm();
 
-    return $this->render('annonce/index.html.twig', [
-        'annonces' => $annonces,
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $data = $form->getData();
+
+        $annonces = $annonceRepository->createQueryBuilder('a')
+            ->leftJoin('a.classification', 'c')
+            ->where('a.titre LIKE :titre')
+            ->andWhere('a.date = :date')
+            ->andWhere('c.nom = :classification')
+            ->setParameter('titre', '%'.$data['titre'].'%')
+            ->setParameter('date', $data['date'])
+            ->setParameter('classification', $data['classification']->getNom())
+            ->getQuery()
+            ->getResult();
+
+        return $this->render('FrontOffice/annonce/search.html.twig', [
+            'form' => $form->createView(),
+            'annonces' => $annonces,
+        ]);
+    }
+
+    return $this->render('FrontOffice/annonce/search.html.twig', [
+        'form' => $form->createView(),
     ]);
 }
+
+    
 #[Route('/annonce/export/all', name: 'export_all_pdf')]
 public function exportAllPdfAction()
 {
@@ -127,32 +166,32 @@ public function exportAllPdfAction()
 }
 
 
-#[Route('/annonces/page/{page}', name: 'app_annonce_list_paginated', requirements: ['page' => '\d+'])]
-public function listPaginated(Request $request, AnnonceRepository $annonceRepository, int $page = 1)
-{
+//#[Route('/annonces/page/{page}', name: 'app_annonce_list_paginated', requirements: ['page' => '\d+'])]
+//public function listPaginated(Request $request, AnnonceRepository $annonceRepository, int $page = 1)
+//{
     // Nombre d'éléments à afficher par page
-    $limit = 10;
+   // $limit = 10;
 
     // Calculer le nombre total d'éléments dans la base de données
-    $total = $annonceRepository->count([]);
+    //$total = $annonceRepository->count([]);
 
     // Calculer le nombre total de pages
-    $pages = ceil($total / $limit);
+    //$pages = ceil($total / $limit);
 
     // Calculer l'offset pour la requête SQL
-    $offset = ($page - 1) * $limit;
+   // $offset = ($page - 1) * $limit;
 
     // Récupérer les annonces paginées
-    $annonces = $annonceRepository->findBy([], ['date' => 'DESC'], $limit, $offset);
+  //  $annonces = $annonceRepository->findBy([], ['date' => 'DESC'], $limit, $offset);
 
     // Afficher le template
-    return $this->render('FrontOffice/annonce/list_paginated.html.twig', [
-        'annonces' => $annonces,
-        'pages' => $pages,
-        'current_page' => $page,
-    ]);
+  //  return $this->render('FrontOffice/annonce/list_paginated.html.twig', [
+  //      'annonces' => $annonces,
+       // 'pages' => $pages,
+      //  'current_page' => $page,
+   // ]);
+//}
+
+
 }
 
-
-
-}

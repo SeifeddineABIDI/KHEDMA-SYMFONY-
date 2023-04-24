@@ -1,3 +1,17 @@
-<h1> Annonces triées par Date</h1>
+{% extends 'base.html.twig' %}
 
-{{ dump(annonces) }}
+{% block title %}Annonces triées par titre{% endblock %}
+
+{% block body %}
+    <h1>Annonces triées par titre</h1>
+
+    {% if annonces is empty %}
+        <p>Aucune annonce trouvée.</p>
+    {% else %}
+        <ul>
+            {% for annonce in annonces %}
+                <li>{{ annonce.titre }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

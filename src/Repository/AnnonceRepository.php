@@ -91,4 +91,36 @@ public function findByNom($classification)
     return $query->getResult();
 }
 
+public function findByTitle(string $titre)
+{
+    $qb = $this->createQueryBuilder('a')
+        ->where('a.titre LIKE :titre')
+        ->setParameter('title', '%' . $titre . '%');
+
+    return $qb->getQuery()->getResult();
+}
+
+public function orderByTitre(){
+    $req=$this->createQueryBuilder('s')
+               ->orderBy('s.titre','ASC')
+               ->getQuery()
+               ->getResult();
+               return $req;
+
+
+}
+public function search($mots = null, $classification = null){
+    $query = $this->createQueryBuilder('a');
+    $query->where('a.active = 1');
+    if($mots != null){
+        $query->andWhere('MATCH_AGAINST(a.titre) AGAINST (:mots boolean)>0')
+            ->setParameter('mots', $mots);
+    }
+    if($classification != null){
+        $query->leftJoin('a.classification', 'c');
+        $query->andWhere('c.id = :id')
+            ->setParameter('id', $classification);
+    }
+    return $query->getQuery()->getResult();
+}
 }

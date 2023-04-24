@@ -9,14 +9,17 @@
         <h4 class="text-capitalize fw-500 breadcrumb-title">Liste d'Annonces </h4>
     </div>
     
-<form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
-                                    <img src="{{ asset('FrontOffice/img/svg/search.svg') }}" alt="search" class="svg">
-                                    <input class="form-control me-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by NomClassification" aria-label="Search">
-                                </form>
+<form id="search-form" class="d-flex align-items-center user-member__form my-sm-0 my-2">
+  <img src="{{ asset('FrontOffice/img/svg/search.svg') }}" alt="search" class="svg">
+  <input id="search-input" class="form-control me-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by Titre" aria-label="Search">
+  <button type="submit" class="btn btn-primary">Search</button>
 
+</form>
+<div id="search-results"></div>
 </div>
 
 <table border="2" class="table">
+
     <thead>
         <tr>
             <th>Id</th>
@@ -32,6 +35,7 @@
         <tr>
             <td colspan="6">no records found</td>
         </tr>
+        
     {% else %}
         {% for annonce in annonces %}
         <tr>
@@ -60,6 +64,7 @@
     {% endif %}
     </tbody>
 </table>
+{{ knp_pagination_render(annonces) }}
 
 <a href="{{ path('app_annonce_new') }}" class="btn btn-info btn-default btn-squared btn-transparent-info ">
     Add New Annonce
@@ -69,4 +74,6 @@
     Télécharger PDF
 </a>
 
+ <li><a href="{{ path('app_annonce_tri') }}">Annonces triées par titre</a></li>
+        
 {% endblock %}
