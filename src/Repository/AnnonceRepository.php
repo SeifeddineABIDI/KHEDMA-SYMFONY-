@@ -64,63 +64,98 @@ class AnnonceRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-public function findAllSortedByDate(): array { 
-    return $this->createQueryBuilder('a')
-    ->orderBy('a.date', 'ASC')
-    ->getQuery()
-    ->getResult() ;
- }
- public function searchByTitre(string $titre): array
+//public function findAllSortedByDate(): array { 
+  //  return $this->createQueryBuilder('a')
+    //->orderBy('a.date', 'ASC')
+    //->getQuery()
+   // ->getResult() ;
+ //} 
+ //public function searchByTitre(string $titre): array
+//{
+  //  $query = $this->createQueryBuilder('a')
+   // ->where('a.titre = :titre')
+  //  ->setParameter('titre', $titre);
+
+   // return $query->getQuery()->getResult();
+//}
+
+//public function findByNom($classification)
+//{
+  //  $query = $this->createQueryBuilder('a')
+     //   ->select('a')
+      //  ->join('a.classification', 'c')
+      //  ->where('c.nom LIKE :nom')
+      //  ->setParameter('nom', '%' . $classification . '%')
+      //  ->getQuery();
+
+  //  return $query->getResult();
+//}
+
+
+//public function orderByTitre(){
+    //$req=$this->createQueryBuilder('s')
+             //  ->orderBy('s.titre','ASC')
+             //  ->getQuery()
+              // ->getResult();
+              // return $req;
+
+
+//}
+//public function search($mots = null, $classification = null){
+  //  $query = $this->createQueryBuilder('a');
+   // $query->where('a.active = 1');
+   // if($mots != null){
+    //    $query->andWhere('MATCH_AGAINST(a.titre) AGAINST (:mots boolean)>0')
+          //  ->setParameter('mots', $mots);
+ //   }
+  //  if($classification != null){
+       // $query->leftJoin('a.classification', 'c');
+      //  $query->andWhere('c.id = :id')
+       //     ->setParameter('id', $classification);
+  //  }
+  //  return $query->getQuery()->getResult();
+//}
+
+
+//public function findByTitre(string $searchTerm): array
+//{
+  //  $queryBuilder = $this->createQueryBuilder('a');
+   // $queryBuilder->andWhere('a.titre LIKE :searchTerm')
+          //       ->setParameter('searchTerm', '%'.$searchTerm.'%');
+  //  return $queryBuilder->getQuery()->getResult();
+//}
+public function SortByid(){
+  return $this->createQueryBuilder('e')
+      ->orderBy('e.id','ASC')
+      ->getQuery()
+      ->getResult()
+      ;
+}
+
+public function SortBytitre()
 {
-    $query = $this->createQueryBuilder('a')
-    ->where('a.titre = :titre')
-    ->setParameter('titre', $titre);
-
-    return $query->getQuery()->getResult();
+  return $this->createQueryBuilder('e')
+      ->orderBy('e.titre','ASC')
+      ->getQuery()
+      ->getResult()
+      ;
 }
 
-public function findByNom($classification)
+public function findByid( $id)
 {
-    $query = $this->createQueryBuilder('a')
-        ->select('a')
-        ->join('a.classification', 'c')
-        ->where('c.nom LIKE :nom')
-        ->setParameter('nom', '%' . $classification . '%')
-        ->getQuery();
-
-    return $query->getResult();
+    return $this-> createQueryBuilder('e')
+        ->andWhere('e.id LIKE :id')
+        ->setParameter('id','%' .$id. '%')
+        ->getQuery()
+        ->execute();
 }
-
-public function findByTitle(string $titre)
+public function findBytitre( $titre)
 {
-    $qb = $this->createQueryBuilder('a')
-        ->where('a.titre LIKE :titre')
-        ->setParameter('title', '%' . $titre . '%');
-
-    return $qb->getQuery()->getResult();
+    return $this-> createQueryBuilder('e')
+        ->andWhere('e.titre LIKE :titre')
+        ->setParameter('titre','%' .$titre. '%')
+        ->getQuery()
+        ->execute();
 }
 
-public function orderByTitre(){
-    $req=$this->createQueryBuilder('s')
-               ->orderBy('s.titre','ASC')
-               ->getQuery()
-               ->getResult();
-               return $req;
-
-
-}
-public function search($mots = null, $classification = null){
-    $query = $this->createQueryBuilder('a');
-    $query->where('a.active = 1');
-    if($mots != null){
-        $query->andWhere('MATCH_AGAINST(a.titre) AGAINST (:mots boolean)>0')
-            ->setParameter('mots', $mots);
-    }
-    if($classification != null){
-        $query->leftJoin('a.classification', 'c');
-        $query->andWhere('c.id = :id')
-            ->setParameter('id', $classification);
-    }
-    return $query->getQuery()->getResult();
-}
 }

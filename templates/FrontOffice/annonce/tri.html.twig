@@ -1,17 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonces triées par titre{% endblock %}
-
 {% block body %}
-    <h1>Annonces triées par titre</h1>
+    <h1>Liste des annonces</h1>
 
-    {% if annonces is empty %}
-        <p>Aucune annonce trouvée.</p>
-    {% else %}
-        <ul>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    {% if tri == 'titre' %}
+                        <a href="{{ path('annonce_index', {'tri': 'titre_desc'}) }}">Titre <i class="fas fa-sort-down"></i></a>
+                    {% elseif tri == 'titre_desc' %}
+                        <a href="{{ path('annonce_index', {'tri': 'titre'}) }}">Titre <i class="fas fa-sort-up"></i></a>
+                    {% else %}
+                        <a href="{{ path('annonce_index', {'tri': 'titre'}) }}">Titre</a>
+                    {% endif %}
+                </th>
+                <th>
+                    {% if tri == 'date' %}
+                        <a href="{{ path('annonce_index', {'tri': 'date_desc'}) }}">Date <i class="fas fa-sort-down"></i></a>
+                    {% elseif tri == 'date_desc' %}
+                        <a href="{{ path('annonce_index', {'tri': 'date'}) }}">Date <i class="fas fa-sort-up"></i></a>
+                    {% else %}
+                        <a href="{{ path('annonce_index', {'tri': 'date'}) }}">Date</a>
+                    {% endif %}
+                </th>
+                <th>
+                    {% if tri == 'classification' %}
+                        <a href="{{ path('annonce_index', {'tri': 'classification_desc'}) }}">Classification <i class="fas fa-sort-down"></i></a>
+                    {% elseif tri == 'classification_desc' %}
+                        <a href="{{ path('annonce_index', {'tri': 'classification'}) }}">Classification <i class="fas fa-sort-up"></i></a>
+                    {% else %}
+                        <a href="{{ path('annonce_index', {'tri': 'classification'}) }}">Classification</a>
+                    {% endif %}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
             {% for annonce in annonces %}
-                <li>{{ annonce.titre }}</li>
+                <tr>
+                    <td>{{ annonce.titre }}</td>
+                    <td>{{ annonce.date|date('d/m/Y') }}</td>
+                    <td>{{ annonce.classification.nom }}</td>
+                </tr>
             {% endfor %}
-        </ul>
-    {% endif %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(annonces) }}
 {% endblock %}
