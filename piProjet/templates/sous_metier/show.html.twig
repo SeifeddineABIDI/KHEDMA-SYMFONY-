@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SousMetier{% endblock %}
+
+{% block body %}
+   <h1 style="text-align: center;"><span style="color: #0077B6;">Sous Metier</span></h1>
+
+   <table border="2" class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sous_metier.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ sous_metier.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Domaine</th>
+                <td>{{ sous_metier.domaine }}</td>
+            </tr>
+           
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sous_metier_index') }}">back to list</a>
+
+    <a href="{{ path('app_sous_metier_edit', {'id': sous_metier.id}) }}">edit</a>
+
+    {{ include('sous_metier/_delete_form.html.twig') }}
+{% endblock %}

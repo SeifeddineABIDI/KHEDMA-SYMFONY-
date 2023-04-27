@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau des Produits</title>
+</head>
+<body >
+<h1 style="text-align: center; color: red">sa7tna</h1>
+
+
+   <h1 style="text-align: center;"><span style="color: #0077B6;">Metier index</span></h1>
+
+    <table border="2" class="table">
+    
+        <thead c>
+            <tr>
+                <th  >Id</th>
+                <th >Nom</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Image</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+        {% for metier in metier %}
+            <tr>
+                <td>{{ metier.id }}</td>
+                <td>{{ metier.nom }}</td>
+                <td>{{ metier.type }}</td>
+                <td>{{ metier.description }}</td>
+                <td>{{ metier.image }}</td>
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="{{ asset('https://kit.fontawesome.com/165c102389.js')}}" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ asset('dashboard/css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('dashboard/css/dataTables.bootstrap5.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('dashboard/css/style.css') }}"/>
+    <title>Dashboard</title>
+</head>
+<body>
+</body>
+
+
+
+<main class="mt-5 pt-3">
+    <div class="container-fluid">
+        <div class="row"></div>
+        <br/>
+    </div>
+</main>
+
+<div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: -50px;">
+    <div class="col-lg-12">
+        <main class="card-body">
+            <i class="ri-arrow-left-circle-fill" style="font-size: 50px;"></i>
+            <div class="bg-light p-3">
+                <h1>Votre panier</h1>
+            </div>
+            {% if items|length > 0 %}
+            <table class="table table-striped">
+                 <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>ZGR6F
+        </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.metier.id }}</td>
+                        <td>{{ item.metier.nom }}</td>
+                        
+                        <td>{{ item.metier.type  }}</td>
+                        <td>{{ item. metier.description}}</td>
+                
+               
+                      
+                   
+                        <td><img src="{{ asset('uploads/donimage/' ~ item.metier.image) }}" width="150px" height="150px"></td>
+                    </tr>
+                    <td>
+                                <a href="{{ path('favoris_remove',{'id':item.metier.id}) }}" class="btn btn-danger btn-sm">
+                                    <i class="fas fa fa-trash"></i>
+                                </a>
+                            </td>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ '/affichage_don_front/' }}" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Retour à la boutique</a>
+            {% else %}
+            <p>Votre panier est vide !</p>
+            <a href="{{ '/affichage_don_front/' }}" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Retour à la boutique</a>
+            {% endif %}
+        </main>
+    </div>
+</div>

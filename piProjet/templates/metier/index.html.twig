@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Metier index{% endblock %}
+
+{% block body %}
+ {# here starts trie and find   #}
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                    </ol>
+                </nav>
+            </div>
+             
+           
+                <div class="card">
+                  <div style="display: flex">
+                            <div class="col-md-5">
+                            </div>
+                            <form method="post" class="forms-sample" style="margin-left: -42px" >
+                                <div class="form-group col-md-4" style="display: flex; margin-top: 11px;margin-left: 50px;margin-right: 14px;padding-bottom: 7px">
+    
+                                    <div class="form-check">
+                                        <label class="form-check-label" style="width: 92px;margin-left: -2px;margin-right: 10px;">
+                                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="id">id</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label" style="width: 86px;margin-left: -2px;margin-right: 10px;">
+                                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="nom" >nom</label>
+                                    </div>
+    
+                                    <div class="form-check">
+                                        <label class="form-check-label" style="width: 86px;margin-left: -2px;margin-right: 10px;">
+                                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="type" >type</label>
+                                    </div>
+                                      <div class="form-check">
+                                        <label class="form-check-label" style="width: 86px;margin-left: -2px;margin-right: 10px;">
+                                            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="freelancer" >freelancer</label>
+                                    </div>
+    
+                                    <button type="Submit" class="btn btn-success btn-fw" style="margin: auto; ">Sort</button>
+                                </div>
+                            </form>
+    
+                        </div></div>
+        <div class="row ">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex">
+                            <div class="col-md-5">
+                            </div>
+                           
+    
+                        </div>
+    
+                        <ul class="navbar-nav w-100" style="margin-top: 18px;">
+                            <li class="nav-item w-100">
+                                <form name="Search-method" id="Search-method"method="post" class="forms-sample" style="display: flex">
+                                    <div class="form-group col-md-5">
+                                        <label style="margin-top: 11px;margin-left: 10px;margin-right: 14px;padding-bottom: 7px;;">Option Recherche</label>
+                                        <select name="optionsearch" class="js-example-basic-single" style="width: 200px;height: 38px; color: white; background-color: #788175; border-radius: 4px;text-align: center;border: 2px solid #0090e7;margin-right: 15px;">
+                                            <option value="">Choisir un Critére</option>
+                                            <option value="id">id</option>
+                                            <option value="nom">nom</option>
+                                            <option value="type">type</option>
+                                            <option value="freelancer">freelancer</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-7">
+                                        <div class="input-group">
+                                            <input name="Search" type="text" class="form-control" placeholder="Search Events" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-sm btn-primary" type="Submit" >Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# here ends trie and find   #}
+   <h1 style="text-align: center;"><span style="color: #0077B6;">Metier index</span></h1>
+
+    <table border="2" class="table">
+    
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Image</th>
+                  <th>freelancer</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for metier in metiers %}
+            <tr>
+                <td>{{ metier.id }}</td>
+                <td>{{ metier.nom }}</td>
+                <td>{{ metier.type }}</td>
+                <td>{{ metier.description }}</td>
+                <td><img src="{{asset ('uploads/metierimage/' ~ metier.image)}}" width="150px" height="150px"></td>
+                 <td>{{ metier.freelancer }}</td>
+                
+
+                <td>
+                    <a href="{{ path('app_metier_show', {'id': metier.id}) }}">show</a>
+                    <a href="{{ path('app_metier_edit', {'id': metier.id}) }}">edit</a>
+                    <a href="{{ path('app_pdf_generator', {'id': metier.id}) }}">pdf</a>
+                    <a href="{{ path('app_local_map', {'id': metier.id}) }}">map</a>
+             
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_metier_new') }}">Create new</a>
+{% endblock %}
