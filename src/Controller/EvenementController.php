@@ -90,7 +90,7 @@ class EvenementController extends AbstractController
         }
 
         $evenement = $paginator->paginate(
-            $evenement, /* query NOT result */
+            $evenement, 
             $request->query->getInt('page', 1),
             2
         );
