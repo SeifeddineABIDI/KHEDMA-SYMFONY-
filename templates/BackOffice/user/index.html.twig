@@ -18,9 +18,41 @@
                                     <img src="{{ asset('BackOffice/img/svg/search.svg') }}" alt="search" class="svg">
                                     <input class="form-control me-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by Name" aria-label="Search">
                                 </form>
-
+                            
                         </div>
-
+                            <div class="project-category d-flex align-items-center ms-md-30 mt-xxl-10 mt-15">
+                              <p class="fs-14 color-gray text-capitalize mb-10 mb-md-0  me-10">Is Verified :</p>
+                              <div class="project-tap order-project-tap global-shadow">
+                                 <ul class="nav px-1" id="ap-tab" role="tablist">
+                                    <li class="nav-item">
+                                       <a class="nav-link active" id="ap-overview-tab" data-bs-toggle="pill" href="#ap-overview" role="tab" aria-selected="true">All</a>
+                                    </li>
+                                    <li class="nav-item">
+                                       <a class="nav-link" id="timeline-tab" data-bs-toggle="pill" href="#timeline" role="tab" aria-selected="false">Yes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                       <a class="nav-link" id="activity-tab" data-bs-toggle="pill" href="#activity" role="tab" aria-selected="false">
+                                          No</a>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                               <div class="project-category d-flex align-items-center ms-md-30 mt-xxl-10 mt-15">
+                              <p class="fs-14 color-gray text-capitalize mb-10 mb-md-0  me-10">Is Archived :</p>
+                              <div class="project-tap order-project-tap global-shadow">
+                                 <ul class="nav px-1" id="ap-tab" role="tablist">
+                                    <li class="nav-item">
+                                       <a class="nav-link active" id="ap-overview-tab" data-bs-toggle="pill" href="#ap-overview" role="tab" aria-selected="true">All</a>
+                                    </li>
+                                    <li class="nav-item">
+                                       <a class="nav-link" id="timeline-tab" data-bs-toggle="pill" href="#timeline" role="tab" aria-selected="false">Yes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                       <a class="nav-link" id="activity-tab" data-bs-toggle="pill" href="#activity" role="tab" aria-selected="false">No</a>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
                      <div class="action-btn">
                         <a href="{{ path('app_user_create') }}" class="btn px-15 btn-primary"  style="background:#A40E1C;">
                            <i class="las la-plus fs-16"></i>Ajouter utilisateur</a>
@@ -35,7 +67,7 @@
                <div class="col-lg-12">
                   <div class="userDatatable global-shadow border-light-0 p-30 bg-white radius-xl w-100 mb-30" >
                      <div class="table-responsive" >
-                        <table class="table mb-0 table-borderless" >
+                        <table class="table mb-0 table-borderless " >
                            <thead >
                               <tr class="userDatatable-header" >
                                  <th>
@@ -126,12 +158,15 @@
                                         </td>
                                         <td>
                                             <div class="d-flex">
-                                                {{ user.isVerified ? 'Yes' : 'No' }}
+<span class="bg-opacity-{{ user.isverified ? 'success color-success' : 'danger color-danger' }} rounded-pill userDatatable-content-status active">{{ user.isverified ? 'Yes' : 'No' }}</span>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="d-flex">
-                                                {{ user.archive ? 'Yes' : 'No' }}
+                                            <div class="userDatatable-content d-inline-block">
+                                            
+<span class="bg-opacity-{{ user.archive ? 'success color-success' : 'danger color-danger' }} rounded-pill userDatatable-content-status active">{{ user.archive ? 'Yes' : 'No' }}</span>
+
+                                                {# {{ user.archive ? 'Yes' : 'No' }} #}
                                             </div>
                                         </td>
                                         <td>
@@ -175,7 +210,9 @@
 
                         </table>
                      </div>
-                     <li class="dm-pagination__item">
+                     <nav class="dm-page ">
+                     <ul class="dm-pagination d-flex">
+                     <li class="">
                         <div class="paging-option">
                             {# add pagination links #}
                             {% if currentPage > 1 %}
@@ -183,9 +220,10 @@
                             {% endif %}
                             {% for page in 1..totalPages %}
                                 {% if page == currentPage %}
-                                {{ page }}
+                                <a href="{{ path('app_user_list', {'page': page}) }}"class="dm-pagination__link active "><span class="page-number">{{page}}</span></a>
                                 {% else %}
-                                <a href="{{ path('app_user_list', {'page': page}) }}">{{ page }}</a>
+                                <a href="{{ path('app_user_list', {'page': page}) }}"class="dm-pagination__link "><span class="page-number">{{page}}</span></a>
+                                
                                 {% endif %}
                             {% endfor %}
                             {% if currentPage < totalPages %}
@@ -193,6 +231,17 @@
                             {% endif %}
                         </div>
                      </li>
+                      {# <li class="dm-pagination__item">
+                                 <div class="paging-option">
+                                    <select name="page-number" class="page-selection">
+                                       <option value="20">20/page</option>
+                                       <option value="40">40/page</option>
+                                       <option value="60">60/page</option>
+                                    </select>
+                                 </div>
+                              </li> #}
+                     </ul>
+                     </nav>
                   </div>
                </div>
             </div>
