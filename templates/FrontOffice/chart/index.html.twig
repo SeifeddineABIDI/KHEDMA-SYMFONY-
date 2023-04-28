@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+    <canvas id="categories-evenements"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const data = {{ data|json_encode|raw }};
+        const labels = data.map(item => item.categorie);
+        const values = data.map(item => item.evenementsCount);
+        const colors = [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+            '#FF8A80',
+            '#00BFA5',
+            '#E0E0E0',
+            '#607D8B',
+            '#C2185B',
+            '#3F51B5',
+            '#4CAF50'
+        ];
+
+        const datasets = [{
+            label: 'Nombre d\'événements par catégorie',
+            data: values,
+            backgroundColor: colors.slice(0, values.length)
+        }];
+
+        const ctx = document.getElementById('categories-evenements').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }]
+                },
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: 'Nombre d\'événements par catégorie',
+                }
+            }
+        });
+    </script>
+{% endblock %}

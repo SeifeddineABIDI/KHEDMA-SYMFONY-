@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Raiting{% endblock %}
+
+{% block body %}
+    <h1>Edit Raiting</h1>
+
+    {{ include('raiting/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_raiting_index') }}">back to list</a>
+
+    {{ include('raiting/_delete_form.html.twig') }}
+{% endblock %}

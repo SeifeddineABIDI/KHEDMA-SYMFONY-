@@ -1,0 +1,24 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+generate_qr_code:
+    path: '/generate-qrcode/{title}/{date}'
+    controller: 'App\Controller\EvenementController::generateQrCode'
+
+
+event_qr_code:
+    path: /event/{id}/qr
+    controller: App\Controller\EventController::eventQrCodeAction
+
+
+# routes.yaml
+post_evenement:
+    path: /afficherback
+    methods: [POST],[GET]
+
+
+# config/routes.yaml
+events_statistics_by_category:
+    path: '/events/category/{category}'
+    controller: 'App\Controller\EvenementController::statisticsByCategory'
+

@@ -1,0 +1,25 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+<div class="edit-profile__body">
+	<form>
+		<div class="form-group mb-25">
+			<label for="name1"></label>
+			{{ form_label(form.nom, 'Nom') }}
+			{{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(form.nom) }}
+		</div>
+
+		<div class="form-group mb-25">
+			<label for="name1"></label>
+			{{ form_label(form.Type, 'Type') }}
+			{{ form_widget(form.Type, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(form.Type) }}
+		</div>
+
+
+
+
+		<button class="btn btn-info btn-default btn-squared btn-transparent-info ">{{ button_label|default('Save') }}
+		</button>
+
+		{{ form_end(form) }}

@@ -1,0 +1,63 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h1 class="text-center">Evenement</h1>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ qrCodes }}" class="img-fluid rounded mb-4">
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>Id</th>
+                                    <td>{{ evenement.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Titre</th>
+                                    <td>{{ evenement.titre }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>{{ evenement.description }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Lieu</th>
+                                    <td>{{ evenement.Lieu }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Prix</th>
+                                    <td>{{ evenement.prix }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Archive</th>
+                                    <td>{{ evenement.archive ? 'Yes' : 'No' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="button-group d-flex justify-content-center pt-3">
+                            <button class="btn btn-warning btn-sm mx-2">
+                                <a href="{{ path('app_evenement_index') }}">Back to list</a>
+                            </button>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

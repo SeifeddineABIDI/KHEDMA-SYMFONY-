@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Raiting{% endblock %}
+
+{% block body %}
+    <h1>Raiting</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ raiting.id }}</td>
+            </tr>
+            <tr>
+                <th>Raiting</th>
+                <td>{{ raiting.raiting }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_raiting_index') }}">back to list</a>
+
+    <a href="{{ path('app_raiting_edit', {'id': raiting.id}) }}">edit</a>
+
+    {{ include('raiting/_delete_form.html.twig') }}
+{% endblock %}

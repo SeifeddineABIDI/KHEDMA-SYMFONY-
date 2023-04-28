@@ -1,0 +1,124 @@
+{% extends 'baseFront.html.twig' %}
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <section id="blog" class="blog">
+      <div class="container">
+
+        <div class="row">
+            <div class="col-4">
+                <!-- Sidebar code goes here -->
+                <div class="sidebar">
+                    <h3 class="sidebar-title">Search</h3>
+                    <div class="sidebar-item search-form">
+                        <form action="">
+                            <input type="text">
+                            <button type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div><!-- End sidebar search formn-->
+
+                    <h3 class="sidebar-title">Categorie</h3>
+                    <div class="sidebar-item categories">
+                        <ul>
+                            <li><a href="#">{{Raiting.id}}</a></li>
+                        </ul>
+                    </div><!-- End sidebar categories-->
+                </div><!-- End sidebar -->
+            </div>
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="">
+                <img src="/FrontOffice/img/svg/article.svg" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">{{ Raiting.raiting }}</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</time></a></li>
+                </ul>
+              </div>
+
+             
+                  <h3>Add your vote </h3>
+                  <div  class="stars ">
+            <i class="lar la-star" data-value="1"></i>
+            <i class="lar la-star" data-value="2"></i>
+            <i class="lar la-star" data-value="3"></i>
+            <i class="lar la-star" data-value="4"></i>
+            <i class="lar la-star" data-value="5"></i>
+             <input type="Hidden" name="note" id="note" value="0">
+            {#} <a href="{{ path('app_article_index_Front') }}"><button class="btn btn-warning" style="background-color:darkred">back to list</button></a>#}
+                   </div>
+
+
+                  <div style="display:flex; justify-content: flex-end;">
+                      <a href="{{ path('app_article_editfront', {'id': article.id}) }}" style="margin-right: 10px;">
+                          <button class="btn btn-warning" style="background-color:lightgray;">edit</button>
+                      </a>
+                      {{ include('frontoffice/article/deletefront.html.twig') }}
+                  </div>
+
+                  {% for comment in article.comments %}
+                  {% if comment.parent == null %}
+                  <div class="blog-comments">
+
+
+                      <div id="comment" class="comment">
+                          <div class="d-flex">
+                              <div>
+                                  <h5><a href="">User name </a> <a href="#add-comment" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                                  <time datetime="2020-01-01">{{comment.createdAt|date("d/m/Y H:i")}}</time>
+                                  <p>
+                                      {{comment.content}}
+                                  </p>
+                              </div>
+                          </div>
+                      </div><!-- End comment #1 -->
+                      <p>{{ comment.getPositiveVotesCount() }} people liked this comment</p>
+                      <p>{{ comment.getNegativeVotesCount() }} people disliked this comment</p>
+                      <a href="{{ path('vote', {'id': comment.id, 'value': 1}) }}" class="btn btn-success btn-circle btn-lg" ><i class="bi bi-hand-thumbs-up"></i></a>
+                      <a href="{{ path('vote', {'id': comment.id, 'value': -1}) }}" class="btn btn-danger btn-circle btn-lg" ><i class="bi bi-hand-thumbs-down"></i></a>
+
+                      {% for reply in comment.replies %}
+                          <p> reply : {{reply.content}} <br> created At {{reply.createdAt|date("d/m/Y H:i")}}</p>
+                      {% endfor %}
+                      {% endif %}
+                      {% endfor %}
+                      <p>Partager sur :</p>
+
+                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_article_showfront', {id: article.id}) }}" target="_blank">
+                          <button class="btn text-white" style="background-color: #3b5998"><i class="fab fa-facebook-f"></i>Facebook</button>
+                      </a>
+
+                      <a href="https://twitter.com/intent/tweet?url={{ url('app_article_showfront', {id: article.id}) }}" target="_blank">
+                          <button class="btn text-white" style="background-color: #55acee"><i class="fab fa-twitter"></i>Twitter</button>
+                      </a>
+
+                      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url('app_article_showfront', {id: article.id}) }}" target="_blank">
+                          <button class="btn text-white" style="background-color: #0082ca"><i class="fab fa-linkedin-in"></i>LinkedIn </button>
+                      </a>
+
+
+                      <div class="reply-form" id="add-comment">
+
+                          <h2 class="comment mt-4 text-justify float-left class=">Add a comment</h2>
+                          {{form(commentForm)}}
+                      </div>
+
+                  </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Main content of the webpage goes here -->
+                </div>
+            </div>
+          </article>
+      </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

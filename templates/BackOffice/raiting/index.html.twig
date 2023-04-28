@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Raiting index
+{% endblock %}
+
+{% block body %}
+	<h1>Raiting index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Raiting</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for raiting in raitings %}
+				<tr>
+					<td>{{ raiting.id }}</td>
+					<td>{{ raiting.raiting }}</td>
+
+
+					<td>
+						<h3>Add your vote
+						</h3>
+						<div class="stars ">
+							<i class="lar la-star" data-value="1"></i>
+							<i class="lar la-star" data-value="2"></i>
+							<i class="lar la-star" data-value="3"></i>
+							<i class="lar la-star" data-value="4"></i>
+							<i class="lar la-star" data-value="5"></i>
+							<input type="Hidden" name="note" id="note" value="0">
+						</div>
+					</td>
+
+					<td>
+						<div
+							class="product-item__content text-capitalize">
+							<!-- Start: Product Ratings -->
+							<div class="stars-rating d-flex align-items-center">
+								<span class="star-icon las la-star active"></span>
+								<span class="star-icon las la-star active"></span>
+								<span class="star-icon las la-star active"></span>
+								<span class="star-icon las la-star active"></span>
+								<span class="star-icon las la-star-half-alt active"></span>
+								<span class="stars-rating__point">{{ raiting.raiting}}</span>
+								<span class="stars-rating__review">
+									<span>778</span>
+									Reviews</span>
+							</div>
+							<!-- End: Product Ratings -->
+							<!-- Start: Product Brand -->
+							<span class="product-details-brandName">Brand:<span>Louis
+																																																																																							                                          Poulsen</span>
+							</span>
+							<span class="product-desc-price" style="color:#A40E1C;">
+								{{ raiting.raiting}}
+								Points
+							</span>
+						</td>
+					</td>
+
+					<td>
+						<a href="{{ path('app_raiting_show', {'id': raiting.id}) }}">show</a>
+						<a href="{{ path('app_raiting_edit', {'id': raiting.id}) }}">edit</a>
+					</td>
+
+
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_raiting_new') }}">Create new</a>
+{% endblock %}

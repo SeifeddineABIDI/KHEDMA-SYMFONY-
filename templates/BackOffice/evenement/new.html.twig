@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Evenement
+{% endblock %}
+
+{% block body %}
+	<center>
+		<h1>Create new Evenement</h1>
+	</center>
+	<br>
+	<br>
+
+	{{ include('BackOffice/evenement/_form.html.twig') }}
+
+
+	<button class="btn btn-warning btn-default btn-squared ">
+
+		<a href="{{ path('app_evenement_index') }}">back to list</a>
+
+	</button>
+{% endblock %}
