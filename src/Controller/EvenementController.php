@@ -100,7 +100,6 @@ class EvenementController extends AbstractController
 
 
 
-
         return $this->render('BackOffice/evenement/index.html.twig', [
             'evenements' => $evenement,
         ]);
