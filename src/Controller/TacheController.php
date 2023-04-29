@@ -22,7 +22,7 @@ class TacheController extends AbstractController
             ->getRepository(Tache::class)
             ->findBy(['project' => $projetId]);
 
-        return $this->render('/tache/index.html.twig', [
+        return $this->render('hexadash/tacheshow.html.twig', [
             'taches' => $taches,
             'projetId' => $projetId,
         ]);
@@ -45,7 +45,7 @@ public function add(Request $request, EntityManagerInterface $entityManager, int
         return $this->redirectToRoute('app_tache_index', ['projetId' => $projetId], Response::HTTP_SEE_OTHER);
     }
 
-    return $this->renderForm('tache/add.html.twig', [
+    return $this->renderForm('hexadash/addtache.html.twig', [
         'form' => $form,
         'projetId' => $projetId,
     ]);

@@ -20,7 +20,7 @@ body {
 }
 
 /* Style the heading */
-h1 {
+.addtacheH1 {
   color: #00539C;
   font-size: 28px;
 }
@@ -59,19 +59,19 @@ textarea {
 }
 
 /* Style the buttons */
-button[type="submit"], a {
+.addtacheButton{
   display: inline-block;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   color: #fff;
-  background-color: #00539C;
+  background-color: #1f5a8d;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover, a:hover {
+buttonadd[type="submit"]:hover, a:hover {
   background-color: #003f78;
 }
 

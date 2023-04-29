@@ -31,6 +31,17 @@ class User
      */
     private $role;
 
+
+    /**
+ * @ORM\Column(type="string", length=255, nullable=true)
+ */
+private $githubUsername;
+
+/**
+ * @ORM\Column(type="string", length=255, nullable=true)
+ */
+private $githubToken;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +79,35 @@ class User
     public function setRole(string $role): self
     {
         $this->role = $role;
+
+        return $this;
+   
+    }
+
+
+
+    public function getGithubUsername(): ?string
+    {
+        return $this->githubUsername;
+    }
+
+    public function setGithubUsername(string $githubUsername): self
+    {
+        $this->githubUsername = $githubUsername;
+
+        return $this;
+   
+    }
+    
+
+    public function getGithubToken(): ?string
+    {
+        return $this->githubToken;
+    }
+
+    public function setGithubToken(string $githubToken): self
+    {
+        $this->githubToken =  $githubToken;
 
         return $this;
    

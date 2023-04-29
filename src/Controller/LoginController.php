@@ -40,8 +40,11 @@ class LoginController extends AbstractController
                 $session = $request->getSession();
                 $session->set('username', $username);
                 $session->set('role', $user->getRole());
+                $session->set('githubUsername', $user->getGithubUsername());
+                $session->set('githubToken', $user->getGithubToken());
                 
                 $currentUser->setUsername($username);
+                
                 
                 
                 // Redirect the user based on their account type

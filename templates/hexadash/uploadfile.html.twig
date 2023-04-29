@@ -512,26 +512,27 @@
 			<div class="contents"> {% block body %}
          
          
-         
+          <div class="container">
+    
 
+    {{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
 
+    <div class="col-md-6">
+      {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+    </div>
 
-         
-             <h1 class="addtacheH1">Create New Task</h1>
+    <div class="col-md-6">
+      {{ form_row(form.file, {'attr': {'class': 'form-control'}}) }}
+    </div>
 
-    {{ form_start(form) }}
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-primary">Upload File</button>
+      <button onclick="window.location.href='{{ path('app_projet_index') }}'">Back to Projects</button>
+    </div>
 
-       <button class="addtacheButton" type="submit">Create Task</button>
     {{ form_end(form) }}
-
-    
-    
-    <a href="{{ path('app_tache_index', {'projetId': projetId}) }}">Cancel</a>
+  </div>
          
-
-		 {% for message in app.flashes('success') %}
-    <div class="alert alert-success">{{ message }}</div>
-{% endfor %}
          
          {% endblock %}
 

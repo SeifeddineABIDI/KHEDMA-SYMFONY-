@@ -8,6 +8,8 @@
    <script src="{{ asset('/drag_drop.js') }}"></script>
 </head>
 <body>
+
+
   <h1>  TASK BOARD</h1>
   <button onclick="window.location.href='{{ path('app_projet_index') }}'">Back to Projects</button>
   <button onclick="window.location.href='{{ path('app_tache_new', {'projetId': projetId}) }}'">Add Task</button>

@@ -1,5 +1,5 @@
 
-$.getJSON(typeof env !== "undefined" && env.iconLoaderUrl ? env.iconLoaderUrl : "json/icons.json", function (data) {
+$.getJSON(typeof env !== "undefined" && env.iconLoaderUrl ? env.iconLoaderUrl : "/json/icons.json", function (data) {
   const { faIcons } = data;
   const { laIcons } = data;
   const feIcons = data.uniCons;

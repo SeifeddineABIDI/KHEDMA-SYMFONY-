@@ -13,6 +13,8 @@
             <link rel="stylesheet" href="{{ asset('/style1.css') }}">
    <script src="{{ asset('/drag_drop.js') }}"></script>
 
+   <link rel="stylesheet" href="{{ asset('/addprojstyle.css') }}">
+
    <link rel="stylesheet" href="{{ asset('/addstyle.css') }}" />
 		<!-- Fonts -->
 		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -511,27 +513,17 @@
 
 			<div class="contents"> {% block body %}
          
+
+             <h1 class="addprojectH1">Create new Projet</h1>
+
+    {{ include('projet/_form.html.twig') }}
+
+    <a href="{{ path('app_projet_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+
+    <button type="submit" form="projet_form" class="class="addprojectButton"">Create</button>
+
+
          
-         
-
-
-
-         
-             <h1 class="addtacheH1">Create New Task</h1>
-
-    {{ form_start(form) }}
-
-       <button class="addtacheButton" type="submit">Create Task</button>
-    {{ form_end(form) }}
-
-    
-    
-    <a href="{{ path('app_tache_index', {'projetId': projetId}) }}">Cancel</a>
-         
-
-		 {% for message in app.flashes('success') %}
-    <div class="alert alert-success">{{ message }}</div>
-{% endfor %}
          
          {% endblock %}
 

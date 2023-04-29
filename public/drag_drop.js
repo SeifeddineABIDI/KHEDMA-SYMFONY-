@@ -52,7 +52,7 @@
     })
       .then(function(response) {
         if (response.ok) {
-          location.reload();
+          taskElement.setAttribute('data-status', status);
         } else {
           console.error('Error updating task status');
         }

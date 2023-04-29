@@ -11,6 +11,9 @@
 
    <!-- inject:css-->
 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
    <link rel="stylesheet" href="assets/vendor_assets/css/bootstrap/bootstrap.css">
 
    <link rel="stylesheet" href="assets/vendor_assets/css/daterangepicker.css">
@@ -1168,38 +1171,40 @@
                <div class="row ">
                   <div class="col-lg-12">
 
+                  <form>
+  <input type="text" id="search-input" placeholder="Search...">
+</form>
+
+
        <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
+               
+                <th>Nom du Projet</th>
                 <th>Domaine</th>
                 <th>Client</th>
                 <th>Freelancer</th>
-                <th>FreelancerId</th>
-                <th>ClientId</th>
-                <th>Archive</th>
-                 <th>Show taches</th>
-                <th>actions</th>
+                 <th>Taches</th>
+                 
+               
             </tr>
         </thead>
         <tbody>
         {% for projet in projets %}
             <tr>
-                <td>{{ projet.id }}</td>
+                
                 <td>{{ projet.nom }}</td>
                 <td>{{ projet.domaine }}</td>
                 <td>{{ projet.client }}</td>
                 <td>{{ projet.freelancer }}</td>
-                <td>{{ projet.freelancerId }}</td>
-                <td>{{ projet.clientId }}</td>
-                
-                <td>{{ projet.archive }}</td>
+            
                 <td>
-                    <a href="{{ path('app_projet_show', {'id': projet.id}) }}">show</a>
-                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">edit</a>
+                    
+                    
                     <a href="{{ path('app_tache_index', {'projetId': projet.id}) }}">Show taches</a>
-                
+                    <a href="{{ path('app_upload_file', {'projetId': projet.id,'projetNom': projet.nom,'projetClient': projet.client}) }}"> Upload File</a>
+                   
+                    
                 </td>
             </tr>
         {% else %}
@@ -1209,6 +1214,7 @@
         {% endfor %}
         </tbody>
     </table>
+{{ knp_pagination_render(projets, '', {'prev_label': 'Previous', 'next_label': 'Next'}) }}
 
                     
                        
@@ -1266,6 +1272,17 @@
    </div>
    <div class="overlay-dark-sidebar"></div>
    <div class="customizer-overlay"></div>
+   <script>
+  $(document).ready(function() {
+    $("#search-input").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+
    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBgYKHZB_QKKLWfIRaYPCadza3nhTAbv7c"></script>
    <!-- inject:js-->
    <script src="assets/vendor_assets/js/jquery/jquery-3.5.1.min.js"></script>

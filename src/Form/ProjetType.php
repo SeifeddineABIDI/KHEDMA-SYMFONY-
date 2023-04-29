@@ -14,11 +14,9 @@ class ProjetType extends AbstractType
         $builder
             ->add('nom')
             ->add('domaine')
-            ->add('client')
             ->add('freelancer')
-            ->add('freelancerId')
-            ->add('clientId')
-            ->add('archive')
+            
+            
         ;
     }
 

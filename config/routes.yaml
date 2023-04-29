@@ -22,6 +22,13 @@ app_login:
 app_tache_index:
     path: '/projet/{projetId}/tache'
     controller: App\Controller\TacheController::index
+    
+
+
+app_upload_file:
+    path: '/projet/{projetId}/files'
+    controller: App\Controller\ProjetController::uploadFile
+    
 
 update_tache_status:
   path: /update_tache_status
