@@ -11,11 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use Doctrine\ORM\QueryBuilder;
 use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\Pagination\SlidingPagination;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Persistence\EntityManagerInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 #[Route('/annonce')]
 class AnnonceController extends AbstractController
 {
@@ -65,13 +69,15 @@ class AnnonceController extends AbstractController
         }else{
             $back = "failure";
         }
-    
+      
+ 
+
         $annonces = $paginator->paginate(
             $annonces, /* query NOT result */
             $request->query->getInt('page', 1),
-            2
+            4
         );
-    
+        
         return $this->render('FrontOffice/annonce/index.html.twig', [
             'annonces' => $annonces,
         ]);
@@ -157,16 +163,30 @@ class AnnonceController extends AbstractController
         // Récupérer toutes les annonces
         $annonces = $this->getDoctrine()->getRepository(Annonce::class)->findAll();
     
-        // Créer le contenu HTML du PDF personnalisé
-        $html = '<div style="text-align:center; color: #1B7F7A;"><h1>Liste des annonces</h1></div><br/>';
+        // // Créer le contenu HTML du PDF personnalisé
+      
+        // $html = '<div style="text-align:center; color: #03045E;"><h1>Liste des annonces</h1></div><br/>';
+        // $html .= '<div style="position: absolute; top: 20px; right: 20px; color: #0076B5; font-weight: bold;"><h2>5EDMA</h2></div>';
+
+        $html = '<div style="text-align:center; color: #1B7F7A;">
+        
+        <div style="display: inline-block; color: #0095C7; font-weight: bold; font-size: 30px; float:right; margin-right: 10px;">5EDMA</div>
+    </div>
+    <br>
+    <div style="text-align:center; color: #03045E; font-size: 20px; font-weight: bold;">Liste Annonces</div>
+    <br>';
+
+     
+         
         foreach ($annonces as $annonce) {
-            $html .= '<h2 style="color:#4CABA6; text-decoration:underline;">'.$annonce->getTitre().'</h2>';
+            $html .= '<h2 style="color:#0076B5; text-decoration:underline;">'.$annonce->getTitre().'</h2>';
             $html .= '<p><strong>Date:</strong> '.$annonce->getDate()->format('Y-m-d').'</p>';
             $html .= '<p><strong>Classification:</strong> '.$annonce->getClassification()->getNom().'</p>';
             $html .= '<br />';
         }
     
         // Créer l'objet Dompdf et générer le PDF
+       
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');

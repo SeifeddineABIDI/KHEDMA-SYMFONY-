@@ -8,17 +8,24 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Annonce;
 use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
-
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/back')]
 class BackController extends AbstractController
 {
     #[Route('/', name: 'app_back_index', methods: ['GET'])]
-    public function index(AnnonceRepository $annonceRepository): Response
+    public function index(Request $request, AnnonceRepository $annonceRepository, PaginatorInterface $paginator): Response
     {
+
+        $annonces = $annonceRepository->findAll();
+        $annonces = $paginator->paginate(
+            $annonces, /* query NOT result */
+            $request->query->getInt('page', 1),
+            4
+        );
         return $this->render('BackOffice/back/index.html.twig', [
-            'annonces' => $annonceRepository->findAll(),
+            'annonces' => $annonces,
         ]);
     }
 

@@ -1,18 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'front.html.twig' %}
 
 {% block title %}Classification index{% endblock %}
 
 {% block body %}
    <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
                         <div class="d-flex align-items-center user-member__title justify-content-center me-sm-25">
-                            <h4 class="text-capitalize fw-500 breadcrumb-title">Liste de Classification</h4>
+                            <h4 class="text-capitalize fw-500 breadcrumb-title"style="color: #0074D9; font-weight: bold;">Liste  Classifications</h4>
                             
                         </div>
 
-                        <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
-                            <img src="/FrontOffice/img/svg/search.svg" alt="search" class="svg">
-                            <input class="form-control me-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by Nom" aria-label="Search">
-                        </form>
+                      
 
                     </div>
 
@@ -42,8 +39,9 @@
                 <td>{{ classification.archive ? 'Yes' : 'No' }}</td>
                 </div>
                 <td>
-                 
-                                            <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                 <a href="{{ path('app_classification_show', {'id': classification.id}) }}">Show</a>
+                    <a href="{{ path('app_classification_edit', {'id': classification.id}) }}">Edit</a>
+                                            {# <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
                                             <li>
                                                 <a href="{{ path('app_classification_show', {'id': classification.id}) }}" class="show">
                                                     <i class="uil uil-eye"></i>
@@ -66,7 +64,7 @@
                                                     <i class="fa-brands fa-creative-commons-by"></i>
                                                 </a>
                                             </li> #}
-                                            </ul>
+                                            {# </ul> #} 
                                         </td>
                 {# <td>
                     <a href="{{ path('app_classification_show', {'id': classification.id}) }}">show</a>
@@ -82,9 +80,12 @@
     </table>
 
    {# <a href="{{ path('app_classification_new') }}">Create new</a> #}
-   <div class="action-btn">
+   {# <div class="action-btn">
                         <a href="{{ path('app_classification_new') }}" class="btn btn-info btn-default btn-squared btn-transparent-info " >
                            <i class="las la-plus fs-16"></i>Add New Classification</a>
 
-                     </div>
+                     </div> #}
+    <a href="{{ path('app_classification_new') }}" class="btn btn-default btn-squared btn-transparent-info btn-blue">
+    <span style="color: #0074D9; font-weight: bold;">Add New Classification</span>
+</a>
 {% endblock %}

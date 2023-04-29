@@ -1,0 +1,25 @@
+/* Style de la pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style du lien vers la page active */
+  .pagination .page-item.active .page-link {
+    background-color: #1B7F7A !important;
+    border-color: #1B7F7A !important;
+  }
+  
+  /* Style du lien vers la page non active */
+  .pagination .page-link {
+    color: #1B7F7A !important;
+    border-color: #1B7F7A !important;
+  }
+  
+  /* Style des flèches de pagination */
+  .pagination .page-item:first-child .page-link,
+  .pagination .page-item:last-child .page-link {
+    color: #1B7F7A !important;
+  }

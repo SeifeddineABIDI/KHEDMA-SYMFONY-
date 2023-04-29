@@ -1,0 +1,35 @@
+.btn-blue {
+    background-color: #90E0EF;
+    color: #0074D9; /* changer la couleur de texte en bleu */
+   
+    font-weight: bold; /* mettre le texte en gras */
+  }
+
+  .breadcrumb-title {
+    color: blue; /* donner la couleur blue au titre */
+  }
+
+  .add-button {
+    margin-right: 10px;
+  }
+  
+  .pdf-button {
+    margin-left: 10px;
+  }
+  
+  @media (max-width: 576px) {
+    .add-button,
+    .pdf-button {
+      margin: 10px 0;
+    }
+  }
+  
+  @media (min-width: 577px) {
+    .d-flex.justify-content-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  
+  
