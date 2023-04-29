@@ -8,19 +8,30 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EvenementRepository;
 use App\Entity\Evenement;
 use Endroid\QrCode\QrCode;
+use Knp\Component\Pager\PaginatorInterface;
+
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
 use Endroid\QrCode\Label\Label;
 use Endroid\QrCode\Logo\Logo;
 use Endroid\QrCode\Writer\PngWriter;
+use Symfony\Component\HttpFoundation\Request;
+
 use Endroid\QrCode\Label\Font\NotoSans;
 
 class FrontController extends AbstractController
 {
     #[Route('/front', name: 'app_front', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(Request $request,EvenementRepository $evenementRepository, PaginatorInterface $paginator): Response
     {
         $evenements = $evenementRepository->findAll();
+
+        
+        $evenements = $paginator->paginate(
+            $evenements, /* query NOT result */
+            $request->query->getInt('page', 1),
+            3
+        );
 
         return $this->render('FrontOffice/front/index.html.twig', [
             'evenements' => $evenements,

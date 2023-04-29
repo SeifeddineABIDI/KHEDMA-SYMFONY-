@@ -18,7 +18,7 @@ class Evenement
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Please enter a title.")]
-    #[Assert\Length(min: 5, max: 30, minMessage: "Le titre doit comporter au moins {{ limit }} caractères",    maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères")]
+    #[Assert\Length(min: 5, max: 300, minMessage: "Le titre doit comporter au moins {{ limit }} caractères",    maxMessage: "Le nom ne peut pas dépasser {{ limit }} caractères")]
     private ?string $titre = null;
 
 
