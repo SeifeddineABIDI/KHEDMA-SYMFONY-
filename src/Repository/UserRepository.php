@@ -56,6 +56,39 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+
+    public function filter($isVerified, $isArchived, $searchQuery)
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        if ($isVerified != 'All') {
+            $qb->andWhere('u.isVerified = :isVerified')
+                ->setParameter('isVerified', $isVerified == 'Yes');
+        }
+
+        if ($isArchived != 'All') {
+            $qb->andWhere('u.archive = :isArchived')
+                ->setParameter('isArchived', $isArchived == 'Yes');
+        }
+
+        
+        if ($searchQuery!=null) {
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('u.nom', ':search'),
+                    $qb->expr()->like('u.prenom', ':search'),
+                    $qb->expr()->like('u.cin', ':search'),
+                    $qb->expr()->like('u.email', ':search'),
+                    $qb->expr()->like('u.adresse', ':search'),
+                    $qb->expr()->like('u.telephone', ':search'),
+                    $qb->expr()->like('u.githubUsername', ':search')
+                )
+            )
+            ->setParameter('search', '%'.$searchQuery.'%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

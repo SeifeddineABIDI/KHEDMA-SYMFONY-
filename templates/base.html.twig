@@ -639,6 +639,26 @@
 				<script src="{{ asset('BackOffice/assets/theme_assets/js/jvectormap-init.js') }}"></script>
 				<script src="{{ asset('BackOffice/assets/theme_assets/js/leaflet-init.js') }}"></script>
 				<script src="{{ asset('BackOffice/assets/theme_assets/js/main.js') }}"></script>
+				{# <script>
+					$(document).ready(function () {
+						$('#search-input').keyup(function () {
+							var searchQuery = $(this).val();
+							$.ajax({
+								url: "{{ path('app_user_list') }}",
+								type: 'GET',
+								data: {
+									'search': searchQuery
+								},
+								success: function (response) {
+									$("#user-table tbody").html(response);
+								},
+								error: function (response) {
+									console.log(response);
+								}
+							});
+						});
+					});
+        		</script> #}
 				<!-- endinject-->
 			{% endblock %}
 		</body>

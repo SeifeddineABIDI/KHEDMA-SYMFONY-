@@ -13,10 +13,9 @@
                                 <div class="d-flex align-items-center user-member__title justify-content-center me-sm-25">
                                     <h4 class="text-capitalize fw-500 breadcrumb-title">users list </h4>                           
                                 </div>
-
-                                <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
+                                <form action="{{ path('app_user_list', {'isArchived': isArchived, 'isVerified': isVerified, 'seach-query': searchQuery}) }}" method="GET" class="d-flex align-items-center user-member__form my-sm-0 my-2">
                                     <img src="{{ asset('BackOffice/img/svg/search.svg') }}" alt="search" class="svg">
-                                    <input class="form-control me-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by Name" aria-label="Search">
+                                    <input id="search-input" class="form-control me-sm-2 border-0 box-shadow-none" type="search" name="search-query" placeholder="Search Users" aria-label="Search" value="{{ searchQuery }}">
                                 </form>
                             
                         </div>
@@ -25,14 +24,19 @@
                               <div class="project-tap order-project-tap global-shadow">
                                  <ul class="nav px-1" id="ap-tab" role="tablist">
                                     <li class="nav-item">
-                                       <a class="nav-link active" id="ap-overview-tab" data-bs-toggle="pill" href="#ap-overview" role="tab" aria-selected="true">All</a>
+                                       <a class="nav-link{{ isVerified == 'All' ? ' active' }}" 
+                                        href="{{ path('app_user_list', {'isVerified': 'All', 'isArchived': isArchived, 'search-query': searchQuery}) }}"
+                                        aria-selected="{{ isVerified == 'All' ? 'true' : 'false' }}">All</a>
                                     </li>
                                     <li class="nav-item">
-                                       <a class="nav-link" id="timeline-tab" data-bs-toggle="pill" href="#timeline" role="tab" aria-selected="false">Yes</a>
+                                       <a class="nav-link{{ isVerified == 'Yes' ? ' active' }}" 
+                                        href="{{ path('app_user_list', {'isVerified': 'Yes', 'isArchived': isArchived, 'search-query': searchQuery}) }}"
+                                        aria-selected="{{ isVerified == 'Yes' ? 'true' : 'false' }}">Yes</a>
                                     </li>
                                     <li class="nav-item">
-                                       <a class="nav-link" id="activity-tab" data-bs-toggle="pill" href="#activity" role="tab" aria-selected="false">
-                                          No</a>
+                                      <a class="nav-link{{ isVerified == 'No' ? ' active' }}" 
+                                        href="{{ path('app_user_list', {'isVerified': 'No', 'isArchived': isArchived, 'search-query': searchQuery}) }}"
+                                        aria-selected="{{ isVerified == 'No' ? 'true' : 'false' }}">No</a>
                                     </li>
                                  </ul>
                               </div>
@@ -42,14 +46,19 @@
                               <div class="project-tap order-project-tap global-shadow">
                                  <ul class="nav px-1" id="ap-tab" role="tablist">
                                     <li class="nav-item">
-                                       <a class="nav-link active" id="ap-overview-tab" data-bs-toggle="pill" href="#ap-overview" role="tab" aria-selected="true">All</a>
+                                      <a class="nav-link{{ isArchived == 'All' ? ' active' }}" 
+                                        href="{{ path('app_user_list', {'isVerified': isVerified, 'isArchived': 'All', 'search-query': searchQuery}) }}"
+                                        aria-selected="{{ isArchived == 'All' ? 'true' : 'false' }}">All</a>
                                     </li>
                                     <li class="nav-item">
-                                       <a class="nav-link" id="timeline-tab" data-bs-toggle="pill" href="#timeline" role="tab" aria-selected="false">Yes</a>
+                                       <a class="nav-link{{ isArchived == 'Yes' ? ' active' }}" 
+                                        href="{{ path('app_user_list', {'isVerified': isVerified, 'isArchived': 'Yes', 'search-query': searchQuery}) }}"
+                                        aria-selected="{{ isArchived == 'Yes' ? 'true' : 'false' }}">Yes</a>
                                     </li>
                                     <li class="nav-item">
-                                       <a class="nav-link" id="activity-tab" data-bs-toggle="pill" href="#activity" role="tab" aria-selected="false">No</a>
-                                    </li>
+                                       <a class="nav-link{{ isArchived == 'No' ? ' active' }}" 
+                                        href="{{ path('app_user_list', {'isVerified': isVerified, 'isArchived': 'No', 'search-query': searchQuery}) }}"
+                                        aria-selected="{{ isArchived == 'No' ? 'true' : 'false' }}">No</a>
                                  </ul>
                               </div>
                            </div>
@@ -67,7 +76,7 @@
                <div class="col-lg-12">
                   <div class="userDatatable global-shadow border-light-0 p-30 bg-white radius-xl w-100 mb-30" >
                      <div class="table-responsive" >
-                        <table class="table mb-0 table-borderless " >
+                        <table id="user-table" class="table mb-0 table-borderless " >
                            <thead >
                               <tr class="userDatatable-header" >
                                  <th>

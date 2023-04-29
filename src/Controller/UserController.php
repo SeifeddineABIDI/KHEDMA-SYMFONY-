@@ -38,7 +38,11 @@ class UserController extends AbstractController
     #[Route('/admin', name: 'app_user_list')]
     public function index(Request $request): Response
     {
-        $users = $this->userRepository->findAll();
+        $isVerified = $request->query->get('isVerified', 'All');
+        $isArchived = $request->query->get('isArchived', 'All');
+        $searchQuery = $request->query->get('search-query', '');
+        $users = $this->userRepository->filter($isVerified, $isArchived, $searchQuery);
+        //$users = $this->userRepository->findAll();
         $numberOfUsersPerPage = 5;
         $totalUsers = count($users);
         $totalPages = ceil($totalUsers / $numberOfUsersPerPage);
@@ -51,9 +55,11 @@ class UserController extends AbstractController
             'users' => $usersOnCurrentPage,
             'totalPages' => $totalPages,
             'currentPage' => $pageNumber,
+            'isArchived' => $isArchived,
+            'isVerified' => $isVerified,
+            'searchQuery' => $searchQuery
         ]);
     }
-
 
     #[Route('/create', name: 'app_user_create')]
     public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
