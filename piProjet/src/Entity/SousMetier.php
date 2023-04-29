@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SousMetierRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: SousMetierRepository::class)]
 class SousMetier
 {
@@ -14,9 +14,25 @@ class SousMetier
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Entrer libelle sous metier')]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'The name must be at least {{ limit }} characters',
+        maxMessage: 'The name cannot exceed {{ limit }} characters'
+    )]
+    #[Assert\Regex("/^[a-zA-Z]/")]
     private ?string $libelle = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Entrer domaine sous metier')]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'The name must be at least {{ limit }} characters',
+        maxMessage: 'The name cannot exceed {{ limit }} characters'
+    )]
+    #[Assert\Regex("/^[a-zA-Z]/")]
     private ?string $domaine = null;
 
     #[ORM\Column(nullable: true)]

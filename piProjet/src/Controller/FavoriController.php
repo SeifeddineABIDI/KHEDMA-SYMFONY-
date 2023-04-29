@@ -47,7 +47,7 @@ class FavorisController extends AbstractController
     {
         $favoris = $session->get('favoris', []);
         $id = $metier->getId();
-
+        dump($id);
         if (!isset($favoris[$id])) {
             $favoris[$id] = true;
         }
@@ -55,7 +55,9 @@ class FavorisController extends AbstractController
         // On sauvegarde dans la session
         $session->set('favoris', $favoris);
 
-        return $this->redirectToRoute("app_favoris");
+        return $this->redirectToRoute("app_favoris", [
+            'id' => $id
+        ]);
     }
 
     /**

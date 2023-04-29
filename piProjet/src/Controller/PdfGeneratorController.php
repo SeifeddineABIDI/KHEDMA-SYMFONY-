@@ -19,8 +19,12 @@ class PdfGeneratorController extends AbstractController
     {
         {
             $metier=$repository->findAll();
+            // $imagePath = $this->getParameter('kernel.project_dir') . '/public/uploads/metierimage/' . $repository->getImage();
+            $imagePath = $this->getParameter('kernel.project_dir') . '/public/uploads/metierimage/' . 'mm.jpg';
+            $imageData = $this->imageToBase64($imagePath);
+            // dump($imagePath);
+
             
-    
             // On définit les options du PDF
             $pdfOptions = new Options();
             // Police par défaut
@@ -33,7 +37,8 @@ class PdfGeneratorController extends AbstractController
     
             // On génère le html
             $html = $this->renderView('pdf_generator/index.html.twig',
-                ['metier'=>$metier ]);
+                ['metier'=>$metier ,
+                'image_data' => $imageData,]);
             //$html = $this->renderView('pdf_generator/index.html.twig',
                 //['don'=>$don ]);
     //
@@ -43,7 +48,7 @@ class PdfGeneratorController extends AbstractController
             $dompdf->render();
     
             // On génère un nom de fichier
-            $fichier = 'Tableau des dons.pdf';
+            $fichier = 'Tableau des metiers.pdf';
     
             // On envoie le PDF au navigateur
             $dompdf->stream($fichier, [
@@ -62,4 +67,5 @@ class PdfGeneratorController extends AbstractController
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         return $base64;
     }
+    
 }

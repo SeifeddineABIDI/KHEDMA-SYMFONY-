@@ -87,8 +87,8 @@
     </div>
 
     {# here ends trie and find   #}
-   <h1 style="text-align: center;"><span style="color: #0077B6;">Metier index</span></h1>
-
+   <h1 style="text-align: center "><span style="color: #0077B6;">les Metiers</span></h1>
+<a href="/metier/stat/sta">Stat</a>
     <table border="2" class="table">
     
         <thead>
@@ -98,7 +98,7 @@
                 <th>Type</th>
                 <th>Description</th>
                 <th>Image</th>
-                  <th>freelancer</th>
+                  <th>localisation</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -111,8 +111,8 @@
                 <td>{{ metier.description }}</td>
                 <td><img src="{{asset ('uploads/metierimage/' ~ metier.image)}}" width="150px" height="150px"></td>
                  <td>{{ metier.freelancer }}</td>
-                
-
+                <td>
+    <a href="{{ path('bank_get_qr_code', {'id': metier.id}) }}"  class="btn btn-outline-primary">Obtenir le code QR</a></td>
                 <td>
                     <a href="{{ path('app_metier_show', {'id': metier.id}) }}">show</a>
                     <a href="{{ path('app_metier_edit', {'id': metier.id}) }}">edit</a>
@@ -129,5 +129,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_metier_new') }}">Create new</a>
+    <a href="{{ path('app_metier_new') }}">Ajouter Metier</a>
 {% endblock %}

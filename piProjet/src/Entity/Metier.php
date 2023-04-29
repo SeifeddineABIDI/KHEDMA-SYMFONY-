@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MetierRepository::class)]
 class Metier
@@ -17,15 +18,40 @@ class Metier
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Entrer nom metier')]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'The name must be at least {{ limit }} characters',
+        maxMessage: 'The name cannot exceed {{ limit }} characters'
+    )]
+    #[Assert\Regex("/^[a-zA-Z]/")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Entrer type metier')]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'The name must be at least {{ limit }} characters',
+        maxMessage: 'The name cannot exceed {{ limit }} characters'
+    )]
+    #[Assert\Regex("/^[a-zA-Z]/")]
     private ?string $type = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT,unique:true)]
+    #[Assert\NotBlank(message: 'Entrer description metier')]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'The name must be at least {{ limit }} characters',
+        maxMessage: 'The name cannot exceed {{ limit }} characters'
+    )]
+    #[Assert\Regex("/^[a-zA-Z]/")]
+
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $image = null;
 
     #[ORM\Column(nullable: true)]
