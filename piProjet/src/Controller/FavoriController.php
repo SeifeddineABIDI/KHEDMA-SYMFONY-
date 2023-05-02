@@ -63,5 +63,16 @@ class FavorisController extends AbstractController
     /**
      * @Route("/favoris/remove/{id}" , name="favoris_remove")
      */
-   
+    public function remove(metier $metier, $id, SessionInterface $session)
+    {
+        $favoris = $session->get('favoris', []);
+        $id = $metier->getId();
+
+        if (isset($favoris[$id])) {
+            unset($favoris[$id]);
+        }
+
+        $session->set('favoris', $favoris);
+        return $this->redirectToRoute("app_favoris");
+    }
 }
