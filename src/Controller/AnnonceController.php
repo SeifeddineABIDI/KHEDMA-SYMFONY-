@@ -185,14 +185,14 @@ class AnnonceController extends AbstractController
             $html .= '<br />';
         }
     
-        // Créer l'objet Dompdf et générer le PDF
-       
+        
+       //instanciation d'un nouveau obj
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
     
-        // Renvoyer le PDF en réponse HTTP
+   
         $response = new Response($dompdf->output());
         $response->headers->set('Content-Type', 'application/pdf');
         $response->headers->set('Content-Disposition', 'attachment;filename="annonces.pdf"');
