@@ -39,61 +39,6 @@ class EvenementRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Evenement[] Returns an array of Evenement objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Evenement
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
-
-
-    // public function findByTitre($titre)
-    // {
-    // return $this->createQueryBuilder('t')
-    // ->where('t.titre LIKE :titre')
-    // ->setParameter('titre', '%'.$titre.'%')
-    // ->getQuery()
-    // ->getResult();
-    // }
-
-
-    // public function orderByNom()
-    // {
-    //     return $this->createQueryBuilder('e')
-    //         ->orderBy('e.titre', 'ASC')
-    //         ->getQuery()->getResult();
-    // }
-
-
-
-    // public function findPlanBySujet($sujet){
-    //     return $this->createQueryBuilder('ex')
-    //         ->andWhere('ex.Lieu LIKE :sujet ')
-    //         ->setParameter('sujet', '%'.$sujet.'%')
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-
-
 
     public function SortByid(){
         return $this->createQueryBuilder('e')
@@ -105,7 +50,7 @@ class EvenementRepository extends ServiceEntityRepository
       
       public function SortBytitre()
       {
-        return $this->createQueryBuilder('e')
+        return $this->createQueryBuilder('e') /*  créer une nouvelle instance d'une requête de sélection */
             ->orderBy('e.titre','ASC')
             ->getQuery()
             ->getResult()

@@ -39,11 +39,12 @@ class EvenementController extends AbstractController
     {
         $this->managerRegistry = $managerRegistry;
     }
-    protected function getDoctrine(): ManagerRegistry
+    protected function getDoctrine(): ManagerRegistry   
     {
         return $this->managerRegistry;
-    }
-
+    }  /* méthode protégée qui retourne l'instance du ManagerRegistry stockée 
+    dans la propriété $managerRegistry. Cela permet aux classes filles qui héritent de cette classe 
+    d'accéder au ManagerRegistry et de gérer les entités et la base de données. */
 
     #[Route('/', name: 'app_evenement_index', methods: ['GET', 'POST'])]
     public function index(Request $request, EvenementRepository $evenementRepository, PaginatorInterface $paginator): Response
@@ -115,6 +116,9 @@ class EvenementController extends AbstractController
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EvenementRepository $evenementRepository): Response
     {
+       /*  La méthode handleRequest() permet de gérer une requête HTTP envoyée par un formulaire. 
+        Elle prend en paramètre l'objet Request qui contient les données de la requête, 
+        et s'occupe de traiter ces données pour les associer au formulaire et effectuer les validations nécessaires. */
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
@@ -188,20 +192,6 @@ class EvenementController extends AbstractController
     // }
     
 
-    #[Route('/rechercher', name: 'app_evenement_rechercher', methods: ['POST'])]
-public function recherche(Request $request, EvenementRepository $evenementRepository): Response
-{
-    $titre = $request->request->get('titre');
-
-    $evenements = $evenementRepository->createQueryBuilder('e')
-        ->andWhere('e.titre LIKE :titre')
-        ->setParameter('titre', '%' . $titre . '%')
-        ->getQuery()
-        ->getResult();
-
-    return $this->render('BackOffice/evenement/index.html.twig', [
-        'evenements' => $evenements,
-    ]);
 
 
 
@@ -302,4 +292,4 @@ public function qrCode(EvenementRepository $evenementRepository, UrlGeneratorInt
  
      
 
-}
+

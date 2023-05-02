@@ -27,6 +27,12 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 		{% block Back %}
+
+
+			<link rel="stylesheet" href="{{ asset('path/to/jquery-bar-rating.css') }}">
+			<script src="{{ asset('path/to/jquery.min.js') }}"></script>
+			<script src="{{ asset('path/to/jquery-bar-rating.js') }}"></script>
+
 			<!-- inject:css-->
 
 			<link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/bootstrap/bootstrap.css') }}">
@@ -83,47 +89,64 @@
 	<body>
 
 		<!-- ======= Header ======= -->
-		<header id="header" class="header fixed-top">
+		<header id="header" class="header fill">
 			<div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
 				<a href="index.html" class="logo d-flex align-items-center">
-					<span></span>
+					<span>5EDMA</span>
 				</a>
 
 				<nav id="navbar" class="navbar">
 					<ul>
-						{# <li><a class="nav-link scrollto" href="{{ path('app_home_page') }}">Home</a></li> #}
-						{# <li><a class="nav-link scrollto" href="{{ path('app_emergency_index') }}">Emergency</a></li> #}
-							<li>
-								<a class="nav-link scrollto" href=""> RDV</a>
+						<li>
+							<a class="nav-link scrollto" href="">Home</a>
 						</li>
-						{# <li><a class="nav-link scrollto" href="{{ path('app_product_index') }}">Marketplace</a></li> #}
-						{# <li><a href="{{ path('app_event_index') }}">Event</a> #}
-					</li>
-					<li class="dropdown">
-						<a href="">
-							<span>Blog</span>
-							<i class="bi bi-chevron-down"></i>
-						</a>
-						<ul>{# <li><a class="nav-link scrollto" href="{{path('app_article_index_Front')}}">Article</a></li> #}
-							{# <li><a class="nav-link" href="{{path('app_article_new')}}">Add an article</a></li> #}
-							{# <li><a class="nav-link scrollto" href="{{path('app_article_category_new_front')}}">Categorie</a></li> #}
+						<li>
+							<a class="nav-link scrollto" href="">Emergency</a>
 						</li>
-					</li>
-				</ul>
-			</li>
-			{# <li><a href="{{path('app_evenement_show')}}" ><i style="background:#A40E1C;" class="fas fa-shopping-cart"></i></a></li> #}
-			{% if app.session.get('user') is not null %}
-				<li>
-					<a class="getstarted scrollto" href="{{ path('app_register') }}">Sign out</a>
+						<li></li>
+						<li>
+							<a class="nav-link scrollto" href="">Marketplace</a>
+						</li>
+						<li>
+							<a href="">Event</a>
+						</li>
+						<li class="dropdown">
+
+							<ul>
+								<li>
+									<a class="nav-link scrollto" href="">Article</a>
+								</li>
+								<li>
+									<a class="nav-link" href="">Add an article</a>
+								</li>
+								<li>
+									<a class="nav-link scrollto" href="">Categorie</a>
+								</li>
+							</li>
+						</li>
+					</ul>
 				</li>
+				<li>
+					<a href="">
+						<i style="background:#2a04a7;" class="fas fa-shopping-cart"></i>
+					</a>
+				</li>
+				{% if app.session.get('user') is not null %}
+					<li>
+						<a class="getstarted scrollto" href="">Sign out</a>
+					</li>
 				{% else %}
-				{# <li><a class="getstarted scrollto" href="{{ path('app_login') }}">Log in</a></li> #}
-			{% endif %}
-		</ul>
-		<i class="bi bi-list mobile-nav-toggle"></i>
+					<li>
+						<a class="getstarted scrollto" href="">Log in</a>
+					</li>
+				{% endif %}
+			</ul>
+			<i class="bi bi-list mobile-nav-toggle"></i>
+		</body>
 	</body>
 </html></nav><!-- .navbar --></div></header><!-- End Header --><main id="main"> {% block body %}{% endblock %}</main><!-- End #main --><!-- ======= Footer ======= --><footer id="footer" class="footer"><div class="footer-top">
+<br><br>
 <div class="container">
 	<div class="row gy-4">
 		<div class="col-lg-5 col-md-12 footer-info">
@@ -228,6 +251,7 @@
 	<!-- All the links in the footer should remain intact. -->
 	<!-- You can delete the links only if you purchased the pro version. -->
 	<!-- Licensing information: https://bootstrapmade.com/license/ -->
-	<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->Designed by
-		<a href="https://bootstrapmade.com/"> CODEX TEAM</a>
+	<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
+	Designed by
+		<a href=""> LEGENDS TEAM</a>
 </div></div></footer><!-- End Footer --><a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>{% block Bjs %}<!-- inject:js--><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery/jquery-3.5.1.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery/jquery-ui.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/bootstrap/popper.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/bootstrap/bootstrap.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/moment/moment.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/accordion.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/apexcharts.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/autoComplete.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/Chart.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/daterangepicker.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/drawer.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/dynamicBadge.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/dynamicCheckbox.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/footable.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/fullcalendar@5.2.0.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/google-chart.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery-jvectormap-2.0.5.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery-jvectormap-world-mill-en.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.countdown.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.filterizr.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.magnific-popup.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.peity.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.star-rating-svg.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/leaflet.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/leaflet.markercluster.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/loader.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/message.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/moment.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/muuri.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/notification.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/popover.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/select2.full.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/slick.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/trumbowyg.min.js') }}"></script><script src="{{ asset('BackOffice/assets/vendor_assets/js/wickedpicker.min.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/apexmain.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/charts.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/drag-drop.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/footable.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/full-calendar.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/googlemap-init.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/icon-loader.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/jvectormap-init.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/leaflet-init.js') }}"></script><script src="{{ asset('BackOffice/assets/theme_assets/js/main.js') }}"></script><!-- endinject-->{% endblock %}{% block js %}<!-- Vendor JS Files --><script src="{{ asset('FrontOffice/vendor/purecounter/purecounter_vanilla.js') }}"></script><script src="{{ asset('FrontOffice/vendor/aos/aos.js') }}"></script><script src="{{ asset('FrontOffice/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script><script src="{{ asset('FrontOffice/vendor/glightbox/js/glightbox.min.js') }}"></script><script src="{{ asset('FrontOffice/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script><script src="{{ asset('FrontOffice/vendor/swiper/swiper-bundle.min.js') }}"></script><script src="{{ asset('FrontOffice/vendor/php-email-form/validate.js') }}"></script>{% endblock %}<!-- Template Main JS File --><script src="{{ asset('FrontOffice/js/main.js') }}"></script></body></html>

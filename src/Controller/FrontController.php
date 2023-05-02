@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\EvenementRepository;
 use App\Entity\Evenement;
-use Endroid\QrCode\QrCode;
+use Endroid\QrCode\QrCode; /* importe la classe QrCode du package endroid/qr-code */
 use Knp\Component\Pager\PaginatorInterface;
 
 use Endroid\QrCode\Encoding\Encoding;
@@ -22,11 +22,11 @@ use Endroid\QrCode\Label\Font\NotoSans;
 class FrontController extends AbstractController
 {
     #[Route('/front', name: 'app_front', methods: ['GET'])]
-    public function index(Request $request,EvenementRepository $evenementRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request, EvenementRepository $evenementRepository, PaginatorInterface $paginator): Response
     {
         $evenements = $evenementRepository->findAll();
 
-        
+
         $evenements = $paginator->paginate(
             $evenements, /* query NOT result */
             $request->query->getInt('page', 1),
@@ -43,10 +43,12 @@ class FrontController extends AbstractController
     {
         $writer = new PngWriter();
 
-        $label = Label::create('')->setFont(new NotoSans(8));
+        $label = Label::create('')->setFont(new NotoSans(8));  /* la méthode setFont() est appelée sur cet objet pour spécifier la police 
+                                                                d'écriture à utiliser pour le texte du label. Dans ce cas,
+                                                                la police est définie comme étant NotoSans avec une taille de 8 points. */
         $qrCode = new QrCode(sprintf(
             'Evenement %d, Titre: %s, Lieu: %s',
-            $evenement->getId(),
+            $evenement->getId(), 
             $evenement->getTitre(),
             $evenement->getLieu()
         ));
@@ -56,7 +58,10 @@ class FrontController extends AbstractController
             null,
             $label->setText('QRCode')
         )->getDataUri();
-
+/*         cette ligne de code génère l'image QR code avec le contenu du message, ajoute un label "QRCode" 
+        et retourne l'URL de l'image encodée en base64. Le résultat 
+        est stocké dans la variable $qrCodes qui est utilisée pour afficher l'image QR code dans la vue Twig. */
+      
         return $this->render('FrontOffice/front/show.html.twig', [
             'evenement' => $evenement,
             'qrCodes' => $qrCodes,

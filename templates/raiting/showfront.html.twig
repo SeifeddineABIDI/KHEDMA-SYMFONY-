@@ -1,5 +1,5 @@
 {% extends 'baseFront.html.twig' %}
-{% block title %}Article{% endblock %}
+{% block title %}evenement{% endblock %}
 
 {% block body %}
     <section id="blog" class="blog">
@@ -27,10 +27,10 @@
             </div>
           <div class="col-lg-8 entries">
 
-            <article class="entry entry-single">
+            <evenement class="entry entry-single">
 
               <div class="">
-                <img src="/FrontOffice/img/svg/article.svg" alt="" class="img-fluid">
+                <img src="/FrontOffice/img/svg/evenement.svg" alt="" class="img-fluid">
               </div>
 
               <h2 class="entry-title">
@@ -39,7 +39,7 @@
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ evenement.createdAt ? evenement.createdAt|date('Y-m-d H:i:s') : '' }}</time></a></li>
                 </ul>
               </div>
 
@@ -52,18 +52,17 @@
             <i class="lar la-star" data-value="4"></i>
             <i class="lar la-star" data-value="5"></i>
              <input type="Hidden" name="note" id="note" value="0">
-            {#} <a href="{{ path('app_article_index_Front') }}"><button class="btn btn-warning" style="background-color:darkred">back to list</button></a>#}
                    </div>
 
 
                   <div style="display:flex; justify-content: flex-end;">
-                      <a href="{{ path('app_article_editfront', {'id': article.id}) }}" style="margin-right: 10px;">
+                      <a href="{{ path('app_evenement_editfront', {'id': evenement.id}) }}" style="margin-right: 10px;">
                           <button class="btn btn-warning" style="background-color:lightgray;">edit</button>
                       </a>
-                      {{ include('frontoffice/article/deletefront.html.twig') }}
+                      {{ include('frontoffice/evenement/deletefront.html.twig') }}
                   </div>
 
-                  {% for comment in article.comments %}
+                  {% for comment in evenement.comments %}
                   {% if comment.parent == null %}
                   <div class="blog-comments">
 
@@ -79,7 +78,7 @@
                               </div>
                           </div>
                       </div><!-- End comment #1 -->
-                      <p>{{ comment.getPositiveVotesCount() }} people liked this comment</p>
+                      <p>{{ comment.getPositiveVotesCount() }} people liked this event</p>
                       <p>{{ comment.getNegativeVotesCount() }} people disliked this comment</p>
                       <a href="{{ path('vote', {'id': comment.id, 'value': 1}) }}" class="btn btn-success btn-circle btn-lg" ><i class="bi bi-hand-thumbs-up"></i></a>
                       <a href="{{ path('vote', {'id': comment.id, 'value': -1}) }}" class="btn btn-danger btn-circle btn-lg" ><i class="bi bi-hand-thumbs-down"></i></a>
@@ -91,15 +90,15 @@
                       {% endfor %}
                       <p>Partager sur :</p>
 
-                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_article_showfront', {id: article.id}) }}" target="_blank">
+                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_evenement_showfront', {id: evenement.id}) }}" target="_blank">
                           <button class="btn text-white" style="background-color: #3b5998"><i class="fab fa-facebook-f"></i>Facebook</button>
                       </a>
 
-                      <a href="https://twitter.com/intent/tweet?url={{ url('app_article_showfront', {id: article.id}) }}" target="_blank">
+                      <a href="https://twitter.com/intent/tweet?url={{ url('app_evenement_showfront', {id: evenement.id}) }}" target="_blank">
                           <button class="btn text-white" style="background-color: #55acee"><i class="fab fa-twitter"></i>Twitter</button>
                       </a>
 
-                      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url('app_article_showfront', {id: article.id}) }}" target="_blank">
+                      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url('app_evenement_showfront', {id: evenement.id}) }}" target="_blank">
                           <button class="btn text-white" style="background-color: #0082ca"><i class="fab fa-linkedin-in"></i>LinkedIn </button>
                       </a>
 
@@ -116,7 +115,7 @@
                     <!-- Main content of the webpage goes here -->
                 </div>
             </div>
-          </article>
+          </evenement>
       </div>
         </div>
       </div>

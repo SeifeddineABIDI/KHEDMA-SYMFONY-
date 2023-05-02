@@ -166,25 +166,7 @@
 			</tbody>
 		</div>
 	</table>
-	{# <li class="dm-pagination__item">
-																				                        <div class="paging-option">
-																				                             add pagination links
-																				                            {% if currentPage > 1 %}
-																				                                <a href="{{ path('app_evenement_index', {'page': currentPage - 1}) }}"class="dm-pagination__link pagination-control"><span class="la la-angle-left"></span></a>
-																				                            {% endif %}
-																				                            {% for page in 1..totalPages %}
-																				                                {% if page == currentPage %}
-																				                                {{ page }}
-																				                                {% else %}
-																				                                <a href="{{ path('app_evenement_index', {'page': page}) }}">{{ page }}</a>
-																				                                {% endif %}
-																				                            {% endfor %}
-																				                            {% if currentPage < totalPages %}
-																				                                <a href="{{ path('app_evenement_index', {'page': currentPage + 1}) }}" class="dm-pagination__link pagination-control"><span class="la la-angle-right"></span></a>
-																				                            {% endif %}
-																				                        </div>
-																				                        </li> #}
-	{# <a href="{{ path('app_evenement_new') }}">Create new</a> #}
+	
 	<div class="action-btn">
 		<a href="{{ path('app_evenement_new') }}" class="btn btn-info btn-default btn-squared btn-transparent-info ">
 			<i class="las la-plus fs-16"></i>Add New evenement</a>
