@@ -1,0 +1,20 @@
+  {% extends 'newbase.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block body %}
+<div style="height: 50px; width: 50px;"></div>
+<div style="height: 30px; width: 50px;"></div>
+  
+  <h1 class="addprojectH1">Create new Projet</h1>
+
+    {{ include('projet/_form.html.twig') }}
+
+    <a href="{{ path('app_projet_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+
+    <button type="submit" form="projet_form" class="class="addprojectButton"">Create</button>
+
+
+         
+         
+         {% endblock %}

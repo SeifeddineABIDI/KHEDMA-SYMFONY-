@@ -51,7 +51,7 @@ class ProjetController extends AbstractController
                 15 // The number of items per page
             );
     
-            return $this->render('/hexadash/projetfreelancer.html.twig', [
+            return $this->render('/FrontOffice/project/projetfreelancer.html.twig', [
                 'projets' => $pagination,
                 'currentusername' => $username,
                 'currentRole' => $role,
@@ -71,7 +71,7 @@ class ProjetController extends AbstractController
                 15 // The number of items per page
             );
     
-            return $this->render('/hexadash/projetclient.html.twig', [
+            return $this->render('/FrontOffice/project/projetclient.html.twig', [
                 'projets' => $pagination,
                 'currentusername' => $username,
                 'currentRole' => $role,
@@ -153,7 +153,7 @@ class ProjetController extends AbstractController
             return $this->redirectToRoute('app_projet_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('hexadash/addproject.html.twig', [
+        return $this->renderForm('FrontOffice/project/addproject.html.twig', [
             'projet' => $projet,
             'form' => $form,
         ]);
