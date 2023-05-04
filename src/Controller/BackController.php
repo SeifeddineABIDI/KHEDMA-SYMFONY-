@@ -37,7 +37,7 @@ class BackController extends AbstractController
             'annonce' => $annonce,
         ]);
     }
-
+   //suppAdmin
     #[Route('/{id}', name: 'app_back_delete', methods: ['POST'])]
     public function delete(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
