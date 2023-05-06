@@ -1,0 +1,55 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Projet index{% endblock %}
+{% block stylesheets %}
+  <link rel="stylesheet" type="text/css" href="{{ asset('styles.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <h1>Projet index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Domaine</th>
+                <th>Client</th>
+                <th>Freelancer</th>
+                <th>FreelancerId</th>
+                <th>ClientId</th>
+                <th>Archive</th>
+                 <th>Show taches</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for projet in projets %}
+            <tr>
+                <td>{{ projet.id }}</td>
+                <td>{{ projet.nom }}</td>
+                <td>{{ projet.domaine }}</td>
+                <td>{{ projet.client }}</td>
+                <td>{{ projet.freelancer }}</td>
+                <td>{{ projet.freelancerId }}</td>
+                <td>{{ projet.clientId }}</td>
+                
+                <td>{{ projet.archive }}</td>
+                <td>
+                    <a href="{{ path('app_projet_show', {'id': projet.id}) }}">show</a>
+                    <a href="{{ path('app_projet_edit', {'id': projet.id}) }}">edit</a>
+                    <a href="{{ path('app_tache_index', {'projetId': projet.id}) }}">Show taches</a>
+                
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_projet_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce Back{% endblock %}
+
+{% block body %}
+
+
+<div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
+    <div class="d-flex align-items-center user-member__title justify-content-center me-sm-25">
+        <h4 class="text-capitalize fw-500 breadcrumb-title">Liste Annonces </h4>
+    </div>
+
+
+
+
+</div>
+
+
+<table border="2" class="table">
+
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Classification</th>
+            <th>Archive</th>
+            <th>Client</th>
+            <th></th>
+          {#  <th>Actions</th> #}
+        </tr>
+    </thead>
+    <tbody>
+       {% if annonces is empty %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+        
+    {% else %}
+        {% for annonce in annonces %}
+        <tr>
+            <td>{{ annonce.id }}</td>
+            <td>{{ annonce.titre }}</td>
+            <td>{{ annonce.date ? annonce.date|date('Y-m-d') : '' }}</td>
+            <td>{{ annonce.classification.nom }}</td>
+             
+            <td>{{ annonce.archive ? 'Yes' : 'No' }}</td>
+            <td>{{ annonce.user.nom }} {{ annonce.user.prenom }}</td>
+            <td>
+                <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                    <li>
+                        <a href="{{ path('app_annonce_show_admin', {'id': annonce.id}) }}" class="show">
+                            <i class="uil uil-eye"></i>
+                        </a>
+                    </li>
+                 
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+ 
+    {% endif %}
+    </tbody>
+</table>
+
+<div  style="margin-left: 526px;" >
+        <style>
+ .pagination {
+    height: 40px;
+    margin: 20px 10px;
+}
+
+.pagination ul {
+    display: inline-block;
+    *display: inline;
+    margin-bottom: 0;
+    margin-left: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    *zoom: 1;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    padding: 0px;
+}
+
+.pagination li {
+    display: inline;
+}
+
+.pagination a,
+.pagination span {
+    float: left;
+    padding: 0 14px;
+    line-height: 38px;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-left-width: 0;
+}
+
+.pagination a:hover,
+.pagination .active a,
+.pagination .active span {
+    background-color: #f5f5f5;
+}
+
+.pagination .active a,
+.pagination .active span {
+    color: #999999;
+    cursor: default;
+}
+
+.pagination .disabled span,
+.pagination .disabled a,
+.pagination .disabled a:hover {
+    color: #999999;
+    cursor: default;
+    background-color: transparent;
+}
+
+.pagination li:first-child a,
+.pagination li:first-child span {
+    border-left-width: 1px;
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+}
+
+.pagination li:last-child a,
+.pagination li:last-child span {
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.pagination-centered {
+    text-align: center;
+}
+
+.pagination-right {
+    text-align: right;
+}
+ </style>
+                                {{knp_pagination_render(annonces) }}
+                    
+                                     </div>
+
+        
+{% endblock %}

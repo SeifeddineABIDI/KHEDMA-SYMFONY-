@@ -1,0 +1,80 @@
+
+/* Set global font and background color */
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    width: 500px;
+    margin: 0 auto;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+/* Style the heading */
+.addtacheH1 {
+  color: #00539C;
+  font-size: 28px;
+}
+
+/* Style the form */
+form {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Style the form fields */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+input[type="text"], select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  height: 150px; /* increase the height of the description field */
+}
+
+/* Style the buttons */
+.addtacheButton{
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #1f5a8d;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+buttonadd[type="submit"]:hover, a:hover {
+  background-color: #003f78;
+}
+
+.form-buttons {
+    text-align: center;
+}

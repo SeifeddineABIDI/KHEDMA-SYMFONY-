@@ -1,0 +1,18 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}New Projet{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/addprojstyle.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Create new Projet</h1>
+
+    {{ include('projet/_form.html.twig') }}
+
+    <a href="{{ path('app_projet_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+
+    <button type="submit" form="projet_form" class="btn btn-primary mt-3">Create</button>
+{% endblock %}

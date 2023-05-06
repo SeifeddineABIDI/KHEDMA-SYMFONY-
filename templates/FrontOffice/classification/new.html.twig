@@ -1,0 +1,10 @@
+
+{% block title %}New Classification{% endblock %}
+
+{% block body %}
+   <h1 style="text-align: center;"><span style="color: #0077B6;">Create new Classification</span></h1>
+
+    {{ include('FrontOffice/classification/_form.html.twig') }}
+
+    <a href="{{ path('app_classification_index') }}">Back To List</a>
+{% endblock %}

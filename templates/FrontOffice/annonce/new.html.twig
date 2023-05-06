@@ -1,0 +1,11 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}New Annonce{% endblock %}
+
+{% block body %}
+   <h1 style="text-align: center;"><span style="color: #0077B6;">Create new Annonce</span></h1>
+
+    {{ include('FrontOffice/annonce/_form.html.twig') }}
+
+    <a href="{{ path('app_annonce_index') }}">Back To List</a>
+{% endblock %}

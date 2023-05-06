@@ -1,0 +1,21 @@
+<div class="pagination">
+    {% if pagination.totalPages > 1 %}
+        <ul>
+            {% if pagination.currentPage != 1 %}
+                <li><a href="{{ path(route, {page: 1}) }}">&laquo;</a></li>
+            {% endif %}
+
+            {% for page in 1..pagination.totalPages %}
+                {% if page == pagination.currentPage %}
+                    <li class="active"><span>{{ page }}</span></li>
+                {% elseif page == pagination.currentPage + 1 or page == pagination.currentPage + 2 or page == pagination.currentPage - 1 or page == pagination.currentPage - 2 %}
+                    <li><a href="{{ path(route, {page: page}) }}">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.currentPage != pagination.totalPages %}
+                <li><a href="{{ path(route, {page: pagination.totalPages}) }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</div>

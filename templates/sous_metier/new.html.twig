@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SousMetier{% endblock %}
+
+{% block body %}
+    <h1>ajouter nouvelle  Sous Metier</h1>
+
+    {{ include('sous_metier/_form.html.twig') }}
+
+    <a href="{{ path('app_sous_metier_index') }}">back to list</a>
+{% endblock %}

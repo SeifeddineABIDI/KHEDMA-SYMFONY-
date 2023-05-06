@@ -1,0 +1,15 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+    <h1>Résultats de recherche pour "{{ searchTerm }}"</h1>
+
+    {% if annonces|length == 0 %}
+        <p>Aucun résultat trouvé.</p>
+    {% else %}
+        <ul>
+            {% for annonce in annonces %}
+                <li>{{ annonce.titre }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

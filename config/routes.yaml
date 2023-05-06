@@ -1,0 +1,26 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+export_pdf:
+    path: '/annonce/export/all'
+    controller: App\Controller\AnnonceController::exportAllPdfAction
+    requirements:
+        id: \d+
+
+
+
+
+
+app_tache_index:
+    path: '/projet/{projetId}/tache'
+    controller: App\Controller\TacheController::index
+    
+
+
+app_upload_file:
+    path: '/projet/{projetId}/files'
+    controller: App\Controller\ProjetController::uploadFile
+    
+app_projet_index:
+    path: '/projet/'
+    controller: App\Controller\ProjetController::index

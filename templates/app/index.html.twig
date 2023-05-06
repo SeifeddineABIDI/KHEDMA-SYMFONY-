@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% for flashSuccess in app.flashes('success') %}
+		<div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
+	{% endfor %}
+
+		 <div class="card-body px-25">
+                                    <h1 class="banner-feature__heading color-dark">Hey {{ app.user.nom }}! Welcome to Khedma
+                                    </h1>
+                                    <p class="banner-feature__para color-dark">There are many variations of passages of
+                                       Lorem Ipsum available,<br>
+                                       ut the majority have suffered passages of Lorem Ipsum available alteration in
+                                       some form
+                                    </p>
+                                 </div>
+{% endblock %}

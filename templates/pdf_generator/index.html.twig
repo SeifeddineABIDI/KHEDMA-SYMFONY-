@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau des  metiers</title>
+</head>
+<body >
+<h1 style="text-align: center; color: red">5edma</h1>
+
+
+   <h1 style="text-align: center;"><span style="color: #0077B6;">les metier  disponibles</span></h1>
+
+    <table border="2" class="table" style="margin: 80px">
+    
+        <thead c>
+            <tr>
+              
+                <th style="color: #0077B9;">Nom</th>
+                <th style="color: #0077B9;">Type</th>
+                <th style="color: #0077B9;">Description</th>
+                {# <th style="color: #0077B9;">image</th> #}
+                {# <th style="color: #0077B9;">localisation</th> #}
+             
+            </tr>
+        </thead>
+        <tbody>
+        {% for metier in metier %}
+            <tr>
+              
+                <td>{{ metier.nom }}</td>
+                <td>{{ metier.type }}</td>
+                <td>{{ metier.description }}</td>
+                {# <td>{{ metier.freelancer }}</td> #}
+                {# {% if image_data is not empty  %}
+                    <img src="{{ image_data}}">
+                {% endif %} #}
+                  {# <td>{{ metier.sousmetier.user.adresse }}</td> #}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</table>
+
+
+</body>
+</html>

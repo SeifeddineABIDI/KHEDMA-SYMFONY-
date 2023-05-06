@@ -1,0 +1,110 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>ArcGIS Developer Guide: Forward geocoding</title>
+    <!-- ArcGIS Mapping APIs and Location Services Developer Guide
+    Learn more: https://developers.arcgis.com/documentation/mapping-apis-and-services/search/
+    -->
+<style>
+  html, body, #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
+<link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.25"></script>
+
+
+
+
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+<script>
+  require([
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/Graphic",
+    "esri/rest/locator"
+  ],(esriConfig, Map, MapView, Graphic, locator)=> {
+
+    esriConfig.apiKey = "AAPK12e9985040fe4016865853dd057dc2d965kBjrbZsfaWIjtHQ2qGy5E_tvrRf8-hLlwxsCxO9nXiJjoa2OEfb-TEDqLPRbBi";
+
+    const map = new Map({
+      basemap: "arcgis-navigation" //Basemap layer service
+    });
+
+    const view = new MapView({
+      container: "viewDiv",
+      map: map,
+      constraints: {
+        snapToZoom: false
+      }
+    });
+
+    view.popup.actions = [];
+
+    view.when(()=>{
+
+      const geocodingServiceUrl = "https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer";
+
+      const params = {
+        address: {
+          "address": "{% for user in users %}{{user.adresse}}  {% endfor %}"    
+        }
+      }
+
+      locator.addressToLocations(geocodingServiceUrl, params).then((results) => {
+        showResult(results);
+      });
+
+
+      function showResult(results) {
+        if (results.length) {
+          const result = results[0];
+          console.log(result.address)
+          view.graphics.add(new Graphic({
+              symbol: {
+                type: "simple-marker",
+                color: "#000000",
+                size: "12px",
+                outline: {
+                  color: "#ffffff",
+                  width: "1px"
+                }
+              },
+              geometry: result.location,
+              attributes: {
+                title: "Address",
+                address: result.address,
+                score: result.score
+              },
+              popupTemplate: {
+                title: "{title}",
+                content: result.address + "<br><br>" + result.location.longitude.toFixed(5) + "," + result.location.latitude.toFixed(5)
+              }
+            }
+          ));
+          if (results.length) {
+            const g = view.graphics.getItemAt(0);
+            view.popup.open({
+              features: [g],
+              location: g.geometry
+            });
+          }
+          view.goTo({
+            target: result.location,
+            zoom: 13
+          });
+        }
+      }
+    });
+  });
+</script>
+</html>

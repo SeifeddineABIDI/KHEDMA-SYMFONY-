@@ -1,0 +1,39 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Metier{% endblock %}
+
+{% block body %}
+   <h1 style="text-align: center;"><span style="color: #0077B6;"> Metier</span></h1>
+   <table border="2" class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ metier.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ metier.nom }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ metier.type }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ metier.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ metier.image }}</td>
+            </tr>
+             <td>{{ metier.freelancer }}</td>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_metier_index') }}">back to list</a>
+
+    <a href="{{ path('app_metier_edit', {'id': metier.id}) }}">edit</a>
+
+    {{ include('metier/_delete_form.html.twig') }}
+{% endblock %}
+

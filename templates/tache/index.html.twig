@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<head>
+  <meta charset="UTF-8">
+  <title>TASK BORAD</title>
+   <link rel="stylesheet" href="{{ asset('/style1.css') }}">
+   <script src="{{ asset('/drag_drop.js') }}"></script>
+</head>
+<body>
+
+
+  <h1>  TASK BOARD</h1>
+  <button onclick="window.location.href='{{ path('app_projet_index') }}'">Back to Projects</button>
+  <button onclick="window.location.href='{{ path('app_tache_new', {'projetId': projetId}) }}'">Add Task</button>
+  
+  <div class="kanban-board">
+  
+<div class="column" data-status="TODO" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
+  <h2>TODO</h2>
+  {% for tache in taches %}
+    {% if tache.status == 'TODO' %}
+      <div class="tache" data-task-id="{{ tache.id }}" draggable="true" ondragstart="drag(event)">{{ tache.nom }}</div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+
+
+<div class="column" data-status="DOING" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
+  <h2>DOING</h2>
+  {% for tache in taches %}
+    {% if tache.status == 'DOING' %}
+      <div class="tache" data-task-id="{{ tache.id }}" draggable="true" ondragstart="drag(event)">{{ tache.nom }}</div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<style>
+.column.over {
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.4);
+}
+</style>
+
+    <div class="column" data-status="DONE" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
+  <h2>DONE</h2>
+  {% for tache in taches %}
+    {% if tache.status == 'DONE' %}
+      <div class="tache" data-task-id="{{ tache.id }}" draggable="true" ondragstart="drag(event)">{{ tache.nom }}</div>
+    {% endif %}
+  {% endfor %}
+</div>
+    <div class="column" data-status="REVIEWING" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
+  <h2>REVIEWING</h2>
+  {% for tache in taches %}
+    {% if tache.status == 'REVIEWING' %}
+      <div class="tache" data-task-id="{{ tache.id }}" draggable="true" ondragstart="drag(event)">{{ tache.nom }}</div>
+    {% endif %}
+  {% endfor %}
+</div>
+    <div class="column" data-status="ACCEPTED" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">
+  <h2>ACCEPTED</h2>
+  {% for tache in taches %}
+    {% if tache.status == 'ACCEPTED' %}
+      <div class="tache" data-task-id="{{ tache.id }}" draggable="true" ondragstart="drag(event)">{{ tache.nom }}</div>
+    {% endif %}
+  {% endfor %}
+</div>
+  </div>
+</body>
+{% endblock %}

@@ -1,0 +1,82 @@
+/* Style for the table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #4CAF50;
+  color: rgb(20, 17, 165);
+}
+
+tr:nth-child(even) {
+  background-color: #ebeaec;
+}
+
+/* Style for the "Create new" link */
+a[href*="app_projet_new"] {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 2px solid #4CAF50;
+  border-radius: 5px;
+  color: #250fa5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a[href*="app_projet_new"]:hover {
+  background-color: #0c27c0;
+  color: white;
+}
+
+/* Style for the page nom */
+h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* Style for the "no records found" message */
+td[colspan="9"] {
+  text-align: center;
+  font-style: italic;
+}
+
+
+.knp-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.knp-pagination ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.knp-pagination li {
+  margin: 0 10px;
+}
+
+.knp-pagination li a {
+  display: block;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.knp-pagination li a:hover,
+.knp-pagination li a.active {
+  background-color: #333;
+  color: #fff;
+}

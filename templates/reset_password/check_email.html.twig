@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Request!{% endblock %}</title>
+       <!-- endinject -->
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {% block css %}
+                           <!-- inject:css-->
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/bootstrap/bootstrap.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/daterangepicker.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/fontawesome.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/footable.standalone.min.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/fullcalendar@5.2.0.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/jquery-jvectormap-2.0.5.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/jquery.mCustomScrollbar.min.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/leaflet.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/line-awesome.min.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/magnific-popup.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/MarkerCluster.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/MarkerCluster.Default.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/select2.min.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/slick.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/star-rating-svg.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/trumbowyg.min.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('BackOffice/assets/vendor_assets/css/wickedpicker.min.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('style.css') }}">
+
+            <!-- endinject -->
+        {% endblock %}
+        </head>
+
+<body>
+<main class="main-content">
+            <div class="banner-feature--14 card mb-25">
+               <div class="row justify-content-center">
+                  <div class="col-md-9">
+                     <div class="row align-items-center">
+                        <div class="col-md-6">
+                           <div class="card-body d-inline-block">
+                              <h1 class="d-flex">Password Reset Email Sent</h1>
+                              <p>If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+                              </p>
+<p>If you don't receive an email please check your spam folder<a class="btn btn-primary btn-sm btn-squared btn-transparent-primary rounded-pill" href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div class="banner-feature__shape mt-50 d-flex justify-content-end">
+                              <img src="BackOffice/img/svg/banne-group21.svg" alt="img" class="svg">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            </main>
+                                 {% block js %}  
+                                                        <!-- inject:js-->
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery/jquery-3.5.1.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery/jquery-ui.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/bootstrap/popper.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/bootstrap/bootstrap.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/moment/moment.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/accordion.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/apexcharts.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/autoComplete.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/Chart.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/daterangepicker.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/drawer.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/dynamicBadge.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/dynamicCheckbox.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/footable.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/fullcalendar@5.2.0.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/google-chart.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery-jvectormap-2.0.5.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery-jvectormap-world-mill-en.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.countdown.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.filterizr.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.magnific-popup.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.peity.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/jquery.star-rating-svg.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/leaflet.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/leaflet.markercluster.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/loader.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/message.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/moment.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/muuri.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/notification.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/popover.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/select2.full.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/slick.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/trumbowyg.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/vendor_assets/js/wickedpicker.min.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/apexmain.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/charts.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/drag-drop.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/footable.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/full-calendar.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/googlemap-init.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/icon-loader.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/jvectormap-init.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/leaflet-init.js') }}"></script>
+                                    <script src="{{ asset('BackOffice/assets/theme_assets/js/main.js') }}"></script>
+                                    <script src="{{ asset('FrontOffice/js/script.js') }}"></script>
+                                    <script src="{{ asset('FrontOffice/js/main.js') }}"></script>
+                                                    <!-- endinject-->
+                    {% endblock %}
+</body>
+
+</html>

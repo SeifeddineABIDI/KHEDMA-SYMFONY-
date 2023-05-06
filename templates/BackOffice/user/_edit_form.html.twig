@@ -1,0 +1,76 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+                                <div class="form-group">
+                                                <label for="name1"></label>
+                                                <i class="fa-solid fa-user fa-fw" style="color:#A40E1C;"></i><span>{{ form_label(form.nom, 'Nom') }}</span>
+                                                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.nom) }}
+                                </div> 
+
+                                <div class="form-group">
+                                                <label for="name1"></label>
+                                                <i class="fa-solid fa-user fa-fw" style="color:#A40E1C;"></i><span>{{ form_label(form.prenom, 'Prenom') }}</span>
+                                                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.prenom) }}
+                                </div>
+
+                                <div class="form-group">
+                                                <label for="name1"></label>
+                                               <i class="fa-regular fa-envelope fa-fw" style="color:#A40E1C;"></i><span>{{ form_label(form.email, 'E-mail') }}</span>
+                                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.email) }}
+                                </div>
+
+                                <div class="form-group">
+                                                <label for="name1"></label>
+                                                <i class="fa-solid fa-phone-volume fa-fw" style="color:#A40E1C;"></i><span> {{ form_label(form.cin, 'CIN') }}</span>
+                                                {{ form_widget(form.cin, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.cin) }}
+                                </div>      
+
+                                <div class="form-group">
+                                                <label for="name1"></label>
+                                                <i class="fa-solid fa-user fa-fw" style="color:#A40E1C;"></i><span>{{ form_label(form.role, 'Role') }}</span>
+                                                {{ form_widget(form.role, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.role) }}
+                                </div> 
+
+                                <div class="form-group">
+                                                <label for="name1"></label>
+                                                <i class="fa-regular fa-calendar fa-fw" style="color:#A40E1C;"></i> <span>{{ form_label(form.telephone, 'Telephone') }}</span>
+                                                {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.telephone) }}
+                                </div>
+                                
+                                <div class="form-group">
+                                                <label for="name1"></label>
+                                                <i class="fa-solid fa-map-location-dot fa-fw" style="color:#A40E1C;"></i><span>{{ form_label(form.adresse, 'Adresse') }}</span>
+                                                {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.adresse) }}
+                                </div>  
+
+
+                                <div class="form-group">
+                                                <label for="name1"></label>
+                                                <i class="fa-solid fa-droplet fa-fw" style="color:#A40E1C;"></i><span>{{ form_label(form.githubUsername, 'GitHub UserName') }}</span>
+                                                {{ form_widget(form.githubUsername, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.githubUsername) }}
+                                </div>
+
+                                 <div class="form-group">
+                                                <label for="name1"></label>
+                                                <i class="fa-regular fa-image fa-fw" style="color:#A40E1C;""></i><span>{{ form_label(form.image, 'Image') }}</span>
+                                                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                                                {{ form_errors(form.image) }}
+                                </div>  
+
+                                <div class="button-group d-flex  justify-content-md-end ">
+                                        <a href="{{ path('app_user_list') }}">
+                                                <button class="btn btn-lg btn-primary btn-submit" style="background:#A40E1C;">
+                                                     {{ button_label|default('Add User') }}
+                                                </button>
+                                        </a>         
+                                </div>
+
+{{ form_end(form) }}
+
+

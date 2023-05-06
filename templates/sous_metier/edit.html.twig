@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SousMetier{% endblock %}
+
+{% block body %}
+    <h1>Edit SousMetier</h1>
+
+    {{ include('sous_metier/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_sous_metier_index') }}">back to list</a>
+
+    {{ include('sous_metier/_delete_form.html.twig') }}
+{% endblock %}

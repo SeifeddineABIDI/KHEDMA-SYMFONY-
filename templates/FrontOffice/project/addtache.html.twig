@@ -1,0 +1,33 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block body %}
+         
+         
+         <div style="height: 50px; width: 50px;"></div>
+<div style="height: 30px; width: 50px;"></div>
+
+
+
+         
+             <h1 class="addtacheH1">Create New Task</h1>
+
+    {{ form_start(form) }}
+
+       <button class="addtacheButton" type="submit">Create Task</button>
+    {{ form_end(form) }}
+
+    
+    
+    <a href="{{ path('app_tache_index', {'projetId': projetId}) }}">Cancel</a>
+         
+
+		 {% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+
+
+   
+{% endfor %}
+         
+         {% endblock %}
