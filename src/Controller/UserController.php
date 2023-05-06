@@ -20,7 +20,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
  //#[IsGranted('ROLE_ADMIN')]
 #[Route('/users')]
 class UserController extends AbstractController
@@ -60,6 +61,23 @@ class UserController extends AbstractController
             'searchQuery' => $searchQuery
         ]);
     }
+
+
+
+    #[Route('/all')]
+    public function AllUsers(UserRepository $repo, NormalizerInterface $normalizer)
+    {
+
+        $users = $repo->findAll();
+       
+        $usersNormalizer = $normalizer->normalize($users, 'json', ['groups' => "users"]); 
+        $json = json_encode($usersNormalizer);
+        return new Response($json);
+        
+    }
+    
+
+
 
     #[Route('/create', name: 'app_user_create')]
     public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
@@ -110,7 +128,55 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/add', name: 'app_user_createJSON')]
+    public function newUser(Request $request, UserPasswordHasherInterface $userPasswordHasher,NormalizerInterface $normalizer)
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            //upload img
+            $image = $form->get('image')->getData();
+            
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $this->slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+                // Move the file to the directory where images are stored
+                try {
+                    $image->move(
+                        $this->getParameter('img_directory_profile'),
+                        $newFilename
+                    );
+
+                    
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'imageename' property to store img name
+                // instead of its contents
+                $user->setImage($newFilename);
+
+            $this->em->persist($user);
+            $this->em->flush();
+            $jsonContent = $normalizer-> normalize($user,'json',['groups',"users"]);
+            return new Response(json_encode($jsonContent)); 
+            }
+            
+        }
+
+
+    }
     #[Route('/{id}', name: 'app_user_show')]
     public function show($id): Response
     {
@@ -118,6 +184,17 @@ class UserController extends AbstractController
             'user' => $this->userRepository->find($id),
         ]);
     }
+
+    #[Route('/by/{id}')]
+    public function GetUserById($id,NormalizerInterface $normalizer)
+    {
+
+            $user=$this->userRepository->find($id);
+            $usersNormalizer = $normalizer->normalize($user, 'json', ['groups' => "users"]); 
+            $json = json_encode($usersNormalizer);
+            return new Response(json_encode($json));
+    }
+
 
     #[Route('/{id}/profile', name: 'app_user_show_na')]
     public function show_user($id): Response

@@ -16,6 +16,7 @@ return [
         '/homepage' => [[['_route' => 'app_home_page', '_controller' => 'App\\Controller\\AppController::index'], null, null, null, false, false, null]],
         '/alternate-page' => [[['_route' => 'app_alterpage', '_controller' => 'App\\Controller\\AppController::alternate'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\AuthController::login'], null, null, null, false, false, null]],
+        '/loginM' => [[['_route' => 'app_auth_loginm', '_controller' => 'App\\Controller\\AuthController::loginM'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\AuthController::logout'], null, null, null, false, false, null]],
         '/categorie' => [[['_route' => 'app_categorie_index', '_controller' => 'App\\Controller\\CategorieController::index'], null, ['GET' => 0], null, true, false, null]],
         '/categorie/new' => [[['_route' => 'app_categorie_new', '_controller' => 'App\\Controller\\CategorieController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
@@ -43,6 +44,7 @@ return [
         '/sousmetier/new' => [[['_route' => 'app_sous_metier_new', '_controller' => 'App\\Controller\\SousMetierController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/sousmetier/stat/stat' => [[['_route' => 'app_cons_stat', '_controller' => 'App\\Controller\\SousMetierController::yourAction'], null, ['GET' => 0], null, false, false, null]],
         '/users/admin' => [[['_route' => 'app_user_list', '_controller' => 'App\\Controller\\UserController::index'], null, null, null, false, false, null]],
+        '/users/all' => [[['_route' => 'app_user_allusers', '_controller' => 'App\\Controller\\UserController::AllUsers'], null, null, null, false, false, null]],
         '/users/create' => [[['_route' => 'app_user_create', '_controller' => 'App\\Controller\\UserController::new'], null, null, null, false, false, null]],
         '/_profiler' => [[['_route' => '_profiler_home', '_controller' => 'web_profiler.controller.profiler::homeAction'], null, null, null, true, false, null]],
         '/_profiler/search' => [[['_route' => '_profiler_search', '_controller' => 'web_profiler.controller.profiler::searchAction'], null, null, null, false, false, null]],
@@ -135,31 +137,32 @@ return [
                     .')'
                     .'|update_tache_status/([^/]++)(*:921)'
                 .')'
-                .'|/users/([^/]++)(?'
-                    .'|(*:948)'
-                    .'|/(?'
-                        .'|profile(*:967)'
+                .'|/users/(?'
+                    .'|([^/]++)(*:948)'
+                    .'|by/([^/]++)(*:967)'
+                    .'|([^/]++)/(?'
+                        .'|profile(*:994)'
                         .'|edit(?'
-                            .'|/admin(*:988)'
-                            .'|(*:996)'
+                            .'|/admin(*:1015)'
+                            .'|(*:1024)'
                         .')'
-                        .'|archive(*:1012)'
+                        .'|archive(*:1041)'
                     .')'
                 .')'
-                .'|/qr\\-code/([^/]++)/([\\w\\W]+)(*:1051)'
+                .'|/qr\\-code/([^/]++)/([\\w\\W]+)(*:1080)'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:1091)'
-                    .'|wdt/([^/]++)(*:1112)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:1120)'
+                    .'|wdt/([^/]++)(*:1141)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:1159)'
-                            .'|router(*:1174)'
+                            .'|search/results(*:1188)'
+                            .'|router(*:1203)'
                             .'|exception(?'
-                                .'|(*:1195)'
-                                .'|\\.css(*:1209)'
+                                .'|(*:1224)'
+                                .'|\\.css(*:1238)'
                             .')'
                         .')'
-                        .'|(*:1220)'
+                        .'|(*:1249)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -212,18 +215,19 @@ return [
         884 => [[['_route' => 'app_tache_delete', '_controller' => 'App\\Controller\\TacheController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
         921 => [[['_route' => 'app_update_tache_status', '_controller' => 'App\\Controller\\TacheController::updateTacheStatus'], ['tache_id'], ['POST' => 0], null, false, true, null]],
         948 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], null, null, false, true, null]],
-        967 => [[['_route' => 'app_user_show_na', '_controller' => 'App\\Controller\\UserController::show_user'], ['id'], null, null, false, false, null]],
-        988 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], null, null, false, false, null]],
-        996 => [[['_route' => 'app_user_edit_na', '_controller' => 'App\\Controller\\UserController::edit_user'], ['id'], null, null, false, false, null]],
-        1012 => [[['_route' => 'app_user_archive', '_controller' => 'App\\Controller\\UserController::archive'], ['id'], null, null, false, false, null]],
-        1051 => [[['_route' => 'qr_code_generate', '_controller' => 'Endroid\\QrCodeBundle\\Controller\\GenerateController'], ['builder', 'data'], null, null, false, true, null]],
-        1091 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        1112 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        1159 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        1174 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        1195 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        1209 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        1220 => [
+        967 => [[['_route' => 'app_user_getuserbyid', '_controller' => 'App\\Controller\\UserController::GetUserById'], ['id'], null, null, false, true, null]],
+        994 => [[['_route' => 'app_user_show_na', '_controller' => 'App\\Controller\\UserController::show_user'], ['id'], null, null, false, false, null]],
+        1015 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], null, null, false, false, null]],
+        1024 => [[['_route' => 'app_user_edit_na', '_controller' => 'App\\Controller\\UserController::edit_user'], ['id'], null, null, false, false, null]],
+        1041 => [[['_route' => 'app_user_archive', '_controller' => 'App\\Controller\\UserController::archive'], ['id'], null, null, false, false, null]],
+        1080 => [[['_route' => 'qr_code_generate', '_controller' => 'Endroid\\QrCodeBundle\\Controller\\GenerateController'], ['builder', 'data'], null, null, false, true, null]],
+        1120 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        1141 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        1188 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        1203 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        1224 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        1238 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        1249 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
