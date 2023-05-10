@@ -50,7 +50,8 @@ class RegistrationController extends AbstractController
             {
                 $roles[] = 'ROLE_CLIENT';
                 $user->setRoles($roles);
-            }else{
+            }
+            if($user->getRole()=="Freelancer"){
             $roles[] = 'ROLE_FREELANCER';
             $user->setRoles($roles);
             }

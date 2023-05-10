@@ -164,4 +164,22 @@ class ResetPasswordController extends AbstractController
 
         return $this->redirectToRoute('app_check_email');
     }
+    #[Route('/reset')]
+    public function qreset(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
+    {
+        $form = $this->createForm(ResetPasswordRequestFormType::class);
+        $form->handleRequest($request);
+
+       
+            return $this->processSendingPasswordResetEmail(
+                $request->get('email'),
+                $mailer,
+                $translator
+            );
+        
+
+        return $this->render('reset_password/request.html.twig', [
+            'requestForm' => $form->createView(),
+        ]);
+    }
 }

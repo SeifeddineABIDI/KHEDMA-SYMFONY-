@@ -445,4 +445,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
+
+public function checklogin($Email, $password): ?bool
+    {
+        if ($this->getEmail() === $Email && $this->getPassword() === $password) {
+            return true;
+        }
+        return false;
+    }
 }

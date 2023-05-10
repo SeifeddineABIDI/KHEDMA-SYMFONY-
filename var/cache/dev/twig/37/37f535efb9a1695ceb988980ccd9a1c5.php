@@ -90,9 +90,22 @@ class __TwigTemplate_31b5c4f5846865f2e9f35728eff929c1 extends Template
         echo "
                                 </div>
 
-                                ";
-        // line 29
+                                <div class=\"form-group\">
+                                                <label for=\"name1\"></label>
+                                                <i class=\"fa-regular fa-list fa-fw\" style=\"color:#A40E1C;\"></i><span>";
+        // line 25
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 25, $this->source); })()), "plainPassword", [], "any", false, false, false, 25), 'label', ["label" => "Password"]);
+        echo "</span>
+                                                ";
+        // line 26
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 26, $this->source); })()), "plainPassword", [], "any", false, false, false, 26), 'widget', ["attr" => ["class" => "form-control"]]);
         echo "
+                                                ";
+        // line 27
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 27, $this->source); })()), "plainPassword", [], "any", false, false, false, 27), 'errors');
+        echo "
+                                </div>
+
                                 <div class=\"form-group\">
                                                 <label for=\"name1\"></label>
                                                 <i class=\"fa-solid fa-phone-volume fa-fw\" style=\"color:#A40E1C;\"></i><span> ";
@@ -231,7 +244,7 @@ class __TwigTemplate_31b5c4f5846865f2e9f35728eff929c1 extends Template
 
     public function getDebugInfo()
     {
-        return array (  209 => 81,  201 => 76,  196 => 74,  189 => 70,  185 => 69,  181 => 68,  173 => 63,  169 => 62,  165 => 61,  156 => 55,  152 => 54,  148 => 53,  140 => 48,  136 => 47,  132 => 46,  124 => 41,  120 => 40,  116 => 39,  108 => 34,  104 => 33,  100 => 32,  95 => 29,  89 => 20,  85 => 19,  81 => 18,  73 => 13,  69 => 12,  65 => 11,  57 => 6,  53 => 5,  49 => 4,  43 => 1,);
+        return array (  222 => 81,  214 => 76,  209 => 74,  202 => 70,  198 => 69,  194 => 68,  186 => 63,  182 => 62,  178 => 61,  169 => 55,  165 => 54,  161 => 53,  153 => 48,  149 => 47,  145 => 46,  137 => 41,  133 => 40,  129 => 39,  121 => 34,  117 => 33,  113 => 32,  105 => 27,  101 => 26,  97 => 25,  89 => 20,  85 => 19,  81 => 18,  73 => 13,  69 => 12,  65 => 11,  57 => 6,  53 => 5,  49 => 4,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -258,12 +271,12 @@ class __TwigTemplate_31b5c4f5846865f2e9f35728eff929c1 extends Template
                                                 {{ form_errors(form.email) }}
                                 </div>
 
-                                {# <div class=\"form-group\">
+                                <div class=\"form-group\">
                                                 <label for=\"name1\"></label>
-                                                <i class=\"fa-regular fa-envelope fa-fw\" style=\"color:#A40E1C;\"></i><span>{{ form_label(form.plainPassword, 'Password') }}</span>
+                                                <i class=\"fa-regular fa-list fa-fw\" style=\"color:#A40E1C;\"></i><span>{{ form_label(form.plainPassword, 'Password') }}</span>
                                                 {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }}
                                                 {{ form_errors(form.plainPassword) }}
-                                </div> #}
+                                </div>
 
                                 <div class=\"form-group\">
                                                 <label for=\"name1\"></label>
