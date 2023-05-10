@@ -119,6 +119,9 @@ class AuthController extends AbstractController
       
 }
 
+    // Login successful
+    // Login successful
+
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
