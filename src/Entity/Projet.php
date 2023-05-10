@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Projet
@@ -19,6 +20,7 @@ class Projet
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
+    #[Groups("projet")]
     private $id;
 
     /**
@@ -26,6 +28,7 @@ class Projet
      *
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
+    #[Groups("projet")]
     private $nom;
 
     /**
@@ -33,6 +36,7 @@ class Projet
      *
      * @ORM\Column(name="domaine", type="string", length=255, nullable=false)
      */
+    #[Groups("projet")]
     private $domaine;
 
     /**
@@ -40,6 +44,7 @@ class Projet
      *
      * @ORM\Column(name="client", type="string", length=255, nullable=false)
      */
+    #[Groups("projet")]
     private $client;
 
     /**
@@ -47,6 +52,7 @@ class Projet
      *
      * @ORM\Column(name="freelancer", type="string", length=255, nullable=false)
      */
+    #[Groups("projet")]
     private $freelancer;
 
     /**
@@ -54,6 +60,7 @@ class Projet
      *
      * @ORM\Column(name="freelancer_id", type="integer", nullable=true)
      */
+    #[Groups("projet")]
     private $freelancerId;
 
     /**
@@ -61,6 +68,7 @@ class Projet
      *
      * @ORM\Column(name="client_id", type="integer", nullable=true)
      */
+    #[Groups("projet")]
     private $clientId;
 
     /**
@@ -68,6 +76,7 @@ class Projet
      *
      * @ORM\Column(name="archive", type="string", length=255, nullable=true)
      */
+    #[Groups("projet")]
     private $archive = '0';
 
     public function getId(): ?int

@@ -19,6 +19,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 
@@ -30,7 +33,7 @@ class ProjetController extends AbstractController
     #[Route('/', name: 'app_projet_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator): Response
     {       
-        $username = $request->getSession()->get('username');
+        $user = $this->getUser()->getNom();
         $role=$request->getSession()->get('role');
         
 
@@ -40,9 +43,8 @@ class ProjetController extends AbstractController
             $queryBuilder = $entityManager
                 ->getRepository(Projet::class)
                 ->createQueryBuilder('p')
-                ->where('p.freelancer = :username')
-                ->andWhere('p.archive = 0')
-                ->setParameter('username', $username)
+                ->where('p.freelancer = :nom')
+                ->setParameter('nom', $user)
                 ->orderBy('p.id', 'ASC');
             
             $pagination = $paginator->paginate(
@@ -53,16 +55,15 @@ class ProjetController extends AbstractController
     
             return $this->render('/FrontOffice/project/projetfreelancer.html.twig', [
                 'projets' => $pagination,
-                'currentusername' => $username,
+                'currentusername' => $user,
                 'currentRole' => $role,
             ]);
         } else {
             $queryBuilder = $entityManager
                 ->getRepository(Projet::class)
                 ->createQueryBuilder('p')
-                ->where('p.client = :username')
-                ->andWhere('p.archive = 0')
-                ->setParameter('username', $username)
+                ->where('p.client = :nom')
+                ->setParameter('nom', $user)
                 ->orderBy('p.id', 'ASC');
     
             $pagination = $paginator->paginate(
@@ -73,7 +74,7 @@ class ProjetController extends AbstractController
     
             return $this->render('/FrontOffice/project/projetclient.html.twig', [
                 'projets' => $pagination,
-                'currentusername' => $username,
+                'currentusername' => $user,
                 'currentRole' => $role,
             ]);
         }
@@ -83,12 +84,14 @@ class ProjetController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $projet = new Projet();
-        $username = $request->getSession()->get('username');
-        $githubToken = $request->getSession()->get('githubToken');
-        $githubusername = $request->getSession()->get('githubUsername');
+        // $username = $request->getSession()->get('username');
+        // $githubToken = $request->getSession()->get('githubToken');
+        $user = $this->getUser();
+        $token = $user->getGithubToken();
+        $githubUsername = $user->getGithubUsername();
         $form = $this->createForm(ProjetType::class, $projet);
         $form->handleRequest($request);
-        $projet->setClient($username);
+        $projet->setClient($user->getNom());
         
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -98,7 +101,7 @@ class ProjetController extends AbstractController
 
             // Create a GitHub repository for the new project
             $repositoryName = $projet->getNom(); // Assuming the project has a 'name' property
-            $token = $githubToken ;// Assuming you have a user entity with a 'githubAccessToken' property
+            // Assuming you have a user entity with a 'githubAccessToken' property
 
 
             $freelancername=$form->get('freelancer')->getData();
@@ -106,13 +109,10 @@ class ProjetController extends AbstractController
 
 
        
-            $githubUsername = "";
-            $user = $entityManager->getRepository(User::class)->findOneBy(['username' => $freelancername]);
             
-            if($user) {
-               $githubUsername = $user->getGithubUsername();
-               
-            }
+            $user = $entityManager->getRepository(User::class)->findOneBy(['nom' => $freelancername]);
+            
+          
             
            
             
@@ -134,19 +134,7 @@ class ProjetController extends AbstractController
 
 
 
-            $client = new Client([
-                'base_uri' => "https://api.github.com/repos/$githubusername/$repositoryName/",
-                'headers' => [
-                    'Accept' => 'application/vnd.github.v3+json',
-                    'Authorization' => "token $token",
-                ]
-            ]);
             
-            $response = $client->put("collaborators/$githubUsername", [
-                'json' => [
-                    'permission' => 'admin'
-                ]
-            ]);
             
 
             // Redirect to the project index page
@@ -191,7 +179,7 @@ class ProjetController extends AbstractController
     public function delete(Request $request, Projet $projet, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$projet->getId(), $request->request->get('_token'))) {
-            $projet->setArchive("1");
+            // $projet->setArchive("1");
             $entityManager->persist($projet);
             $entityManager->flush();
         }
@@ -270,6 +258,96 @@ $this->addFlash('success', 'The file has been uploaded.');
             'form' => $form->createView(),
         ]);
     }
+
+
+    #[Route('/projetmobile', name: 'app_projet_mobile', methods: ['GET'])]
+    public function indexmobile(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator, NormalizerInterface $normalizer): Response
+    {       
+        /*$username = $request->getSession()->get('username');
+        $role=$request->getSession()->get('role');*/
+
+        $username="testtest";
+        $role="Client";
+
+        
+
+
+        
+        if ($role === 'freelancer') {
+            $queryBuilder = $entityManager
+                ->getRepository(Projet::class)
+                ->createQueryBuilder('p')
+                ->where('p.freelancer = :username')
+                ->setParameter('username', $username)
+                ->orderBy('p.id', 'ASC');
+            
+            $pagination = $paginator->paginate(
+                $queryBuilder, // The query to paginate
+                $request->query->getInt('page', 1), // The current page number
+                15 // The number of items per page
+            );
+
+            $Projetmobile= $normalizer->normalize($pagination,'json', ['groups' => "projet"]);
+            $json = json_encode($Projetmobile);
+            return new Response($json);
+
+            /*return $this->render('/FrontOffice/project/projetfreelancer.html.twig', [
+                'projets' => $pagination,
+                'currentusername' => $username,
+                'currentRole' => $role,
+            ]);*/
+        } else {
+            $queryBuilder = $entityManager
+                ->getRepository(Projet::class)
+                ->createQueryBuilder('p')
+                ->where('p.client = :username')
+                
+                ->setParameter('username', $username)
+                ->orderBy('p.id', 'ASC');
+    
+            $pagination = $paginator->paginate(
+                $queryBuilder, // The query to paginate
+                $request->query->getInt('page', 1), // The current page number
+                15 // The number of items per page
+            );
+              $Projetmobile= $normalizer->normalize($pagination,'json', ['groups' => "projet"]);
+            $json = json_encode($Projetmobile);
+            return new Response($json);
+           /* return $this->render('/FrontOffice/project/projetclient.html.twig', [
+                'projets' => $pagination,
+                'currentusername' => $username,
+                'currentRole' => $role,
+            ]);*/
+        }
+    }
+
+    #[Route('/projetadd', name: 'app_projet_add', methods: ['POST'])]
+public function add(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator, SerializerInterface $serializer): Response
+{
+    $jsonData = $request->getContent();
+
+    // Deserialize the JSON data into a Projet object
+    $projet = $serializer->deserialize($jsonData, Projet::class, 'json');
+
+    // Validate the Projet object
+    $errors = $validator->validate($projet);
+    if (count($errors) > 0) {
+        $errorArray = [];
+        foreach ($errors as $error) {
+            $errorArray[$error->getPropertyPath()][] = $error->getMessage();
+        }
+        $jsonErrors = json_encode($errorArray);
+        return new Response($jsonErrors, 400, ['Content-Type' => 'application/json']);
+    }
+
+    // Persist the Projet object to the database
+    $entityManager->persist($projet);
+    $entityManager->flush();
+
+    // Serialize the newly created Projet object to JSON and return it in the response
+    $jsonProjet = $serializer->serialize($projet, 'json');
+    return new Response($jsonProjet, 201, ['Content-Type' => 'application/json']);
+}
 
     
 }
