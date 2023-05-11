@@ -696,6 +696,6 @@ class __TwigTemplate_46708e7c83d33d2f47d52fd6c0936c78 extends Template
       </tr>
     </table>
   </body>
-", "registration/confirmation_email.html.twig", "C:\\Users\\Safe\\Downloads\\PIDEV-SYMFONY (1)\\templates\\registration\\confirmation_email.html.twig");
+", "registration/confirmation_email.html.twig", "C:\\Users\\Safe\\Documents\\NetBeansProjects\\PIDEV-SYMFONY (1)\\templates\\registration\\confirmation_email.html.twig");
     }
 }

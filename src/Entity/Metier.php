@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: MetierRepository::class)]
 class Metier
@@ -15,6 +17,8 @@ class Metier
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("metiers")]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -26,6 +30,8 @@ class Metier
         maxMessage: 'The name cannot exceed {{ limit }} characters'
     )]
     #[Assert\Regex("/^[a-zA-Z]/")]
+    #[Groups("metiers")]
+
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
@@ -37,6 +43,8 @@ class Metier
         maxMessage: 'The name cannot exceed {{ limit }} characters'
     )]
     #[Assert\Regex("/^[a-zA-Z]/")]
+    #[Groups("metiers")]
+
     private ?string $type = null;
 
     #[ORM\Column(type: Types::TEXT,unique:true)]
@@ -48,13 +56,19 @@ class Metier
         maxMessage: 'The name cannot exceed {{ limit }} characters'
     )]
     #[Assert\Regex("/^[a-zA-Z]/")]
+    #[Groups("metiers")]
+
 
     private ?string $description = null;
 
     #[ORM\Column(length: 255,nullable: true)]
+    #[Groups("metiers")]
+
     private ?string $image = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("metiers")]
+
     private ?bool $archive = null;
 
     #[ORM\OneToMany(mappedBy: 'Metier', targetEntity: SousMetier::class)]

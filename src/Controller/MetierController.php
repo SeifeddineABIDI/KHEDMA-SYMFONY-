@@ -18,6 +18,11 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 #[Route('/metier')]
 class MetierController extends AbstractController
 {
@@ -391,5 +396,72 @@ $qrCode = new QrCode($qrText);
 
     return $response;
 }   
+
+
+
+
+
+
+////////////// json pour mobile /////////////
+
+    
+#[Route('/affichage/mobile')]
+public function allApp(MetierRepository $metierRepository,NormalizerInterface $s):JsonResponse
+{
+    $x=$metierRepository->findAll();
+
+    $json=$s->normalize($x,'json',['groups'=>"metiers"]);
+    return new JsonResponse(($json));
+ 
+}
+#[Route('/ajout/mobile', name: 'app_metier_ajoutApp')]
+public function AjoutMobil(Request $req,NormalizerInterface $s,ManagerRegistry $doctrine){
+    
+    $em = $doctrine->getManager();
+    $metier=new Metier();
+    $metier->setNom($req->get('nom'));
+    $metier->setType($req->get('type'));
+    $metier->setDescription($req->get('description'));
+    $metier->setImage($req->get('image'));
+
+    $em -> persist($metier);
+    $em->flush();
+    $json=$s->normalize($metier,'json',['groups'=>"metiers"]);
+    return new Response(json_encode($json));
+ 
+}
+
+#[Route('/Update/mobile/{id}', name: 'app_metier_editApp')]
+public function UpdateMobile(Request $req,$id,NormalizerInterface $s,ManagerRegistry $doctrine){
+    
+    $em = $doctrine->getManager();
+    $metier=$em->getRepository(Metier::class)->find($id);
+    $metier->setNom($req->get('nom'));
+    $metier->setType($req->get('type'));
+    $metier->setDescription($req->get('description'));
+    $metier->setImage($req->get('image'));
+  
+    $em->flush();
+    $json=$s->normalize($metier,'json',['groups'=>"metiers"]);
+    return new Response(" metier updated successfully".json_encode($json));
+ 
+}
+
+
+#[Route('/delete/mobile/{id}', name: 'app__deleteApp21')]
+public function deleteMobile($id,NormalizerInterface $s,ManagerRegistry $doctrine)
+{
+    
+    $em = $doctrine->getManager();
+    $metier=$em->getRepository(Metier::class)->find($id);
+    $em->remove($metier);
+    
+    
+    $em->flush();
+
+    $json=$s->normalize($metier,'json',['groups'=>"metiers"]);
+    return new Response(" metier deleted successfully".json_encode($json));
+ 
+}
 
 }

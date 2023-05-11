@@ -123,11 +123,9 @@ class __TwigTemplate_3a0a119778315d54d278f07043d9f118 extends Template
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["metier"]) || array_key_exists("metier", $context) ? $context["metier"] : (function () { throw new RuntimeError('Variable "metier" does not exist.', 27, $this->source); })()), "image", [], "any", false, false, false, 27), "html", null, true);
         echo "</td>
             </tr>
-             <td>";
-        // line 29
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["metier"]) || array_key_exists("metier", $context) ? $context["metier"] : (function () { throw new RuntimeError('Variable "metier" does not exist.', 29, $this->source); })()), "freelancer", [], "any", false, false, false, 29), "html", null, true);
-        echo "</td>
-        </tbody>
+             ";
+        // line 30
+        echo "        </tbody>
     </table>
 
     <a href=\"";
@@ -165,7 +163,7 @@ class __TwigTemplate_3a0a119778315d54d278f07043d9f118 extends Template
 
     public function getDebugInfo()
     {
-        return array (  145 => 37,  140 => 35,  135 => 33,  128 => 29,  123 => 27,  116 => 23,  109 => 19,  102 => 15,  95 => 11,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  143 => 37,  138 => 35,  133 => 33,  128 => 30,  123 => 27,  116 => 23,  109 => 19,  102 => 15,  95 => 11,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -198,7 +196,7 @@ class __TwigTemplate_3a0a119778315d54d278f07043d9f118 extends Template
                 <th>Image</th>
                 <td>{{ metier.image }}</td>
             </tr>
-             <td>{{ metier.freelancer }}</td>
+             {# <td>{{ metier.freelancer }}</td> #}
         </tbody>
     </table>
 
@@ -209,6 +207,6 @@ class __TwigTemplate_3a0a119778315d54d278f07043d9f118 extends Template
     {{ include('metier/_delete_form.html.twig') }}
 {% endblock %}
 
-", "metier/show.html.twig", "C:\\Users\\Safe\\Downloads\\PIDEV-SYMFONY (1)\\templates\\metier\\show.html.twig");
+", "metier/show.html.twig", "C:\\Users\\Safe\\Documents\\NetBeansProjects\\PIDEV-SYMFONY (1)\\templates\\metier\\show.html.twig");
     }
 }

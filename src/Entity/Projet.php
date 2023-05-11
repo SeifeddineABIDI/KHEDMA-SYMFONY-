@@ -6,6 +6,7 @@ use App\Repository\ProjetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
@@ -13,18 +14,23 @@ class Projet
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("projet")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("projet")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("projet")]
     private ?string $domaine = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("projet")]
     private ?string $client = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("projet")]
     private ?string $freelancer = null;
  
 

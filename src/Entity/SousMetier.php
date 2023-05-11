@@ -9,12 +9,16 @@ use App\Repository\SousMetierRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 #[ORM\Entity(repositoryClass: SousMetierRepository::class)]
 class SousMetier
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("SousMetiers")]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -26,6 +30,8 @@ class SousMetier
         maxMessage: 'The name cannot exceed {{ limit }} characters'
     )]
     #[Assert\Regex("/^[a-zA-Z]/")]
+    #[Groups("SousMetiers")]
+
     private ?string $libelle = null;
 
     #[ORM\Column(length: 255)]
@@ -37,16 +43,22 @@ class SousMetier
         maxMessage: 'The name cannot exceed {{ limit }} characters'
     )]
     #[Assert\Regex("/^[a-zA-Z]/")]
+    #[Groups("SousMetiers")]
+
     private ?string $domaine = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("SousMetiers")]
+
     private ?bool $archive = null;
 
     #[ManyToOne(targetEntity: Metier::class, inversedBy: 'sousMetiers')]
     #[JoinColumn(name: 'metier_id', referencedColumnName: 'id', onDelete: "CASCADE")]
+
     private ?Metier $Metier = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'sousMetiers')]
+
     private Collection $users;
 
     public function __construct()

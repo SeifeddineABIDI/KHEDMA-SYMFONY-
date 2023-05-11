@@ -9,15 +9,18 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 use App\Repository\AnnonceRepository;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 class Annonce
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("annonces")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("annonces")]
     #[Assert\NotBlank(message: '*Champ Obligatoire')]
     #[Assert\Length(
         min: 5,
@@ -28,17 +31,21 @@ class Annonce
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
+    //#[Groups("annonces")]
     private ?bool $archive = null;
 
     #[ORM\ManyToOne(inversedBy: 'annonces')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups("annonces")]
     private ?Classification $classification = null;
 
     #[ManyToOne(targetEntity: User::class, inversedBy: 'annonces')]
     #[JoinColumn(name: 'user_id', referencedColumnName: 'id', onDelete: "CASCADE")]
+    #[Groups("annonces")]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -105,4 +112,12 @@ class Annonce
 
         return $this;
     }
+
+
+    public function __toString()
+    {
+        return $this->getTitre();
+    }
+  
+
 }

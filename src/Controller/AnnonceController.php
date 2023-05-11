@@ -6,6 +6,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\User;
 use App\Entity\Annonce;
+use App\Entity\Classification;
 use App\Form\AnnonceType;
 use Doctrine\ORM\QueryBuilder;
 use App\Repository\AnnonceRepository;
@@ -21,6 +22,8 @@ use Knp\Component\Pager\Pagination\SlidingPagination;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 #[Route('/annonce')]
 class AnnonceController extends AbstractController
 {
@@ -283,6 +286,106 @@ class AnnonceController extends AbstractController
 //}
 
 
+#[Route("/all/Allannonces")]
+    //* Dans cette fonction, nous utilisons les services NormlizeInterface et EvenementRepository, 
+    //* avec la méthode d'injection de dépendances.
+    public function getannonces(AnnonceRepository $repo, NormalizerInterface $serializer):JsonResponse
+    {
+        $evenements = $repo->findAll();
+        //* Nous utilisons la fonction normalize qui transforme le tableau d'objets 
+        //* evenements en  tableau associatif simple.
+        // $evenementsNormalises = $normalizer->normalize($evenements, 'json', ['groups' => "evenements"]);
+
+        // //* Nous utilisons la fonction json_encode pour transformer un tableau associatif en format JSON
+        // $json = json_encode($evenementsNormalises);
+
+        $json = $serializer->normalize($evenements, 'json', ['groups' => "annonces"]);
+
+        //* Nous renvoyons une réponse Http qui prend en paramètre un tableau en format JSON
+        return new JsonResponse($json);
+    }
+
+
+
+
+    #[Route("/annonce1/{id}", name: "annonce")]
+    public function annonceId($id, NormalizerInterface $normalizer, AnnonceRepository $repo)
+    {
+        $annonce = $repo->find($id);
+        $annonceNormalises = $normalizer->normalize($annonce, 'json', ['groups' => "annonces"]);
+        return new Response(json_encode($annonceNormalises));
+    }
+
+
+    #[Route("/addannonceJSON/new", name: "addannonceJSON")]
+    public function addannonceJSON(Request $req,   NormalizerInterface $Normalizer)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $annonce = new annonce();
+        $annonce->setTitre($req->get('titre'));
+       
+
+        $date = new \DateTime();
+        $annonce->setDate($date);
+
+        $classificationId = $req->get('classification');
+        $classification = $em->getRepository(Classification::class)->find( $classificationId );
+
+        $annonce->setClassification($classification);
+        
+
+        $userId = $req->get('user');
+        $user = $em->getRepository(User::class)->find( $userId );
+
+        $annonce->setUser($user);
+    
+        $em->persist($annonce);
+        $em->flush();
+
+        $jsonContent = $Normalizer->normalize($annonce, 'json', ['groups' => 'annonces']);
+        return new Response(json_encode($jsonContent));
+    }
+
+     //https://127.0.0.1:8000/addannonceJSON/new?titre=recherchedvp&date=2022-05-01&classification=3&user=2
+
+    #[Route("/updateannonceJSON/{id}", name: "updateannonceJSON")]
+    public function updateannonceJSON(Request $req, $id, NormalizerInterface $Normalizer)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $annonce = $em->getRepository(annonce::class)->find($id);
+        $annonce->setTitre($req->get('titre'));
+       
+        $date = new \DateTime();
+        $annonce->setDate($date);
+       
+
+        $classificationId = $req->get('classification');
+        $classification = $em->getRepository(Classification::class)->find( $classificationId );
+
+        $annonce->setClassification($classification);
+      
+
+    
+
+        $em->flush();
+
+        $jsonContent = $Normalizer->normalize($annonce, 'json', ['groups' => 'annonces']);
+        return new Response("evenement updated successfully " . json_encode($jsonContent));
+    }
+
+    #[Route("/deleteannonceJSON/{id}", name: "deleteannonceJSON")]
+    public function deleteannonceJSON(Request $req, $id, NormalizerInterface $Normalizer)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $annonce = $em->getRepository(annonce::class)->find($id);
+        $em->remove($annonce);
+        $em->flush();
+        $jsonContent = $Normalizer->normalize($annonce, 'json', ['groups' => 'annonces']);
+        return new Response("annonce deleted successfully " . json_encode($jsonContent));
+    }
 
 }
 

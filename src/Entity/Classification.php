@@ -9,15 +9,18 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Assert\Length;
 use App\Entity\Assert\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ClassificationRepository::class)]
 class Classification
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("classifications")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("classifications")]
     #[Assert\NotBlank(message: '*Champ Obligatoire')]
     #[Assert\Length(
         min: 2,
@@ -28,6 +31,7 @@ class Classification
     private ?string $Nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("classifications")]
     #[Assert\NotBlank(message: '*Champ Obligatoire')]
     #[Assert\Length(
         min: 3,
@@ -118,4 +122,10 @@ class Classification
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->getNom();
+        return $this->getDomaine();
+    }
+  
 }

@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/sousmetier')]
 class SousMetierController extends AbstractController
@@ -118,6 +122,67 @@ $data = array(
         ]);
     }
 
+
+
+
+////////////// json pour mobile /////////////
+
+    
+
+#[Route('/affichage/mobile')]
+public function allApp(SousMetierRepository $sousMetierRepository,NormalizerInterface $s):JsonResponse
+{
+    $x=$sousMetierRepository->findAll();
+
+    $json=$s->normalize($x,'json',['groups'=>"SousMetiers"]);
+    return new JsonResponse(($json));
+ 
+}
+#[Route('/ajout/mobile', name: 'app_sousmetier_ajoutApp')]
+public function AjoutMobil(Request $req,NormalizerInterface $s,ManagerRegistry $doctrine){
+    
+    $em = $doctrine->getManager();
+    $metier=new SousMetier();
+    $metier->setLibelle($req->get('libelle'));
+    $metier->setDomaine($req->get('domaine'));
+  
+    $em -> persist($metier);
+    $em->flush();
+    $json=$s->normalize($metier,'json',['groups'=>"sousMetiers"]);
+    return new Response(json_encode($json));
+ 
+}
+
+#[Route('/Update/mobile/{id}', name: 'app_sousmetier_editApp')]
+public function UpdateMobile(Request $req,$id,NormalizerInterface $s,ManagerRegistry $doctrine){
+    
+    $em = $doctrine->getManager();
+    $metier=$em->getRepository(SousMetier::class)->find($id);
+    $metier->setLibelle($req->get('libelle'));
+    $metier->setDomaine($req->get('domaine'));
+  
+    $em->flush();
+    $json=$s->normalize($metier,'json',['groups'=>"sousMetiers"]);
+    return new Response(" Sous metier updated successfully".json_encode($json));
+ 
+}
+
+
+#[Route('/delete/mobile/{id}', name: 'app__deleteApp')]
+public function deleteMobile($id,NormalizerInterface $s,ManagerRegistry $doctrine)
+{
+    
+    $em = $doctrine->getManager();
+    $metier=$em->getRepository(SousMetier::class)->find($id);
+    $em->remove($metier);
+    
+    
+    $em->flush();
+
+    $json=$s->normalize($metier,'json',['groups'=>"sousMetiers"]);
+    return new Response(" Sous metier deleted successfully".json_encode($json));
+ 
+}
 
 
 

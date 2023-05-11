@@ -19,6 +19,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 
@@ -255,6 +258,96 @@ $this->addFlash('success', 'The file has been uploaded.');
             'form' => $form->createView(),
         ]);
     }
+
+
+    #[Route('/projetmobile', name: 'app_projet_mobile', methods: ['GET'])]
+    public function indexmobile(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator, NormalizerInterface $normalizer): Response
+    {       
+        /*$username = $request->getSession()->get('username');
+        $role=$request->getSession()->get('role');*/
+
+        $username="testtest";
+        $role="Client";
+
+        
+
+
+        
+        if ($role === 'freelancer') {
+            $queryBuilder = $entityManager
+                ->getRepository(Projet::class)
+                ->createQueryBuilder('p')
+                ->where('p.freelancer = :username')
+                ->setParameter('username', $username)
+                ->orderBy('p.id', 'ASC');
+            
+            $pagination = $paginator->paginate(
+                $queryBuilder, // The query to paginate
+                $request->query->getInt('page', 1), // The current page number
+                15 // The number of items per page
+            );
+
+            $Projetmobile= $normalizer->normalize($pagination,'json', ['groups' => "projet"]);
+            $json = json_encode($Projetmobile);
+            return new Response($json);
+
+            /*return $this->render('/FrontOffice/project/projetfreelancer.html.twig', [
+                'projets' => $pagination,
+                'currentusername' => $username,
+                'currentRole' => $role,
+            ]);*/
+        } else {
+            $queryBuilder = $entityManager
+                ->getRepository(Projet::class)
+                ->createQueryBuilder('p')
+                ->where('p.client = :username')
+                
+                ->setParameter('username', $username)
+                ->orderBy('p.id', 'ASC');
+    
+            $pagination = $paginator->paginate(
+                $queryBuilder, // The query to paginate
+                $request->query->getInt('page', 1), // The current page number
+                15 // The number of items per page
+            );
+              $Projetmobile= $normalizer->normalize($pagination,'json', ['groups' => "projet"]);
+            $json = json_encode($Projetmobile);
+            return new Response($json);
+           /* return $this->render('/FrontOffice/project/projetclient.html.twig', [
+                'projets' => $pagination,
+                'currentusername' => $username,
+                'currentRole' => $role,
+            ]);*/
+        }
+    }
+
+    #[Route('/projetadd', name: 'app_projet_add', methods: ['POST'])]
+public function add(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator, SerializerInterface $serializer): Response
+{
+    $jsonData = $request->getContent();
+
+    // Deserialize the JSON data into a Projet object
+    $projet = $serializer->deserialize($jsonData, Projet::class, 'json');
+
+    // Validate the Projet object
+    $errors = $validator->validate($projet);
+    if (count($errors) > 0) {
+        $errorArray = [];
+        foreach ($errors as $error) {
+            $errorArray[$error->getPropertyPath()][] = $error->getMessage();
+        }
+        $jsonErrors = json_encode($errorArray);
+        return new Response($jsonErrors, 400, ['Content-Type' => 'application/json']);
+    }
+
+    // Persist the Projet object to the database
+    $entityManager->persist($projet);
+    $entityManager->flush();
+
+    // Serialize the newly created Projet object to JSON and return it in the response
+    $jsonProjet = $serializer->serialize($projet, 'json');
+    return new Response($jsonProjet, 201, ['Content-Type' => 'application/json']);
+}
 
     
 }

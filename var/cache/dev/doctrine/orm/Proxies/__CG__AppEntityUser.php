@@ -654,4 +654,15 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         return parent::setGithubToken($githubToken);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function checklogin($Email, $password): ?bool
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'checklogin', [$Email, $password]);
+
+        return parent::checklogin($Email, $password);
+    }
+
 }

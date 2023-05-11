@@ -25,3 +25,7 @@ app_projet_index:
     path: '/projet/'
     controller: App\Controller\ProjetController::index
 
+app_projet_mobile:
+    path: '/projetmobile'
+    controller: App\Controller\ProjetController::indexmobile
+

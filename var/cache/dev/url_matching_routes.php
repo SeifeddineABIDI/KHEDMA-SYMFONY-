@@ -13,6 +13,8 @@ return [
         '/annonce/new' => [[['_route' => 'app_annonce_new', '_controller' => 'App\\Controller\\AnnonceController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/annonce/annonce/search' => [[['_route' => 'annonce_search', '_controller' => 'App\\Controller\\AnnonceController::searchAnnonces'], null, null, null, false, false, null]],
         '/annonce/annonce/export/all' => [[['_route' => 'export_all_pdf', '_controller' => 'App\\Controller\\AnnonceController::exportAllPdfAction'], null, null, null, false, false, null]],
+        '/annonce/all/Allannonces' => [[['_route' => 'app_annonce_getannonces', '_controller' => 'App\\Controller\\AnnonceController::getannonces'], null, null, null, false, false, null]],
+        '/annonce/addannonceJSON/new' => [[['_route' => 'addannonceJSON', '_controller' => 'App\\Controller\\AnnonceController::addannonceJSON'], null, null, null, false, false, null]],
         '/homepage' => [[['_route' => 'app_home_page', '_controller' => 'App\\Controller\\AppController::index'], null, null, null, false, false, null]],
         '/alternate-page' => [[['_route' => 'app_alterpage', '_controller' => 'App\\Controller\\AppController::alternate'], null, null, null, false, false, null]],
         '/addoneone' => [[['_route' => 'app_auth_newuser', '_controller' => 'App\\Controller\\AuthController::newUser'], null, null, null, false, false, null]],
@@ -24,6 +26,7 @@ return [
         '/chart' => [[['_route' => 'chart', '_controller' => 'App\\Controller\\ChartController::categoriesEvenements'], null, null, null, false, false, null]],
         '/classification' => [[['_route' => 'app_classification_index', '_controller' => 'App\\Controller\\ClassificationController::index'], null, ['GET' => 0], null, true, false, null]],
         '/classification/new' => [[['_route' => 'app_classification_new', '_controller' => 'App\\Controller\\ClassificationController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/classification/addclassificationJSON/new' => [[['_route' => 'addclassificationJSON', '_controller' => 'App\\Controller\\ClassificationController::addclassificationJSON'], null, null, null, false, false, null]],
         '/evenement' => [[['_route' => 'app_evenement_index', '_controller' => 'App\\Controller\\EvenementController::index'], null, ['GET' => 0, 'POST' => 1], null, true, false, null]],
         '/evenement/freelancer' => [[['_route' => 'app_event_freelancer', '_controller' => 'App\\Controller\\EvenementController::indexFreelancer'], null, null, null, false, false, null]],
         '/evenement/new' => [[['_route' => 'app_evenement_new', '_controller' => 'App\\Controller\\EvenementController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
@@ -33,6 +36,8 @@ return [
         '/metier/metier/front' => [[['_route' => 'app_front', '_controller' => 'App\\Controller\\MetierController::Front'], null, null, null, false, false, null]],
         '/metier/metier/affichagefront' => [[['_route' => 'app_affichage_metier_front', '_controller' => 'App\\Controller\\MetierController::affichage_front'], null, null, null, false, false, null]],
         '/metier/stat/sta' => [[['_route' => 'app_cons_statt', '_controller' => 'App\\Controller\\MetierController::yourAction'], null, ['GET' => 0], null, false, false, null]],
+        '/metier/affichage/mobile' => [[['_route' => 'app_metier_allapp', '_controller' => 'App\\Controller\\MetierController::allApp'], null, null, null, false, false, null]],
+        '/metier/ajout/mobile' => [[['_route' => 'app_metier_ajoutApp', '_controller' => 'App\\Controller\\MetierController::AjoutMobil'], null, null, null, false, false, null]],
         '/pdf/generator' => [[['_route' => 'app_pdf_generator', '_controller' => 'App\\Controller\\PdfGeneratorController::pdf'], null, null, null, false, false, null]],
         '/projet/new' => [[['_route' => 'app_projet_new', '_controller' => 'App\\Controller\\ProjetController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/raiting' => [[['_route' => 'app_raiting_index', '_controller' => 'App\\Controller\\RaitingController::index'], null, ['GET' => 0], null, true, false, null]],
@@ -44,6 +49,8 @@ return [
         '/sousmetier' => [[['_route' => 'app_sous_metier_index', '_controller' => 'App\\Controller\\SousMetierController::index'], null, null, null, true, false, null]],
         '/sousmetier/new' => [[['_route' => 'app_sous_metier_new', '_controller' => 'App\\Controller\\SousMetierController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/sousmetier/stat/stat' => [[['_route' => 'app_cons_stat', '_controller' => 'App\\Controller\\SousMetierController::yourAction'], null, ['GET' => 0], null, false, false, null]],
+        '/sousmetier/affichage/mobile' => [[['_route' => 'app_sousmetier_allapp', '_controller' => 'App\\Controller\\SousMetierController::allApp'], null, null, null, false, false, null]],
+        '/sousmetier/ajout/mobile' => [[['_route' => 'app_sousmetier_ajoutApp', '_controller' => 'App\\Controller\\SousMetierController::AjoutMobil'], null, null, null, false, false, null]],
         '/users/admin' => [[['_route' => 'app_user_list', '_controller' => 'App\\Controller\\UserController::index'], null, null, null, false, false, null]],
         '/users/all' => [[['_route' => 'app_user_allusers', '_controller' => 'App\\Controller\\UserController::AllUsers'], null, null, null, false, false, null]],
         '/users/create' => [[['_route' => 'app_user_create', '_controller' => 'App\\Controller\\UserController::new'], null, null, null, false, false, null]],
@@ -54,6 +61,7 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/annonce/export/all' => [[['_route' => 'export_pdf', '_controller' => 'App\\Controller\\AnnonceController::exportAllPdfAction'], null, null, null, false, false, null]],
         '/projet' => [[['_route' => 'app_projet_index', '_controller' => 'App\\Controller\\ProjetController::index'], null, null, null, true, false, null]],
+        '/projetmobile' => [[['_route' => 'app_projet_mobile', '_controller' => 'App\\Controller\\ProjetController::indexmobile'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -65,109 +73,129 @@ return [
                             .'|/edit(*:74)'
                             .'|(*:81)'
                         .')'
-                        .'|admin/([^/]++)(*:103)'
-                        .'|rechercheadmin(*:125)'
+                        .'|a(?'
+                            .'|dmin/([^/]++)(*:106)'
+                            .'|nnonce1/([^/]++)(*:130)'
+                        .')'
+                        .'|rechercheadmin(*:153)'
+                        .'|updateannonceJSON/([^/]++)(*:187)'
+                        .'|deleteannonceJSON/([^/]++)(*:221)'
                     .')'
-                    .'|utocomplete/([^/]++)(*:154)'
+                    .'|utocomplete/([^/]++)(*:250)'
                 .')'
                 .'|/c(?'
                     .'|ategorie/([^/]++)(?'
-                        .'|(*:188)'
-                        .'|/edit(*:201)'
-                        .'|(*:209)'
+                        .'|(*:284)'
+                        .'|/edit(*:297)'
+                        .'|(*:305)'
                     .')'
-                    .'|lassification/([^/]++)(?'
-                        .'|(*:243)'
-                        .'|/edit(*:256)'
-                        .'|(*:264)'
+                    .'|lassification/(?'
+                        .'|([^/]++)(?'
+                            .'|(*:342)'
+                            .'|/edit(*:355)'
+                            .'|(*:363)'
+                        .')'
+                        .'|Allclassifications(*:390)'
+                        .'|classification1/([^/]++)(*:422)'
+                        .'|updateclassificationJSON/([^/]++)(*:463)'
+                        .'|deleteclassificationJSON/([^/]++)(*:504)'
                     .')'
                 .')'
                 .'|/evenement/([^/]++)(?'
                     .'|/(?'
-                        .'|showQr(*:306)'
-                        .'|edit(*:318)'
-                        .'|addRating(*:335)'
+                        .'|showQr(*:546)'
+                        .'|edit(*:558)'
+                        .'|addRating(*:575)'
                     .')'
-                    .'|(*:344)'
+                    .'|(*:584)'
                 .')'
                 .'|/favoris/favoris/(?'
-                    .'|add/([^/]++)(*:385)'
-                    .'|remove/([^/]++)(*:408)'
+                    .'|add/([^/]++)(*:625)'
+                    .'|remove/([^/]++)(*:648)'
                 .')'
                 .'|/metier/(?'
                     .'|([^/]++)(?'
-                        .'|(*:439)'
-                        .'|/edit(*:452)'
-                        .'|(*:460)'
+                        .'|(*:679)'
+                        .'|/edit(*:692)'
+                        .'|(*:700)'
                     .')'
-                    .'|front/sous_metier/front/([^/]++)(*:501)'
-                    .'|map/show_in_map/([^/]++)(*:533)'
-                    .'|([^/]++)/qrcode(*:556)'
+                    .'|front/sous_metier/front/([^/]++)(*:741)'
+                    .'|map/show_in_map/([^/]++)(*:773)'
+                    .'|([^/]++)/qrcode(*:796)'
+                    .'|Update/mobile/([^/]++)(*:826)'
+                    .'|delete/mobile/([^/]++)(*:856)'
                 .')'
-                .'|/projet/([^/]++)(?'
-                    .'|(*:584)'
-                    .'|/(?'
-                        .'|edit(*:600)'
-                        .'|tache(*:613)'
-                        .'|files(*:626)'
+                .'|/projet/(?'
+                    .'|([^/]++)(?'
+                        .'|(*:887)'
+                        .'|/edit(*:900)'
+                        .'|(*:908)'
                     .')'
-                    .'|(*:635)'
+                    .'|projetadd(*:926)'
+                    .'|([^/]++)/(?'
+                        .'|tache(*:951)'
+                        .'|files(*:964)'
+                    .')'
                 .')'
                 .'|/r(?'
                     .'|aiting/([^/]++)(?'
-                        .'|(*:667)'
+                        .'|(*:997)'
                         .'|/(?'
-                            .'|edit(*:683)'
-                            .'|rate(*:695)'
+                            .'|edit(*:1013)'
+                            .'|rate(*:1026)'
                         .')'
-                        .'|(*:704)'
+                        .'|(*:1036)'
                     .')'
                     .'|eset\\-password/reset(?'
-                        .'|(?:/([^/]++))?(*:750)'
-                        .'|(*:758)'
+                        .'|(?:/([^/]++))?(*:1083)'
+                        .'|(*:1092)'
                     .')'
                 .')'
-                .'|/sousmetier/([^/]++)(?'
-                    .'|(*:791)'
-                    .'|/edit(*:804)'
-                    .'|(*:812)'
+                .'|/sousmetier/(?'
+                    .'|([^/]++)(?'
+                        .'|(*:1129)'
+                        .'|/edit(*:1143)'
+                        .'|(*:1152)'
+                    .')'
+                    .'|Update/mobile/([^/]++)(*:1184)'
+                    .'|delete/mobile/([^/]++)(*:1215)'
                 .')'
                 .'|/tache/(?'
-                    .'|projet/([^/]++)/tache/add(*:856)'
+                    .'|projet/([^/]++)/tache/add(*:1260)'
                     .'|([^/]++)(?'
-                        .'|(*:875)'
-                        .'|/edit(*:888)'
-                        .'|(*:896)'
+                        .'|(*:1280)'
+                        .'|/edit(*:1294)'
+                        .'|(*:1303)'
                     .')'
-                    .'|update_tache_status/([^/]++)(*:933)'
+                    .'|update_tache_status/([^/]++)(*:1341)'
                 .')'
                 .'|/users/(?'
-                    .'|([^/]++)(*:960)'
-                    .'|by/([^/]++)(*:979)'
+                    .'|([^/]++)(*:1369)'
+                    .'|by/([^/]++)(*:1389)'
                     .'|([^/]++)/(?'
-                        .'|profile(*:1006)'
+                        .'|profile(*:1417)'
                         .'|edit(?'
-                            .'|/admin(*:1028)'
-                            .'|(*:1037)'
-                            .'|Json(*:1050)'
+                            .'|/admin(*:1439)'
+                            .'|(*:1448)'
+                            .'|Json(*:1461)'
                         .')'
-                        .'|archive(*:1067)'
+                        .'|archive(*:1478)'
                     .')'
                 .')'
-                .'|/qr\\-code/([^/]++)/([\\w\\W]+)(*:1106)'
+                .'|/qr\\-code/([^/]++)/([\\w\\W]+)(*:1517)'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:1146)'
-                    .'|wdt/([^/]++)(*:1167)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:1557)'
+                    .'|wdt/([^/]++)(*:1578)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:1214)'
-                            .'|router(*:1229)'
+                            .'|search/results(*:1625)'
+                            .'|router(*:1640)'
                             .'|exception(?'
-                                .'|(*:1250)'
-                                .'|\\.css(*:1264)'
+                                .'|(*:1661)'
+                                .'|\\.css(*:1675)'
                             .')'
                         .')'
-                        .'|(*:1275)'
+                        .'|(*:1686)'
                     .')'
                 .')'
             .')/?$}sDu',
@@ -177,64 +205,76 @@ return [
         51 => [[['_route' => 'app_annonce_show_admin', '_controller' => 'App\\Controller\\AnnonceController::showByAdmin'], ['id'], ['GET' => 0], null, false, true, null]],
         74 => [[['_route' => 'app_annonce_edit', '_controller' => 'App\\Controller\\AnnonceController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         81 => [[['_route' => 'app_annonce_delete_client', '_controller' => 'App\\Controller\\AnnonceController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        103 => [[['_route' => 'app_annonce_delete_admin', '_controller' => 'App\\Controller\\AnnonceController::deleteByAdmin'], ['id'], ['POST' => 0], null, false, true, null]],
-        125 => [[['_route' => 'app_liste_ordonne', '_controller' => 'App\\Controller\\AnnonceController::listOrdonne'], [], null, null, false, false, null]],
-        154 => [[['_route' => 'ux_entity_autocomplete', '_controller' => 'ux.autocomplete.entity_autocomplete_controller'], ['alias'], null, null, false, true, null]],
-        188 => [[['_route' => 'app_categorie_show', '_controller' => 'App\\Controller\\CategorieController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        201 => [[['_route' => 'app_categorie_edit', '_controller' => 'App\\Controller\\CategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        209 => [[['_route' => 'app_categorie_delete', '_controller' => 'App\\Controller\\CategorieController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        243 => [[['_route' => 'app_classification_show', '_controller' => 'App\\Controller\\ClassificationController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        256 => [[['_route' => 'app_classification_edit', '_controller' => 'App\\Controller\\ClassificationController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        264 => [[['_route' => 'app_classification_delete', '_controller' => 'App\\Controller\\ClassificationController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        306 => [[['_route' => 'app_evenement_qr', '_controller' => 'App\\Controller\\EvenementController::showQr'], ['id'], ['GET' => 0], null, false, false, null]],
-        318 => [[['_route' => 'app_evenement_edit', '_controller' => 'App\\Controller\\EvenementController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        335 => [[['_route' => 'app_evenement_rating', '_controller' => 'App\\Controller\\EvenementController::addRating'], ['id'], null, null, false, false, null]],
-        344 => [
+        106 => [[['_route' => 'app_annonce_delete_admin', '_controller' => 'App\\Controller\\AnnonceController::deleteByAdmin'], ['id'], ['POST' => 0], null, false, true, null]],
+        130 => [[['_route' => 'annonce', '_controller' => 'App\\Controller\\AnnonceController::annonceId'], ['id'], null, null, false, true, null]],
+        153 => [[['_route' => 'app_liste_ordonne', '_controller' => 'App\\Controller\\AnnonceController::listOrdonne'], [], null, null, false, false, null]],
+        187 => [[['_route' => 'updateannonceJSON', '_controller' => 'App\\Controller\\AnnonceController::updateannonceJSON'], ['id'], null, null, false, true, null]],
+        221 => [[['_route' => 'deleteannonceJSON', '_controller' => 'App\\Controller\\AnnonceController::deleteannonceJSON'], ['id'], null, null, false, true, null]],
+        250 => [[['_route' => 'ux_entity_autocomplete', '_controller' => 'ux.autocomplete.entity_autocomplete_controller'], ['alias'], null, null, false, true, null]],
+        284 => [[['_route' => 'app_categorie_show', '_controller' => 'App\\Controller\\CategorieController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        297 => [[['_route' => 'app_categorie_edit', '_controller' => 'App\\Controller\\CategorieController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        305 => [[['_route' => 'app_categorie_delete', '_controller' => 'App\\Controller\\CategorieController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        342 => [[['_route' => 'app_classification_show', '_controller' => 'App\\Controller\\ClassificationController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        355 => [[['_route' => 'app_classification_edit', '_controller' => 'App\\Controller\\ClassificationController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        363 => [[['_route' => 'app_classification_delete', '_controller' => 'App\\Controller\\ClassificationController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        390 => [[['_route' => 'app_classification_getclassifications', '_controller' => 'App\\Controller\\ClassificationController::getclassifications'], [], null, null, false, false, null]],
+        422 => [[['_route' => 'app_classification_classificationid', '_controller' => 'App\\Controller\\ClassificationController::classificationId'], ['id'], null, null, false, true, null]],
+        463 => [[['_route' => 'updateclassificationJSON', '_controller' => 'App\\Controller\\ClassificationController::updateclassificationJSON'], ['id'], null, null, false, true, null]],
+        504 => [[['_route' => 'deleteclassificationJSON', '_controller' => 'App\\Controller\\ClassificationController::deleteclassificationJSON'], ['id'], null, null, false, true, null]],
+        546 => [[['_route' => 'app_evenement_qr', '_controller' => 'App\\Controller\\EvenementController::showQr'], ['id'], ['GET' => 0], null, false, false, null]],
+        558 => [[['_route' => 'app_evenement_edit', '_controller' => 'App\\Controller\\EvenementController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        575 => [[['_route' => 'app_evenement_rating', '_controller' => 'App\\Controller\\EvenementController::addRating'], ['id'], null, null, false, false, null]],
+        584 => [
             [['_route' => 'app_evenement_show', '_controller' => 'App\\Controller\\EvenementController::show'], ['id'], ['GET' => 0], null, false, true, null],
             [['_route' => 'app_evenement_delete', '_controller' => 'App\\Controller\\EvenementController::delete'], ['id'], ['POST' => 0], null, false, true, null],
         ],
-        385 => [[['_route' => 'favoris_add', '_controller' => 'App\\Controller\\FavorisController::add'], ['id'], null, null, false, true, null]],
-        408 => [[['_route' => 'favoris_remove', '_controller' => 'App\\Controller\\FavorisController::remove'], ['id'], null, null, false, true, null]],
-        439 => [[['_route' => 'app_metier_show', '_controller' => 'App\\Controller\\MetierController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        452 => [[['_route' => 'app_metier_edit', '_controller' => 'App\\Controller\\MetierController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        460 => [[['_route' => 'app_metier_delete', '_controller' => 'App\\Controller\\MetierController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        501 => [[['_route' => 'app_front_metierrrrr', '_controller' => 'App\\Controller\\MetierController::SousMetier'], ['id'], null, null, false, true, null]],
-        533 => [[['_route' => 'app_local_map', '_controller' => 'App\\Controller\\MetierController::Map'], ['id'], null, null, false, true, null]],
-        556 => [[['_route' => 'app_metier_qr', '_controller' => 'App\\Controller\\MetierController::getQrCodeForProduct'], ['id'], null, null, false, false, null]],
-        584 => [[['_route' => 'app_projet_show', '_controller' => 'App\\Controller\\ProjetController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        600 => [[['_route' => 'app_projet_edit', '_controller' => 'App\\Controller\\ProjetController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        613 => [[['_route' => 'app_tache_index', '_controller' => 'App\\Controller\\TacheController::index'], ['projetId'], null, null, false, false, null]],
-        626 => [[['_route' => 'app_upload_file', '_controller' => 'App\\Controller\\ProjetController::uploadFile'], ['projetId'], null, null, false, false, null]],
-        635 => [[['_route' => 'app_projet_delete', '_controller' => 'App\\Controller\\ProjetController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        667 => [[['_route' => 'app_raiting_show', '_controller' => 'App\\Controller\\RaitingController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        683 => [[['_route' => 'app_raiting_edit', '_controller' => 'App\\Controller\\RaitingController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        695 => [[['_route' => 'Rate', '_controller' => 'App\\Controller\\RaitingController::addRaiting'], ['id'], null, null, false, false, null]],
-        704 => [[['_route' => 'app_raiting_delete', '_controller' => 'App\\Controller\\RaitingController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        750 => [[['_route' => 'app_reset_password', 'token' => null, '_controller' => 'App\\Controller\\ResetPasswordController::reset'], ['token'], null, null, false, true, null]],
-        758 => [[['_route' => 'app_resetpassword_qreset', '_controller' => 'App\\Controller\\ResetPasswordController::qreset'], [], null, null, false, false, null]],
-        791 => [[['_route' => 'app_sous_metier_show', '_controller' => 'App\\Controller\\SousMetierController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        804 => [[['_route' => 'app_sous_metier_edit', '_controller' => 'App\\Controller\\SousMetierController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        812 => [[['_route' => 'app_sous_metier_delete', '_controller' => 'App\\Controller\\SousMetierController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        856 => [[['_route' => 'app_tache_new', '_controller' => 'App\\Controller\\TacheController::add'], ['projetId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        875 => [[['_route' => 'app_tache_show', '_controller' => 'App\\Controller\\TacheController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        888 => [[['_route' => 'app_tache_edit', '_controller' => 'App\\Controller\\TacheController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        896 => [[['_route' => 'app_tache_delete', '_controller' => 'App\\Controller\\TacheController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        933 => [[['_route' => 'app_update_tache_status', '_controller' => 'App\\Controller\\TacheController::updateTacheStatus'], ['tache_id'], ['POST' => 0], null, false, true, null]],
-        960 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], null, null, false, true, null]],
-        979 => [[['_route' => 'app_user_getuserbyid', '_controller' => 'App\\Controller\\UserController::GetUserById'], ['id'], null, null, false, true, null]],
-        1006 => [[['_route' => 'app_user_show_na', '_controller' => 'App\\Controller\\UserController::show_user'], ['id'], null, null, false, false, null]],
-        1028 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], null, null, false, false, null]],
-        1037 => [[['_route' => 'app_user_edit_na', '_controller' => 'App\\Controller\\UserController::edit_user'], ['id'], null, null, false, false, null]],
-        1050 => [[['_route' => 'app_edit', '_controller' => 'App\\Controller\\UserController::editJSON'], ['id'], null, null, false, false, null]],
-        1067 => [[['_route' => 'app_user_archive', '_controller' => 'App\\Controller\\UserController::archive'], ['id'], null, null, false, false, null]],
-        1106 => [[['_route' => 'qr_code_generate', '_controller' => 'Endroid\\QrCodeBundle\\Controller\\GenerateController'], ['builder', 'data'], null, null, false, true, null]],
-        1146 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        1167 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        1214 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        1229 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        1250 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        1264 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        1275 => [
+        625 => [[['_route' => 'favoris_add', '_controller' => 'App\\Controller\\FavorisController::add'], ['id'], null, null, false, true, null]],
+        648 => [[['_route' => 'favoris_remove', '_controller' => 'App\\Controller\\FavorisController::remove'], ['id'], null, null, false, true, null]],
+        679 => [[['_route' => 'app_metier_show', '_controller' => 'App\\Controller\\MetierController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        692 => [[['_route' => 'app_metier_edit', '_controller' => 'App\\Controller\\MetierController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        700 => [[['_route' => 'app_metier_delete', '_controller' => 'App\\Controller\\MetierController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        741 => [[['_route' => 'app_front_metierrrrr', '_controller' => 'App\\Controller\\MetierController::SousMetier'], ['id'], null, null, false, true, null]],
+        773 => [[['_route' => 'app_local_map', '_controller' => 'App\\Controller\\MetierController::Map'], ['id'], null, null, false, true, null]],
+        796 => [[['_route' => 'app_metier_qr', '_controller' => 'App\\Controller\\MetierController::getQrCodeForProduct'], ['id'], null, null, false, false, null]],
+        826 => [[['_route' => 'app_metier_editApp', '_controller' => 'App\\Controller\\MetierController::UpdateMobile'], ['id'], null, null, false, true, null]],
+        856 => [[['_route' => 'app__deleteApp21', '_controller' => 'App\\Controller\\MetierController::deleteMobile'], ['id'], null, null, false, true, null]],
+        887 => [[['_route' => 'app_projet_show', '_controller' => 'App\\Controller\\ProjetController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        900 => [[['_route' => 'app_projet_edit', '_controller' => 'App\\Controller\\ProjetController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        908 => [[['_route' => 'app_projet_delete', '_controller' => 'App\\Controller\\ProjetController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        926 => [[['_route' => 'app_projet_add', '_controller' => 'App\\Controller\\ProjetController::add'], [], ['POST' => 0], null, false, false, null]],
+        951 => [[['_route' => 'app_tache_index', '_controller' => 'App\\Controller\\TacheController::index'], ['projetId'], null, null, false, false, null]],
+        964 => [[['_route' => 'app_upload_file', '_controller' => 'App\\Controller\\ProjetController::uploadFile'], ['projetId'], null, null, false, false, null]],
+        997 => [[['_route' => 'app_raiting_show', '_controller' => 'App\\Controller\\RaitingController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        1013 => [[['_route' => 'app_raiting_edit', '_controller' => 'App\\Controller\\RaitingController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1026 => [[['_route' => 'Rate', '_controller' => 'App\\Controller\\RaitingController::addRaiting'], ['id'], null, null, false, false, null]],
+        1036 => [[['_route' => 'app_raiting_delete', '_controller' => 'App\\Controller\\RaitingController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        1083 => [[['_route' => 'app_reset_password', 'token' => null, '_controller' => 'App\\Controller\\ResetPasswordController::reset'], ['token'], null, null, false, true, null]],
+        1092 => [[['_route' => 'app_resetpassword_qreset', '_controller' => 'App\\Controller\\ResetPasswordController::qreset'], [], null, null, false, false, null]],
+        1129 => [[['_route' => 'app_sous_metier_show', '_controller' => 'App\\Controller\\SousMetierController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        1143 => [[['_route' => 'app_sous_metier_edit', '_controller' => 'App\\Controller\\SousMetierController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1152 => [[['_route' => 'app_sous_metier_delete', '_controller' => 'App\\Controller\\SousMetierController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        1184 => [[['_route' => 'app_sousmetier_editApp', '_controller' => 'App\\Controller\\SousMetierController::UpdateMobile'], ['id'], null, null, false, true, null]],
+        1215 => [[['_route' => 'app__deleteApp', '_controller' => 'App\\Controller\\SousMetierController::deleteMobile'], ['id'], null, null, false, true, null]],
+        1260 => [[['_route' => 'app_tache_new', '_controller' => 'App\\Controller\\TacheController::add'], ['projetId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1280 => [[['_route' => 'app_tache_show', '_controller' => 'App\\Controller\\TacheController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        1294 => [[['_route' => 'app_tache_edit', '_controller' => 'App\\Controller\\TacheController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1303 => [[['_route' => 'app_tache_delete', '_controller' => 'App\\Controller\\TacheController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        1341 => [[['_route' => 'app_update_tache_status', '_controller' => 'App\\Controller\\TacheController::updateTacheStatus'], ['tache_id'], ['POST' => 0], null, false, true, null]],
+        1369 => [[['_route' => 'app_user_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], null, null, false, true, null]],
+        1389 => [[['_route' => 'app_user_getuserbyid', '_controller' => 'App\\Controller\\UserController::GetUserById'], ['id'], null, null, false, true, null]],
+        1417 => [[['_route' => 'app_user_show_na', '_controller' => 'App\\Controller\\UserController::show_user'], ['id'], null, null, false, false, null]],
+        1439 => [[['_route' => 'app_user_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], null, null, false, false, null]],
+        1448 => [[['_route' => 'app_user_edit_na', '_controller' => 'App\\Controller\\UserController::edit_user'], ['id'], null, null, false, false, null]],
+        1461 => [[['_route' => 'app_edit', '_controller' => 'App\\Controller\\UserController::editJSON'], ['id'], null, null, false, false, null]],
+        1478 => [[['_route' => 'app_user_archive', '_controller' => 'App\\Controller\\UserController::archive'], ['id'], null, null, false, false, null]],
+        1517 => [[['_route' => 'qr_code_generate', '_controller' => 'Endroid\\QrCodeBundle\\Controller\\GenerateController'], ['builder', 'data'], null, null, false, true, null]],
+        1557 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        1578 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        1625 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        1640 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        1661 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        1675 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        1686 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
