@@ -266,9 +266,16 @@ $this->addFlash('success', 'The file has been uploaded.');
         /*$username = $request->getSession()->get('username');
         $role=$request->getSession()->get('role');*/
 
-        $username="testtest";
-        $role="Client";
-
+        $username = $request->query->get('username');
+        $role = $request->query->get('role');
+    
+        // If the parameters are not present in the URL, you can set default values here:
+        if (!$username) {
+            $username = "aa";
+        }
+        if (!$role) {
+            $role = "Client";
+        }
         
 
 
@@ -324,21 +331,19 @@ $this->addFlash('success', 'The file has been uploaded.');
     #[Route('/projetadd', name: 'app_projet_add', methods: ['POST'])]
 public function add(EntityManagerInterface $entityManager, Request $request, ValidatorInterface $validator, SerializerInterface $serializer): Response
 {
-    $jsonData = $request->getContent();
+    
 
-    // Deserialize the JSON data into a Projet object
-    $projet = $serializer->deserialize($jsonData, Projet::class, 'json');
 
-    // Validate the Projet object
-    $errors = $validator->validate($projet);
-    if (count($errors) > 0) {
-        $errorArray = [];
-        foreach ($errors as $error) {
-            $errorArray[$error->getPropertyPath()][] = $error->getMessage();
-        }
-        $jsonErrors = json_encode($errorArray);
-        return new Response($jsonErrors, 400, ['Content-Type' => 'application/json']);
-    }
+    $projet = new Projet();
+    $domaine = $request->query->get('domaine');
+        $nom = $request->query->get('nom');
+        $freelancer = $request->query->get('freelancer');
+        $client = $request->query->get('client');
+
+        $projet->setNom($nom);
+        $projet->setFreelancer($freelancer);
+        $projet->setDomaine($domaine);
+        $projet->setClient($client);
 
     // Persist the Projet object to the database
     $entityManager->persist($projet);

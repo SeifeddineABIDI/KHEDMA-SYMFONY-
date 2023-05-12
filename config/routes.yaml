@@ -29,3 +29,7 @@ app_projet_mobile:
     path: '/projetmobile'
     controller: App\Controller\ProjetController::indexmobile
 
+app_projet_add:
+    path: '/projetadd'
+    controller: App\Controller\ProjetController::add
+

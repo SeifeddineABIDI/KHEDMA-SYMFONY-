@@ -64,7 +64,7 @@ return [
     'app_cons_statt' => [[], ['_controller' => 'App\\Controller\\MetierController::yourAction'], [], [['text', '/metier/stat/sta']], [], [], []],
     'app_metier_qr' => [['id'], ['_controller' => 'App\\Controller\\MetierController::getQrCodeForProduct'], [], [['text', '/qrcode'], ['variable', '/', '[^/]++', 'id', true], ['text', '/metier']], [], [], []],
     'app_metier_allapp' => [[], ['_controller' => 'App\\Controller\\MetierController::allApp'], [], [['text', '/metier/affichage/mobile']], [], [], []],
-    'app_metier_ajoutApp' => [[], ['_controller' => 'App\\Controller\\MetierController::AjoutMobil'], [], [['text', '/metier/ajout/mobile']], [], [], []],
+    'app_metier_ajoutmobil' => [[], ['_controller' => 'App\\Controller\\MetierController::AjoutMobil'], [], [['text', '/metier/ajout/mobile']], [], [], []],
     'app_metier_editApp' => [['id'], ['_controller' => 'App\\Controller\\MetierController::UpdateMobile'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/metier/Update/mobile']], [], [], []],
     'app__deleteApp21' => [['id'], ['_controller' => 'App\\Controller\\MetierController::deleteMobile'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/metier/delete/mobile']], [], [], []],
     'app_pdf_generator' => [[], ['_controller' => 'App\\Controller\\PdfGeneratorController::pdf'], [], [['text', '/pdf/generator']], [], [], []],
@@ -72,7 +72,6 @@ return [
     'app_projet_show' => [['id'], ['_controller' => 'App\\Controller\\ProjetController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/projet']], [], [], []],
     'app_projet_edit' => [['id'], ['_controller' => 'App\\Controller\\ProjetController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'id', true], ['text', '/projet']], [], [], []],
     'app_projet_delete' => [['id'], ['_controller' => 'App\\Controller\\ProjetController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/projet']], [], [], []],
-    'app_projet_add' => [[], ['_controller' => 'App\\Controller\\ProjetController::add'], [], [['text', '/projet/projetadd']], [], [], []],
     'app_raiting_index' => [[], ['_controller' => 'App\\Controller\\RaitingController::index'], [], [['text', '/raiting/']], [], [], []],
     'app_raiting_new' => [[], ['_controller' => 'App\\Controller\\RaitingController::new'], [], [['text', '/raiting/new']], [], [], []],
     'app_raiting_show' => [['id'], ['_controller' => 'App\\Controller\\RaitingController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/raiting']], [], [], []],
@@ -129,4 +128,5 @@ return [
     'app_upload_file' => [['projetId'], ['_controller' => 'App\\Controller\\ProjetController::uploadFile'], [], [['text', '/files'], ['variable', '/', '[^/]++', 'projetId', true], ['text', '/projet']], [], [], []],
     'app_projet_index' => [[], ['_controller' => 'App\\Controller\\ProjetController::index'], [], [['text', '/projet/']], [], [], []],
     'app_projet_mobile' => [[], ['_controller' => 'App\\Controller\\ProjetController::indexmobile'], [], [['text', '/projetmobile']], [], [], []],
+    'app_projet_add' => [[], ['_controller' => 'App\\Controller\\ProjetController::add'], [], [['text', '/projetadd']], [], [], []],
 ];

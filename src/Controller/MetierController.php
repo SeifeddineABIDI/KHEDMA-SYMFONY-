@@ -414,7 +414,7 @@ public function allApp(MetierRepository $metierRepository,NormalizerInterface $s
     return new JsonResponse(($json));
  
 }
-#[Route('/ajout/mobile', name: 'app_metier_ajoutApp')]
+#[Route('/ajout/mobile')]
 public function AjoutMobil(Request $req,NormalizerInterface $s,ManagerRegistry $doctrine){
     
     $em = $doctrine->getManager();
@@ -427,7 +427,7 @@ public function AjoutMobil(Request $req,NormalizerInterface $s,ManagerRegistry $
     $em -> persist($metier);
     $em->flush();
     $json=$s->normalize($metier,'json',['groups'=>"metiers"]);
-    return new Response(json_encode($json));
+    return new Response(($json));
  
 }
 
